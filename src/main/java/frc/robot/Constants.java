@@ -149,6 +149,56 @@ public class Constants {
         // stage 2 = 0
         // stage 2 = 5
         // stage 2 = 10
+        public static final class PID {
+            //
+            public static final double P = 2.4f;
+            public static final int I = 0;
+            public static final double D = 0.1f;
+            //
+            public static final int P2 = 60;
+            public static final int I2 = 0;
+            public static final int D2 = 6;
+            //
+        }
+    
+        public static final class Positions {
+    
+            //Stored
+            public static final int lowerStored = 0;
+            public static final int upperStored = 10;
+    
+            //L1
+            public static final int lowerFirst = 0;
+            public static final int upperFirst = 5;
+    
+            //L2
+            public static final int lowerSecond = 0;
+            public static final int upperSecond = 10;
+    
+            //L3
+            public static final int lowerThird = 5;
+            public static final int upperThird = 10;
+    
+            //L4
+            public static final int lowerFourth = 10;
+            public static final int upperFourth = 10;
+    
+            //Climb
+            public static final int lowerClimb = -5;
+            public static final int upperClimb = 0;
+    
+            //Ground Pickup
+            public static final int lowerGround = 0;
+            public static final int upperGround = 0;
+            
+            //Source Pickup
+            // public static final int lowerSource = 0;
+            // public static final int upperSource = 0;
+    
+            //Processor Place
+            // public static final int lowerProcessor = 0;
+            // public static final int upperProcessor = 0;
+        }
     }
 
     public static final class ShoulderConstants {
