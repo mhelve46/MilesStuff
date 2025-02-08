@@ -12,7 +12,13 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecondPerSecond;
+import static edu.wpi.first.units.Units.Second;
+import static edu.wpi.first.units.Units.Amps;
+
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
@@ -23,11 +29,6 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import static edu.wpi.first.units.Units.RotationsPerSecond;
-import static edu.wpi.first.units.Units.RotationsPerSecondPerSecond;
-import static edu.wpi.first.units.Units.Second;
-
 import frc.robot.Constants;
 import frc.robot.Robot;
 
@@ -86,6 +87,16 @@ public class Elevator extends SubsystemBase {
         motionMagicL.withMotionMagicCruiseVelocity(RotationsPerSecond.of(5)) // (meachanism) rotations per second cruise
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
+
+        elevatorLowerConfig.withCurrentLimits(
+                new CurrentLimitsConfigs()
+                        .withStatorCurrentLimit(Amps.of(4))
+                        .withStatorCurrentLimitEnable(true));
+
+        elevatorUpperConfig.withCurrentLimits(
+                new CurrentLimitsConfigs()
+                        .withStatorCurrentLimit(Amps.of(5))
+                        .withStatorCurrentLimitEnable(true));
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
         upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
@@ -181,37 +192,47 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setFirst() {
-        stage1motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFirst).withSlot(0));
-        stage2motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFirst).withSlot(0));
+        stage1motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFirst).withSlot(0));
+        stage2motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFirst).withSlot(0));
         stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerFirst;
         stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperFirst;
     }
 
     public void setSecond() {
-        stage1motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerSecond).withSlot(0));
-        stage2motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperSecond).withSlot(0));
+        stage1motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerSecond).withSlot(0));
+        stage2motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperSecond).withSlot(0));
         stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerSecond;
         stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperSecond;
     }
 
     public void setThird() {
-        stage1motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerThird).withSlot(0));
-        stage2motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperThird).withSlot(0));
+        stage1motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerThird).withSlot(0));
+        stage2motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperThird).withSlot(0));
         stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerThird;
         stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperThird;
     }
 
     public void setFourth() {
-        stage1motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFourth).withSlot(0));
-        stage2motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFourth).withSlot(0));
+        stage1motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFourth).withSlot(0));
+        stage2motor.setControl(
+                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFourth).withSlot(0));
         stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerFourth;
         stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperFourth;
     }
 
     public void setClimb() {
         if (Robot.getInstance().elevatorTestControl.getRightTriggerAxis() >= .5) {
-            stage1motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerClimb).withSlot(0));
-            stage2motor.setControl(m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperClimb).withSlot(0));
+            stage1motor.setControl(
+                    m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerClimb).withSlot(0));
+            stage2motor.setControl(
+                    m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperClimb).withSlot(0));
             // enabledClimb = true;
             stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerClimb;
             stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperClimb;

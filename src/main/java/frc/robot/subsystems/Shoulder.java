@@ -14,6 +14,7 @@ package frc.robot.subsystems;
 
 
 import com.ctre.phoenix6.StatusCode;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
@@ -74,6 +75,12 @@ public class Shoulder extends SubsystemBase {
         // Voltage
         TalonFXConfiguration configs = new TalonFXConfiguration();
     
+        // Current Limits
+        configs.withCurrentLimits(
+            new CurrentLimitsConfigs()
+                .withStatorCurrentLimit(Amps.of(4))
+                .withStatorCurrentLimitEnable(true));
+
         configs.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
         configs.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
         configs.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
