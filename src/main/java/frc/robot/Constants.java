@@ -117,17 +117,17 @@ public class Constants {
 
             public static String getLevel(){
                 String level = blank;
-                if (currentRow == 0) level = L1;
-                else if (currentRow == 1) level = L2;
-                else if (currentRow == 2) level = L3;
-                else if (currentRow == 3) level = L4;
+                if (getCurrentRow() == 0) level = L1;
+                else if (getCurrentRow() == 1) level = L2;
+                else if (getCurrentRow() == 2) level = L3;
+                else if (getCurrentRow() == 3) level = L4;
                 return level;
             }
 
             public static String getScoringPose(){
                 String side = blank;
-                if (currentCol == 0)side = left;
-                else if (currentCol == 1) side = right;
+                if (getCurrentCol() == 0)side = left;
+                else if (getCurrentCol() == 1)side = right;
                 return side;
             }
 
@@ -168,6 +168,13 @@ public class Constants {
     }
 
     public static final class ClawConstants {
+    }
+
+    public static final class VisionConstants {
+        public static final String limeLightName = "limelight";
+        public static final String limeLightName2 = "";
+        public static final int aprilPipe = 0;
+        // public static final int nPipe = 1;
     }
 
     public static final class PoseSetter {{
