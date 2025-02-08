@@ -203,6 +203,20 @@ public class Constants {
 
     public static final class ShoulderConstants {
         public static double shoulderTarget;
+        //
+        public static final double P = 2.4f;
+        public static final int I = 0;
+        public static final double D = 0.1f;
+        //
+        public static final int P2 = 60;
+        public static final int I2 = 0;
+        public static final int D2 = 6;
+        //
+        public static final int PosReef4 = 180;
+        public static final int PosReef123 = 270;
+        public static final int PosStored = 30;
+        public static final int PosStationPickup = 90;
+        public static final int PosSeaBedPickup = 0;
         // pose for ground L1 L2 L3 processor = x
         // pose for feeder = x
         // pose for L4 = X

@@ -31,6 +31,9 @@ import frc.robot.commands.LevelFourOld;
 import frc.robot.commands.LevelOneOld;
 import frc.robot.commands.LevelThreeOld;
 import frc.robot.commands.LevelTwoOld;
+import frc.robot.commands.OldRunShoulderReef123;
+import frc.robot.commands.OldRunShoulderReef4;
+import frc.robot.commands.OldShoulderSeaBedPickup;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
@@ -68,6 +71,7 @@ public class RobotContainer {
     public final XboxController accessory = new XboxController(1);
     // private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
     public final CommandXboxController elevatorTestControl = new CommandXboxController(3);
+    private final XboxController shoulderTestControl = new XboxController(4);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
@@ -176,6 +180,15 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
         joystick.rightBumper().onTrue(new InstantCommand(() -> plus()));
         joystick.x().onTrue(new InstantCommand(() -> toggleReefOffset()));
+        // Shoulder Test Buttons TODO Reassign
+        final JoystickButton buttonXSH = new JoystickButton(shoulderTestControl, XboxController.Button.kX.value);        
+buttonXSH.onTrue(new OldRunShoulderReef4( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+                        
+final JoystickButton buttonBSH = new JoystickButton(shoulderTestControl, XboxController.Button.kB.value);        
+buttonBSH.onTrue(new OldRunShoulderReef123( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+                        
+final JoystickButton buttonASH = new JoystickButton(shoulderTestControl, XboxController.Button.kA.value);        
+buttonASH.onTrue(new OldShoulderSeaBedPickup( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Elevator Test Buttons TODO Reassign
         final JoystickButton buttonY = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kY.value);
