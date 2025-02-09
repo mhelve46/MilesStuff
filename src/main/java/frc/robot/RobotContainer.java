@@ -69,7 +69,8 @@ public class RobotContainer {
 
     public final CommandXboxController joystick = new CommandXboxController(0);
     public final XboxController accessory = new XboxController(1);
-    // private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
+    // private final CommandXboxController characterizationJoystick = new
+    // CommandXboxController(2);
     public final CommandXboxController elevatorTestControl = new CommandXboxController(3);
     private final XboxController shoulderTestControl = new XboxController(4);
 
@@ -181,29 +182,31 @@ public class RobotContainer {
         joystick.rightBumper().onTrue(new InstantCommand(() -> plus()));
         joystick.x().onTrue(new InstantCommand(() -> toggleReefOffset()));
         // Shoulder Test Buttons TODO Reassign
-        final JoystickButton buttonXSH = new JoystickButton(shoulderTestControl, XboxController.Button.kX.value);        
-buttonXSH.onTrue(new OldRunShoulderReef4( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-                        
-final JoystickButton buttonBSH = new JoystickButton(shoulderTestControl, XboxController.Button.kB.value);        
-buttonBSH.onTrue(new OldRunShoulderReef123( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-                        
-final JoystickButton buttonASH = new JoystickButton(shoulderTestControl, XboxController.Button.kA.value);        
-buttonASH.onTrue(new OldShoulderSeaBedPickup( m_shoulder ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        final JoystickButton buttonXSH = new JoystickButton(shoulderTestControl, XboxController.Button.kX.value);
+        buttonXSH.onTrue(new OldRunShoulderReef4(m_shoulder).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+        final JoystickButton buttonBSH = new JoystickButton(shoulderTestControl, XboxController.Button.kB.value);
+        buttonBSH.onTrue(new OldRunShoulderReef123(m_shoulder).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+        final JoystickButton buttonASH = new JoystickButton(shoulderTestControl, XboxController.Button.kA.value);
+        buttonASH.onTrue(
+                new OldShoulderSeaBedPickup(m_shoulder).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Elevator Test Buttons TODO Reassign
         final JoystickButton buttonY = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kY.value);
         buttonY.onTrue(new LevelFourOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-    
+
         final JoystickButton buttonX = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kX.value);
         buttonX.onTrue(new LevelThreeOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-    
+
         final JoystickButton buttonB = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kB.value);
         buttonB.onTrue(new LevelTwoOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-    
+
         final JoystickButton buttonA = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kA.value);
         buttonA.onTrue(new LevelOneOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-    
-        final JoystickButton btnClimbOld = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kStart.value);
+
+        final JoystickButton btnClimbOld = new JoystickButton(elevatorTestControl.getHID(),
+                XboxController.Button.kStart.value);
         btnClimbOld.onTrue(new ClimbOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Accessory buttons

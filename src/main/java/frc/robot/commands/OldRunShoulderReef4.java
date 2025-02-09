@@ -60,6 +60,7 @@ public class OldRunShoulderReef4 extends Command {
     @Override
     public void end(boolean interrupted) {
         System.out.println("Run Shoulder Reef 4 is done");
+        m_shoulder.stopShoulder();
     }
 
     // Returns true when the command should end.

@@ -62,6 +62,7 @@ public class OldShoulderSeaBedPickup extends Command {
     @Override
     public void end(boolean interrupted) {
         System.out.println("Shoulder Sea Bed Pickup is done");
+        m_shoulder.stopShoulder();
     }
 
     // Returns true when the command should end.

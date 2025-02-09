@@ -167,6 +167,10 @@ public class Shoulder extends SubsystemBase {
         shoulderGoalPos = Constants.ShoulderConstants.PosReef4;
     }
 
+    public void stopShoulder() {
+        shoulderMotor.set(0);
+    }
+
     public boolean isShoulderFrontTrip() {
         return shoulderFrontSwitch.get();
     }
@@ -176,7 +180,11 @@ public class Shoulder extends SubsystemBase {
     }
 
     public boolean isShoulderAtGoalPos() {
-        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderGoalPos) < 1/(365*2); //half a degree
+        SmartDashboard.putBoolean("isShoulderAtGoal", Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderGoalPos) < 1/(365*2));
+        // return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderGoalPos) < 1.0/(365.0*2.0); //half a degree
+        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderGoalPos) < 1.0; //half a degree
+
     }
+
 }
 
