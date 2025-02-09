@@ -58,19 +58,21 @@ public class MoveShoulder extends Command {
     @Override
     public void execute() {
         System.out.println("shoulder value going to" + m_shoulder.shoulderTarget);
-            // motor.setPosition().shoulderTarget
+        m_shoulder.shoulderMove();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         System.out.println("ending shoulder");
+        m_shoulder.stopShoulder();
+
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return m_shoulder.isShoulderAtGoalPos();
     }
 
     @Override

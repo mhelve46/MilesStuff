@@ -136,12 +136,6 @@ public class Constants {
     }
 
     public static final class ElevatorConstants {
-        // stage 1 = 0
-        // stage 1 = 5
-        // stage 1 = 10
-        // stage 2 = 0
-        // stage 2 = 5
-        // stage 2 = 10
         public static final class PID {
             //
             public static final double P = 2.4f;
@@ -152,45 +146,6 @@ public class Constants {
             public static final int I2 = 0;
             public static final int D2 = 6;
             //
-        }
-    
-        public static final class Positions {
-    
-            //Stored
-            public static final int lowerStored = 0;
-            public static final int upperStored = 10;
-    
-            //L1
-            public static final int lowerFirst = 0;
-            public static final int upperFirst = 5;
-    
-            //L2
-            public static final int lowerSecond = 0;
-            public static final int upperSecond = 10;
-    
-            //L3
-            public static final int lowerThird = 5;
-            public static final int upperThird = 10;
-    
-            //L4
-            public static final int lowerFourth = 10;
-            public static final int upperFourth = 10;
-    
-            //Climb
-            public static final int lowerClimb = -5;
-            public static final int upperClimb = 0;
-    
-            //Ground Pickup
-            public static final int lowerGround = 0;
-            public static final int upperGround = 0;
-            
-            //Source Pickup
-            // public static final int lowerSource = 0;
-            // public static final int upperSource = 0;
-    
-            //Processor Place
-            // public static final int lowerProcessor = 0;
-            // public static final int upperProcessor = 0;
         }
     }
 
@@ -204,28 +159,13 @@ public class Constants {
         public static final int I2 = 0;
         public static final int D2 = 6;
         //
-        public static final int PosReef4 = 180;
-        public static final int PosReef123 = 270;
-        public static final int PosStored = 30;
-        public static final int PosStationPickup = 90;
-        public static final int PosSeaBedPickup = 0;
-        // pose for ground L1 L2 L3 processor = x
-        // pose for feeder = x
-        // pose for L4 = X
-        // pose for auton stored = X
-        // pose for feeder station = x
     }
 
     public static final class WristConstants {
-        // pose upright = 0
-        // pose flat = 90
-        public static final class OldWristConstants {
-
             public static final double wristMotorGearRatio = 8; //X input rotations for each output rotation
         
             public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.5;
             public static final double rotationHorizontalAlligned = wristMotorGearRatio * 0;
-        }
     }
 
     public static final class ClawConstants {
@@ -235,7 +175,7 @@ public class Constants {
         public static final String limeLightName = "limelight";
         public static final String limeLightName2 = "";
         public static final int aprilPipe = 0;
-        // public static final int nPipe = 1;
+        // public static final int Pipe2 = 1;
     }
 
 }

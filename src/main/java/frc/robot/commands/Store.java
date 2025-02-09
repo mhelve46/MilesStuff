@@ -16,13 +16,14 @@ import frc.robot.subsystems.Wrist;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Store extends SequentialCommandGroup {
   /** Creates a new Store. */
-  public Store(Shoulder shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
+  public Store(Shoulder m_shoulder, Elevator m_elevator, Wrist m_wrist){
     // Add Commands here:
+    // Also add parallel commands using the
+    //
     addCommands(
-        new MoveWrist(Wrist).withTimeout(2),
-        new MoveElevator(Elevator).withTimeout(4),
-        new MoveShoulder(shoulder).withTimeout(3),
-        new ClawIntake(Claw).withTimeout(2),
+          new MoveWrist(m_wrist),           
+          new MoveShoulder(m_shoulder),
+          new MoveElevator(m_elevator),
         new InstantCommand(() -> Robot.getInstance().currentArrangementOthers()));
 
   }

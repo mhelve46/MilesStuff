@@ -55,28 +55,28 @@ public class MoveElevator extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("starting elevator to ");
+        System.out.println("elevator 1 going to" + m_elevator.elevatorStage1Target);
+        System.out.println("elevator 2 going to" + m_elevator.elevatorStage2Target);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("elevator 1 going to" + m_elevator.elevatorStage1Target);
-        System.out.println("elevator 2 going to" + m_elevator.elevatorStage2Target);
-        // motor.setPosition().elevatorStage1Target;
-        // othermotor.setPosition().elevatorStage2Target;
+        m_elevator.setElevatorPosition();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         System.out.println("ending elevator");
+        m_elevator.stopBothMotors();
+
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return m_elevator.isMotorOneAtPos() && m_elevator.isMotorTwoAtPos();
     }
 
     @Override
