@@ -51,14 +51,14 @@ public class MoveShoulder extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        System.out.println("starting shoulder" + SmartDashboard.getString("Selection", "L1"));
+        System.out.println("starting shoulder");
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("moving shoulder" + SmartDashboard.getString("Selection", "L1"));
-    // motor.setPosition().shoulderTarget
+        System.out.println("shoulder value going to" + m_shoulder.shoulderTarget);
+            // motor.setPosition().shoulderTarget
     }
 
     // Called once the command ends or is interrupted.

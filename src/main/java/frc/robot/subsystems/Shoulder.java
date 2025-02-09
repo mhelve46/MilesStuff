@@ -58,6 +58,7 @@ public class Shoulder extends SubsystemBase {
     private DigitalInput shoulderBackSwitch;
     private final MotionMagicVoltage m_motionMagicReq = new MotionMagicVoltage(0).withSlot(0);
     private double shoulderGoalPos = 0;
+    public static double shoulderTarget;
     /**
     *
     */

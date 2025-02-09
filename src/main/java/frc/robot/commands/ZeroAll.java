@@ -14,9 +14,9 @@ import frc.robot.subsystems.Shoulder;
 import frc.robot.subsystems.Wrist;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class Store extends SequentialCommandGroup {
+public class ZeroAll extends SequentialCommandGroup {
   /** Creates a new Store. */
-  public Store(Shoulder shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
+  public ZeroAll(Shoulder shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
     // Add Commands here:
     addCommands(
         new MoveWrist(Wrist).withTimeout(2),

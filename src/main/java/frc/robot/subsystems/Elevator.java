@@ -58,8 +58,8 @@ public class Elevator extends SubsystemBase {
     private final MotionMagicVoltage m_motionMagicReqU = new MotionMagicVoltage(0);
     private final MotionMagicVoltage m_motionMagicReqL = new MotionMagicVoltage(0);
     public boolean stopped = false;
-    private double stage1motorGoalPos;
-    private double stage2motorGoalPos;
+    public double elevatorStage1Target;
+    public double elevatorStage2Target;
 
     /**
     *
@@ -185,59 +185,59 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isMotorOneAtPos() {
-        return Math.abs(stage1motor.getPosition().getValueAsDouble() - stage1motorGoalPos) < .1;
+        return Math.abs(stage1motor.getPosition().getValueAsDouble() - elevatorStage1Target) < .1;
     }
 
     public boolean isMotorTwoAtPos() {
-        return Math.abs(stage2motor.getPosition().getValueAsDouble() - stage2motorGoalPos) < .1;
+        return Math.abs(stage2motor.getPosition().getValueAsDouble() - elevatorStage2Target) < .1;
     }
 
     public void setFirst() {
         stage1motor.setControl(
-                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFirst).withSlot(0));
+                m_motionMagicReqL.withPosition(Constants.ElevatorConstants.Positions.lowerFirst).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFirst).withSlot(0));
-        stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerFirst;
-        stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperFirst;
+        elevatorStage1Target = Constants.ElevatorConstants.Positions.lowerFirst;
+        elevatorStage2Target = Constants.ElevatorConstants.Positions.upperFirst;
     }
 
 
     public void setSecond() {
         stage1motor.setControl(
-                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerSecond).withSlot(0));
+                m_motionMagicReqL.withPosition(Constants.ElevatorConstants.Positions.lowerSecond).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperSecond).withSlot(0));
-        stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerSecond;
-        stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperSecond;
+        elevatorStage1Target = Constants.ElevatorConstants.Positions.lowerSecond;
+        elevatorStage2Target = Constants.ElevatorConstants.Positions.upperSecond;
     }
 
     public void setThird() {
         stage1motor.setControl(
-                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerThird).withSlot(0));
+                m_motionMagicReqL.withPosition(Constants.ElevatorConstants.Positions.lowerThird).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperThird).withSlot(0));
-        stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerThird;
-        stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperThird;
+        elevatorStage1Target = Constants.ElevatorConstants.Positions.lowerThird;
+        elevatorStage2Target = Constants.ElevatorConstants.Positions.upperThird;
     }
 
     public void setFourth() {
         stage1motor.setControl(
-                m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerFourth).withSlot(0));
+                m_motionMagicReqL.withPosition(Constants.ElevatorConstants.Positions.lowerFourth).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperFourth).withSlot(0));
-        stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerFourth;
-        stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperFourth;
+        elevatorStage1Target = Constants.ElevatorConstants.Positions.lowerFourth;
+        elevatorStage2Target = Constants.ElevatorConstants.Positions.upperFourth;
     }
 
     public void setClimb() {
         if (Robot.getInstance().elevatorTestControl.getRightTriggerAxis() >= .5) {
             stage1motor.setControl(
-                    m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.lowerClimb).withSlot(0));
+                    m_motionMagicReqL.withPosition(Constants.ElevatorConstants.Positions.lowerClimb).withSlot(0));
             stage2motor.setControl(
                     m_motionMagicReqU.withPosition(Constants.ElevatorConstants.Positions.upperClimb).withSlot(0));
             // enabledClimb = true;
-            stage1motorGoalPos = Constants.ElevatorConstants.Positions.lowerClimb;
-            stage2motorGoalPos = Constants.ElevatorConstants.Positions.upperClimb;
+            elevatorStage1Target = Constants.ElevatorConstants.Positions.lowerClimb;
+            elevatorStage2Target = Constants.ElevatorConstants.Positions.upperClimb;
         }
     }
 

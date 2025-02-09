@@ -60,7 +60,12 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    Robot.getInstance().m_elevator.stopBothMotors();
+    Robot.getInstance().m_shoulder.stopShoulder();
+    Robot.getInstance().m_wrist.stopMotor();
+    Robot.getInstance().m_claw.zero();
+  }
 
   @Override
   public void disabledPeriodic() {}
@@ -88,10 +93,14 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    // RUN TO ZERO PLEASE //
+
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void teleopExit() {}
