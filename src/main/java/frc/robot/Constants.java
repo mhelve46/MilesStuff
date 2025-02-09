@@ -229,6 +229,13 @@ public class Constants {
         // pose upright = 0
         // pose flat = 90
         // pose ? = 180
+        public static final class OldWristConstants {
+
+            public static final double wristMotorGearRatio = 8; //X input rotations for each output rotation
+        
+            public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.5;
+            public static final double rotationHorizontalAlligned = wristMotorGearRatio * 0;
+        }
     }
 
     public static final class ClawConstants {

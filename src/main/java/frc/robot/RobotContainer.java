@@ -23,17 +23,20 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Climb;
-import frc.robot.commands.ClimbOld;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
-import frc.robot.commands.LevelFourOld;
-import frc.robot.commands.LevelOneOld;
-import frc.robot.commands.LevelThreeOld;
-import frc.robot.commands.LevelTwoOld;
+import frc.robot.commands.OldClawDrop;
+import frc.robot.commands.OldClawIntake;
+import frc.robot.commands.OldClimb;
+import frc.robot.commands.OldLevelFour;
+import frc.robot.commands.OldLevelOne;
+import frc.robot.commands.OldLevelThree;
+import frc.robot.commands.OldLevelTwo;
 import frc.robot.commands.OldRunShoulderReef123;
 import frc.robot.commands.OldRunShoulderReef4;
 import frc.robot.commands.OldShoulderSeaBedPickup;
+import frc.robot.commands.OldTurnWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
@@ -73,6 +76,7 @@ public class RobotContainer {
     // CommandXboxController(2);
     public final CommandXboxController elevatorTestControl = new CommandXboxController(3);
     private final XboxController shoulderTestControl = new XboxController(4);
+    private final XboxController wristTestControl = new XboxController(5);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
@@ -92,11 +96,14 @@ public class RobotContainer {
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("LevelOne", new LevelOneOld(m_elevator));
-        SmartDashboard.putData("LevelTwo", new LevelTwoOld(m_elevator));
-        SmartDashboard.putData("LevelThree", new LevelThreeOld(m_elevator));
-        SmartDashboard.putData("LevelFour", new LevelFourOld(m_elevator));
-        SmartDashboard.putData("Climb", new ClimbOld(m_elevator));
+        SmartDashboard.putData("LevelOne", new OldLevelOne(m_elevator));
+        SmartDashboard.putData("LevelTwo", new OldLevelTwo(m_elevator));
+        SmartDashboard.putData("LevelThree", new OldLevelThree(m_elevator));
+        SmartDashboard.putData("LevelFour", new OldLevelFour(m_elevator));
+        SmartDashboard.putData("Climb", new OldClimb(m_elevator));
+        SmartDashboard.putData("switchPos", new OldTurnWrist(m_wrist));
+        SmartDashboard.putData("RollIn", new OldClawIntake(m_claw));
+        SmartDashboard.putData("RollOut", new OldClawDrop(m_claw));
 
         // Field Widgets
         SmartDashboard.putData("Current Robot Position", field);
@@ -181,6 +188,17 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
         joystick.rightBumper().onTrue(new InstantCommand(() -> plus()));
         joystick.x().onTrue(new InstantCommand(() -> toggleReefOffset()));
+
+        // Wrist Test Buttons and Claw Test Buttons
+        final JoystickButton posChanger = new JoystickButton(wristTestControl, XboxController.Button.kA.value);
+        posChanger.onTrue(new OldTurnWrist(m_wrist).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+        final JoystickButton rollOutButton = new JoystickButton(wristTestControl, XboxController.Button.kX.value);        
+        rollOutButton.whileTrue(new OldClawDrop( m_claw ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+                        
+        final JoystickButton rollInButton = new JoystickButton(wristTestControl, XboxController.Button.kY.value);        
+        rollInButton.whileTrue(new OldClawIntake( m_claw ).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
         // Shoulder Test Buttons TODO Reassign
         final JoystickButton buttonXSH = new JoystickButton(shoulderTestControl, XboxController.Button.kX.value);
         buttonXSH.onTrue(new OldRunShoulderReef4(m_shoulder).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -194,20 +212,20 @@ public class RobotContainer {
 
         // Elevator Test Buttons TODO Reassign
         final JoystickButton buttonY = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kY.value);
-        buttonY.onTrue(new LevelFourOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        buttonY.onTrue(new OldLevelFour(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton buttonX = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kX.value);
-        buttonX.onTrue(new LevelThreeOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        buttonX.onTrue(new OldLevelThree(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton buttonB = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kB.value);
-        buttonB.onTrue(new LevelTwoOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        buttonB.onTrue(new OldLevelTwo(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton buttonA = new JoystickButton(elevatorTestControl.getHID(), XboxController.Button.kA.value);
-        buttonA.onTrue(new LevelOneOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        buttonA.onTrue(new OldLevelOne(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton btnClimbOld = new JoystickButton(elevatorTestControl.getHID(),
                 XboxController.Button.kStart.value);
-        btnClimbOld.onTrue(new ClimbOld(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        btnClimbOld.onTrue(new OldClimb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
