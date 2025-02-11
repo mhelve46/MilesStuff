@@ -15,12 +15,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -76,6 +78,9 @@ public class Shoulder extends SubsystemBase {
                 new CurrentLimitsConfigs()
                         .withStatorCurrentLimit(Amps.of(4))
                         .withStatorCurrentLimitEnable(true));
+        configs.withMotorOutput(
+                new MotorOutputConfigs()
+                        .withInverted(InvertedValue.Clockwise_Positive));
 
         configs.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
         configs.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
