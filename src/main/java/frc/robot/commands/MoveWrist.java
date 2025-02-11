@@ -56,12 +56,15 @@ public class MoveWrist extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        System.out.println("wrist value going to" + m_wrist.wristTarget);
+        m_wrist.rotateToPosition();
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
         m_wrist.stopMotor();
+        System.out.println("wrist stop");
     }
 
     // Returns true when the command should end.

@@ -124,6 +124,7 @@ public class Wrist extends SubsystemBase {
         if (switchValue() == true) {
             encoder.setPosition(0);
         }
+    SmartDashboard.putBoolean("for", rotationZero.get());
 //TODO SET TO REAL POSITION
         SmartDashboard.putBoolean("switch", switchValue());
         SmartDashboard.putNumber("pos", encoder.getPosition());

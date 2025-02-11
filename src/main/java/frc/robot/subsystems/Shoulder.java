@@ -117,7 +117,9 @@ public class Shoulder extends SubsystemBase {
             shoulderMotor.setPosition(270);
         }
 
-        SmartDashboard.putNumber("Kraken Position", shoulderMotor.getPosition().getValueAsDouble());
+        SmartDashboard.putBoolean("thee", shoulderBackSwitch.get());
+        SmartDashboard.putBoolean("rtwo", shoulderFrontSwitch.get());
+        SmartDashboard.putNumber("Shoulder Position", shoulderMotor.getPosition().getValueAsDouble());
 
     }
 
