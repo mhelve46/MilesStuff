@@ -7,17 +7,18 @@ public class PoseSetter {
 		private static final long serialVersionUID = 1L;
 			// TODO tune values
 			{   // place to go to   stage 1, stage 2, shoulder, wrist
-				put( "L1", new double[] { 0, 5, 270, 0 });
-				put( "L2", new double[] { 0, 10, 270, 90 });
-				put( "L3", new double[] { 5, 10, 270, 90 });
-				put( "L4", new double[] { 10, 10, 180, 90 });
-				put( "Feeder", new double[] { 0, 5, 90, 90});
-				put( "Zero", new double[] { 0, 10, 0, 0});
-				put( "Stored", new double[] { 0, 5, 30, 0});
-				put( "Ground", new double[] { 0, 10, 300, 0});
-				put( "Climb" , new double[] { -5, 0, 300, 0,});
+				put( "L1", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 270, 0 });
+				put( "L2", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 270, 90 });
+				put( "L3", new double[] { 1.25, Constants.ElevatorConstants.stage2UpperLimit, 270, 90 });
+				put( "L4", new double[] { Constants.ElevatorConstants.stage1UpperLimit, Constants.ElevatorConstants.stage2UpperLimit, 180, 90 });
+				put( "Feeder", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 90, 90});
+				put( "Zero", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 0, 0});
+				put( "Stored", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 30, 0});
+				put( "Ground", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 300, 0});
+				put( "Climb" , new double[] { -1.25, Constants.ElevatorConstants.stage2LowerLimit, 300, 0,});
 
 		}
 	};
 
+	
 }

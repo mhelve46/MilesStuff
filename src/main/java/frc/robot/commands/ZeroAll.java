@@ -19,10 +19,10 @@ public class ZeroAll extends SequentialCommandGroup {
   public ZeroAll(Shoulder shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
     // Add Commands here:
     addCommands(
-        new MoveWrist(Wrist).withTimeout(2),
-        new MoveElevator(Elevator).withTimeout(4),
-        new MoveShoulder(shoulder).withTimeout(3),
-        new ClawIntake(Claw).withTimeout(2),
+        // new MoveWrist(Wrist),
+        new MoveElevator(Elevator),
+        // new MoveShoulder(shoulder),
+        // new ClawIntake(Claw),
         new InstantCommand(() -> Robot.getInstance().currentArrangementOthers()));
 
   }

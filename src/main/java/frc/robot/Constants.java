@@ -147,6 +147,12 @@ public class Constants {
             public static final int D2 = 6;
             //
         }
+
+        public static final double stage2UpperLimit = 3;
+        public static final double stage2LowerLimit = 0;
+        public static final double stage1UpperLimit = 2.5;
+        public static final double stage1LowerLimit = 0;
+
     }
 
     public static final class ShoulderConstants {
