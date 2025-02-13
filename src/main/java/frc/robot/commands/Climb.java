@@ -51,7 +51,7 @@ public class Climb extends Command {
         System.out.println("Starting climb");
         // elevatorLowerConfig.withCurrentLimits(
         //         new CurrentLimitsConfigs()
-        //                 .withStatorCurrentLimit(Amps.of(20))
+        //                 .withStatorCurrentLimit(Amps.of(40))
         //                 .withStatorCurrentLimitEnable(true));
     }
 
