@@ -14,6 +14,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
@@ -71,7 +72,7 @@ public class Claw extends SubsystemBase {
   }
 
   public double getDistance() {
-    double distance = getVoltage() * Constants.Claw.Constants.VOLTS_TO_DIST + 1.0;
+    double distance = getVoltage() * Constants.ClawConstants.VOLTS_TO_DIST + 1.0;
     return distance;
   }
 }
