@@ -110,11 +110,11 @@ public class Shoulder extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if (isShoulderFrontTrip()) {
+        if (isShoulderFrontTrip() && shoulderMotor.getPosition().getValueAsDouble() != 0) {
             shoulderMotor.setPosition(0);
         }
 
-        if (isShoulderBackTrip()) {
+        if (isShoulderBackTrip() && shoulderMotor.getPosition().getValueAsDouble() !=270) {
             shoulderMotor.setPosition(270);
         }
 

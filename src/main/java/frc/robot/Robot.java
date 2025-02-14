@@ -17,7 +17,7 @@ public class Robot extends TimedRobot {
 
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
-  private boolean kUseLimelight = true;
+  private boolean kUseLimelight = false;
 
   public Robot() {
     // m_robotContainer = new RobotContainer();

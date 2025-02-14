@@ -221,4 +221,18 @@ public class Elevator extends SubsystemBase {
         stage2motor.set(0);
     }
 
+    public void setElevatorZeroing(){
+        if (getBottomSwitch()) {
+            stage1motor.set(0);
+        } else {
+            stage1motor.set(-0.25);
+        }
+        if (getTopSwitch()) {
+            stage2motor.set(0);
+        } else {
+            stage2motor.set(0.25);
+        }
+
+    }
+
 }
