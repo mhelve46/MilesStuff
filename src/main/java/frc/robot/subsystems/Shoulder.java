@@ -70,7 +70,7 @@ public class Shoulder extends SubsystemBase {
         shoulderBackSwitch = new DigitalInput(3);
         addChild("shoulderBackSwitch", shoulderBackSwitch);
 
-        // Voltage
+        // Configs
         TalonFXConfiguration configs = new TalonFXConfiguration();
 
         // Current Limits
@@ -85,6 +85,7 @@ public class Shoulder extends SubsystemBase {
         configs.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
         configs.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
         configs.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
+        
         // Peak output of 8 V
         configs.Voltage.withPeakForwardVoltage(Volts.of(8)).withPeakReverseVoltage(Volts.of(-8));
 
@@ -126,7 +127,6 @@ public class Shoulder extends SubsystemBase {
     @Override
     public void simulationPeriodic() {
         // This method will be called once per scheduler run when in simulation
-
     }
 
     // Put methods for controlling this subsystem

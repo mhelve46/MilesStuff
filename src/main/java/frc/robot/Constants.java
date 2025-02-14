@@ -161,10 +161,6 @@ public class Constants {
         public static final int I = 0;
         public static final double D = 0.1f;
         //
-        public static final int P2 = 60;
-        public static final int I2 = 0;
-        public static final int D2 = 6;
-        //
     }
 
     public static final class WristConstants {
@@ -175,11 +171,12 @@ public class Constants {
     }
 
     public static final class ClawConstants {
+        public static final double VOLTS_TO_DIST = 2.55;
     }
 
     public static final class VisionConstants {
         public static final String limeLightName = "limelight";
-        public static final String limeLightName2 = "";
+        public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
         // public static final int Pipe2 = 1;
     }

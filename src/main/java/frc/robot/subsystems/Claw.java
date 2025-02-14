@@ -66,14 +66,12 @@ public class Claw extends SubsystemBase {
       return false;
   }
 
-  private static final double VOLTS_TO_DIST = 2.55;
-
   public double getVoltage() {
     return clawHoldingDetector.getVoltage();
   }
 
   public double getDistance() {
-    double distance = getVoltage() * VOLTS_TO_DIST + 1.0;
+    double distance = getVoltage() * Constants.Claw.Constants.VOLTS_TO_DIST + 1.0;
     return distance;
   }
 }
