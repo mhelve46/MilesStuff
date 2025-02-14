@@ -28,10 +28,9 @@ public class DriveToPosition extends Command {
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
 
     private String _limelightName = Constants.VisionConstants.limeLightName;
+
     private TagApproaches tagApproaches = TagApproaches.getInstance();
-/*old up */
     private final CommandSwerveDrivetrain drivetrain;
-    /* old down */
     private Pose2d goalPose;
     // private double initialR;
     // private double angle;

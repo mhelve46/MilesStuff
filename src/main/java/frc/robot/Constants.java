@@ -48,11 +48,7 @@ public class Constants {
             private static int currentRow = 0;
             private static int currentCol = 0;
             private static GenericEntry[][] array1 = new GenericEntry[4][2];
-            public static String L1;
-            public static String L2;
-            public static String L3;
-            public static String L4;
-            public static String blank;
+            public static String level = "blank";
             public static String left;
             public static String right;
 
@@ -116,16 +112,15 @@ public class Constants {
         
 
             public static String getLevel(){
-                String level = blank;
-                if (getCurrentRow() == 0) level = L1;
-                else if (getCurrentRow() == 1) level = L2;
-                else if (getCurrentRow() == 2) level = L3;
-                else if (getCurrentRow() == 3) level = L4;
+                if (getCurrentRow() == 0) level = "L1";
+                else if (getCurrentRow() == 1) level = "L2";
+                else if (getCurrentRow() == 2) level = "L3";
+                else if (getCurrentRow() == 3) level = "L4";
                 return level;
             }
 
             public static String getScoringPose(){
-                String side = blank;
+                String side = "blank";
                 if (getCurrentCol() == 0)side = left;
                 else if (getCurrentCol() == 1)side = right;
                 return side;
@@ -141,84 +136,49 @@ public class Constants {
     }
 
     public static final class ElevatorConstants {
-        public static double elevatorStage1Target;
-        public static double elevatorStage2Target;
-        // stage 1 = 0
-        // stage 1 = 5
-        // stage 1 = 10
-        // stage 2 = 0
-        // stage 2 = 5
-        // stage 2 = 10
+        public static final class PID {
+            //
+            public static final double P = 2.4f;
+            public static final int I = 0;
+            public static final double D = 0.1f;
+            //
+            public static final int P2 = 60;
+            public static final int I2 = 0;
+            public static final int D2 = 6;
+            //
+        }
+
+        public static final double stage2UpperLimit = 3;
+        public static final double stage2LowerLimit = 0;
+        public static final double stage1UpperLimit = 2.5;
+        public static final double stage1LowerLimit = 0;
+
     }
 
     public static final class ShoulderConstants {
-        public static double shoulderTarget;
-        // pose for ground L1 L2 L3 processor = x
-        // pose for feeder = x
-        // pose for L4 = X
-        // pose for auton stored = X
-        // pose for feeder station = x
+        //
+        public static final double P = 2.4f;
+        public static final int I = 0;
+        public static final double D = 0.1f;
+        //
     }
 
     public static final class WristConstants {
-        public static double wristTarget;
-        // pose upright = 0
-        // pose flat = 90
-        // pose ? = 180
+            public static final double wristMotorGearRatio = 8; //X input rotations for each output rotation
+        
+            public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.5;
+            public static final double rotationHorizontalAlligned = wristMotorGearRatio * 0;
     }
 
     public static final class ClawConstants {
+        public static final double VOLTS_TO_DIST = 2.55;
     }
 
     public static final class VisionConstants {
         public static final String limeLightName = "limelight";
-        public static final String limeLightName2 = "";
+        public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
-        // public static final int nPipe = 1;
+        // public static final int Pipe2 = 1;
     }
 
-    public static final class PoseSetter {{
-        if (Selector.PlacementSelector.getLevel() == Selector.PlacementSelector.L1){
-            // elevatorStage1Target = 'stage 1 = 0'
-            // elevatorStage2Target = 'stage 2 = 5'
-            // shoulderTarget = pos L1
-            // wristTarget = pos 0
-        }
-        else if (Selector.PlacementSelector.getLevel() == Selector.PlacementSelector.L2){
-            // elevatorStage1Target = 'stage 1 = 0'
-            // elevatorStage2Target = 'stage 2 = 10'
-            // shoulderTarget = pos L1
-            // wristTarget = pos 90
-        }
-        else if (Selector.PlacementSelector.getLevel() == Selector.PlacementSelector.L3){
-            // elevatorStage1Target = 'stage 1 = 5'
-            // elevatorStage2Target = 'stage 2 = 10'
-            // shoulderTarget = pos L1
-            // wristTarget = pos 90
-        }
-        else if (Selector.PlacementSelector.getLevel() == Selector.PlacementSelector.L4){
-            // elevatorStage1Target = 'stage 1 = 10'
-            // elevatorStage2Target = 'stage 2 = 10'
-            // shoulderTarget = pos L4
-            // wristTarget = pos 90
-        }
-        // grabbing coal from feeder station
-        else if(Robot.getInstance().joystick.rightBumper().getAsBoolean()){
-            // elevatorStage1Target = 0
-            // elevatorStage2Target = 5
-            // shoulderTarget = pos feeder
-            // wristTarget = pos 0
-        }
-        // placing algae in processor
-        else if(Robot.getInstance().joystick.leftTrigger().getAsBoolean()){
-            // elevatorStage1Target = 0
-            // elevatorStage2Target = 0
-            // shoulderTarget = pos processor
-            // wristTarget = pos 0
-        }
-    }
-  }
 }
-
-
-

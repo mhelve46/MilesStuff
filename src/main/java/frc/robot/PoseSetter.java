@@ -5,16 +5,20 @@ import java.util.TreeMap;
 public class PoseSetter {
     	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
-		{   // place to go to                                  stage 1, stage 2, shoulder, wrist
-			put( Constants.Selector.PlacementSelector.L1, new double[] { 0, 5, 20, 0 });
-			put( Constants.Selector.PlacementSelector.L2, new double[] { 0, 10, 20, 90 });
-			put( Constants.Selector.PlacementSelector.L3, new double[] { 5, 10, 20, 90 });
-			put( Constants.Selector.PlacementSelector.L4, new double[] { 10, 10, 100, 90 });
-			// put( 70, new double[] { 30, 3200 }); 
-			// put( 25, new double[] { -5000, 2500 });
-			// put( 0, new double[] { -4300, 3200 });
+			// TODO tune values
+			{   // place to go to   stage 1, stage 2, shoulder, wrist
+				put( "L1", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 270, 0 });
+				put( "L2", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 270, 90 });
+				put( "L3", new double[] { 1.25, Constants.ElevatorConstants.stage2UpperLimit, 270, 90 });
+				put( "L4", new double[] { Constants.ElevatorConstants.stage1UpperLimit, Constants.ElevatorConstants.stage2UpperLimit, 180, 90 });
+				put( "Feeder", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 90, 90});
+				put( "Zero", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 0, 0});
+				put( "Stored", new double[] { Constants.ElevatorConstants.stage1LowerLimit, 1.5, 30, 0});
+				put( "Ground", new double[] { Constants.ElevatorConstants.stage1LowerLimit, Constants.ElevatorConstants.stage2UpperLimit, 300, 0});
+				put( "Climb" , new double[] { -1.25, Constants.ElevatorConstants.stage2LowerLimit, 300, 0,});
 
 		}
 	};
 
+	
 }
