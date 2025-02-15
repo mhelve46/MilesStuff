@@ -118,7 +118,6 @@ public class Constants {
                 else if (getCurrentRow() == 1) level = "L2";
                 else if (getCurrentRow() == 2) level = "L3";
                 else if (getCurrentRow() == 3) level = "L4";
-                level = "L1";
                 return level;
             }
 
@@ -163,14 +162,18 @@ public class Constants {
         public static final double P = 2.4f;
         public static final int I = 0;
         public static final double D = 0.1f;
+
+        public static final double shoulderUpperLimit = 12;
+        public static final double shoulderLowerLimit = 0;
         //
     }
 
     public static final class WristConstants {
-            public static final double wristMotorGearRatio = 8; //X input rotations for each output rotation
+            public static final double wristMotorGearRatio = 251.52; //X input rotations for each output rotation
         
-            public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.5;
+            public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.25; // quarter of a rotation on the output shaft
             public static final double rotationHorizontalAlligned = wristMotorGearRatio * 0;
+            public static final double tolerance = wristMotorGearRatio / 360.0; // 1 degree on the output mechanism
     }
 
     public static final class ClawConstants {

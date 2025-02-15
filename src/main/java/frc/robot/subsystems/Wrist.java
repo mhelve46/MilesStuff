@@ -98,9 +98,9 @@ public class Wrist extends SubsystemBase {
         NewSparkMaxConfig.closedLoop.maxMotion
                 // Set MAXMotion parameters for position control. We don't need to pass
                 // a closed loop slot, as it will default to slot 0.
-                .maxVelocity(1000)
-                .maxAcceleration(1000)
-                .allowedClosedLoopError(1 / (360));
+                .maxVelocity(11000)
+                .maxAcceleration(10000)
+                .allowedClosedLoopError(Constants.WristConstants.tolerance);
 
         /*
          * Apply the configuration to the SPARK MAX.
@@ -124,10 +124,9 @@ public class Wrist extends SubsystemBase {
         if (switchValue() == true) {
             encoder.setPosition(0);
         }
-    SmartDashboard.putBoolean("for", rotationZero.get());
-//TODO SET TO REAL POSITION
+
         SmartDashboard.putBoolean("switchWrist", switchValue());
-        SmartDashboard.putNumber("pos", encoder.getPosition());
+        SmartDashboard.putNumber("wrist pos", encoder.getPosition());
     }
 
     @Override
@@ -147,8 +146,8 @@ public class Wrist extends SubsystemBase {
     }
 
     public boolean atPosition() {
-        return Math.abs(encoder.getPosition() - wristTarget) < 1.0 / 360.0; // degree tolerance
-    }
+        return Math.abs(encoder.getPosition() - wristTarget) < Constants.WristConstants.tolerance; // degree tolerance
+    }// + or - 1 degree on the output shaft
 
     public boolean switchValue() {
         return rotationZero.get(); // normally open switch, true when triggered
@@ -157,4 +156,9 @@ public class Wrist extends SubsystemBase {
     public void stopMotor() {
         wristMotor.set(0);
     }
+
+    public void runInTheZeroWay(){
+        wristMotor.set(-.1);
+    }
+
 }

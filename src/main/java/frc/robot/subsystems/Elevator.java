@@ -193,6 +193,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public boolean isMotorOneAtPos() {
+    
         return Math.abs(stage1motor.getPosition().getValueAsDouble() - elevatorStage1Target) < .1;
     }
 
