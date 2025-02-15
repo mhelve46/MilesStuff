@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PoseSetter;
@@ -22,7 +21,7 @@ public class ZeroAll extends SequentialCommandGroup {
     addCommands(
         // new MoveWrist(Wrist),
         new ZeroElevator(Elevator),
-        // new MoveShoulder(Shoulder),
+        new ZeroShoulder(Shoulder),
         // new ClawIntake(Claw),
         new InstantCommand(() -> Robot.getInstance().currentArrangementOthers(PoseSetter.Zero)));
 
