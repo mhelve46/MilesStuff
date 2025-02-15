@@ -52,12 +52,12 @@ public class MoveShoulder extends Command {
     @Override
     public void initialize() {
         System.out.println("starting shoulder");
+        System.out.println("shoulder value going to" + m_shoulder.shoulderTarget);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("shoulder value going to" + m_shoulder.shoulderTarget);
         m_shoulder.shoulderMove();
     }
 

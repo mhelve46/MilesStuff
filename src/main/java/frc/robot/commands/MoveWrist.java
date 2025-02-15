@@ -50,12 +50,12 @@ public class MoveWrist extends Command {
     @Override
     public void initialize() {
         System.out.println("starting wrist");
+        System.out.println("wrist value going to" + m_wrist.wristTarget);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println("wrist value going to" + m_wrist.wristTarget);
         m_wrist.rotateToPosition();
     }
 

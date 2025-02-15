@@ -6,12 +6,15 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
+import com.ctre.phoenix6.controls.VoltageOut;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.math.system.Discretization;
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,7 +23,7 @@ public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
 
   private SparkMax clawMotor;
-  private AnalogInput clawHoldingDetector;
+  private DigitalInput clawHoldingDetector;
 
   public Claw() {
 
@@ -31,9 +34,7 @@ public class Claw extends SubsystemBase {
     NewSparkMaxConfig.inverted(false);
     NewSparkMaxConfig.idleMode(IdleMode.kCoast);
 
-    clawHoldingDetector = new AnalogInput(0);
-    addChild("ClawHoldingDetector", clawHoldingDetector);
-
+    clawHoldingDetector = new DigitalInput(5);
   }
 
   @Override
@@ -41,8 +42,7 @@ public class Claw extends SubsystemBase {
 
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Claw Holding", getClawHoldingDetector());
-    SmartDashboard.putNumber("Distance (Volts)", getVoltage());
-    SmartDashboard.putNumber("Distance (real)", getDistance());
+  
 
   }
 
@@ -59,20 +59,7 @@ public class Claw extends SubsystemBase {
   }
 
   public boolean getClawHoldingDetector() {
-    // clawHoldingDetector.getValue
-    // if (getDistance() < 3) {
-    if (getVoltage() < 3.8) {
-      return true;
-    } else
-      return false;
+      return clawHoldingDetector.get();
   }
 
-  public double getVoltage() {
-    return clawHoldingDetector.getVoltage();
-  }
-
-  public double getDistance() {
-    double distance = getVoltage() * Constants.ClawConstants.VOLTS_TO_DIST + 1.0;
-    return distance;
-  }
 }

@@ -18,14 +18,13 @@ public class ZeroShoulder extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-
+        System.out.println("shoulder 1 going to zero");
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
         m_shoulder.setShoulderZeroing();
-        System.out.println("shoulder 1 going to zero");
 
     }
 

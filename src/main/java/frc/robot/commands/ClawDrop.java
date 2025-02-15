@@ -21,7 +21,9 @@ public class ClawDrop extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    System.out.println("dropping claw");
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -33,12 +35,12 @@ public class ClawDrop extends Command {
   @Override
   public void end(boolean interrupted) {
     m_claw.zero();
-
+    System.out.println("end claw");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_claw.getClawHoldingDetector() == false;
   }
 }

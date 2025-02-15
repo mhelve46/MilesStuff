@@ -47,7 +47,7 @@ public class GrabCoralHigh extends SequentialCommandGroup {
               //new MoveWrist(m_wrist),           
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
-              //new ClawIntake(m_claw),
+              new ClawIntake(m_claw),
               new InstantCommand(() -> Robot.getInstance().currentArrangementOthers(PoseSetter.Feeder))
                   
         );
