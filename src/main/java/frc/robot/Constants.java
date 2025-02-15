@@ -118,7 +118,6 @@ public class Constants {
                 else if (getCurrentRow() == 1) level = "L2";
                 else if (getCurrentRow() == 2) level = "L3";
                 else if (getCurrentRow() == 3) level = "L4";
-                level = "L1";
                 return level;
             }
 
@@ -163,6 +162,9 @@ public class Constants {
         public static final double P = 2.4f;
         public static final int I = 0;
         public static final double D = 0.1f;
+
+        public static final double shoulderUpperLimit = 12;
+        public static final double shoulderLowerLimit = 0;
         //
     }
 
