@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -101,13 +102,17 @@ public class DriveToPosition extends Command {
             //update polar coords
             double currentR = drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation());
             double distCxGx = drivetrain.getState().Pose.getTranslation().getX() - goalPose.getTranslation().getX();
-            if (drivetrain.getState().Pose.getY() < goalPose.getX()) {
-                angle = -1.0 * Math.acos(distCxGx / currentR);
+            if (drivetrain.getState().Pose.getY() > goalPose.getY()) {
+                angle = Math.toDegrees(-1.0 * Math.acos(distCxGx / currentR));
+                SmartDashboard.putBoolean("invertS", true);
             } else {
-                angle = Math.acos(distCxGx / currentR);
+                angle = Math.toDegrees(Math.acos(distCxGx / currentR));
+                SmartDashboard.putBoolean("invertS", false);
             }
             SmartDashboard.putNumber("angleRJIEOFOS", angle);
-                                    
+            SmartDashboard.putNumber("cR", currentR);
+            SmartDashboard.putNumber("dCXGX", distCxGx);
+
             // Drive
             xController.setGoal(goalPose.getX());
             yController.setGoal(goalPose.getY());

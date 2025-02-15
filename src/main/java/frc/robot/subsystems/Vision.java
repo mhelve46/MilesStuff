@@ -53,7 +53,7 @@ public class Vision extends SubsystemBase {
         // _turnToTargetPID.setTolerance(2);
         // _rotateToTargetPID.setTolerance(2);
 
-        LimelightHelpers.setCameraPose_RobotSpace("", 0.525, 0, 0.44, 0, 0, 0);
+        LimelightHelpers.setCameraPose_RobotSpace("", -0.073, 0, 0.44, 0, 0, 0);
     }
 
     private Pose2d currentOptimalPose;
