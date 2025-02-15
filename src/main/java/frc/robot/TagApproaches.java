@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.TagApproach.gameTarget;
 
 public class TagApproaches {
-    public AprilTagFieldLayout FieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+    public AprilTagFieldLayout FieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
     private TagApproach[] tagArray;
 
     private static TagApproaches _TagApproaches = new TagApproaches();
@@ -152,7 +152,7 @@ public class TagApproaches {
 
     public Pose2d DesiredRobotPos(int tagID) {
         int indexInArray = tagID - 1;
-        // Alliance alliance = Robot.getInstance().m_Vision.MyAlliance();
+        Alliance alliance = Robot.getInstance().m_Vision.MyAlliance();
         // if (indexInArray > 21 && alliance != null && alliance != tagArray[indexInArray].TagAlliance()) {
             
         //    return RotatePose2d(indexInArray);
@@ -194,7 +194,6 @@ public class TagApproaches {
             offset = 0;
         }
 
-        System.out.println(offset);
         Rotation2d goalAngle = goalBeforeShift.getRotation();
         Translation2d oldTranslation = goalBeforeShift.getTranslation();
         Translation2d offsetTranslation = new Translation2d(offset, goalAngle.plus(Rotation2d.fromDegrees(90)));
