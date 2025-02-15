@@ -5,15 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "TopBlueReef"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 3.7
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TopBlueReef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoral"
+                }
+              }
+            ]
           }
         },
         {

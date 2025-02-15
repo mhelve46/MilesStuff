@@ -15,6 +15,7 @@ import java.security.PublicKey;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -49,8 +50,8 @@ public class Constants {
             private static int currentCol = 0;
             private static GenericEntry[][] array1 = new GenericEntry[4][2];
             public static String level = "blank";
-            public static String left;
-            public static String right;
+            public static String left = "left";
+            public static String right = "right";
 
             public PlacementSelector() {
 
@@ -112,10 +113,12 @@ public class Constants {
         
 
             public static String getLevel(){
-                if (getCurrentRow() == 0) level = "L1";
+                if (DriverStation.isAutonomous()) level = "L4";
+                else if (getCurrentRow() == 0) level = "L1";
                 else if (getCurrentRow() == 1) level = "L2";
                 else if (getCurrentRow() == 2) level = "L3";
                 else if (getCurrentRow() == 3) level = "L4";
+                level = "L1";
                 return level;
             }
 

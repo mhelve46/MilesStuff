@@ -185,7 +185,6 @@ public class RobotContainer {
 
         joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
         joystick.a().onTrue(new InstantCommand(() -> plus()));
-        joystick.x().onTrue(new InstantCommand(() -> toggleReefOffset()));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
@@ -235,15 +234,6 @@ public class RobotContainer {
         if (globalCurrNumSelected > 1) {
             globalCurrNumSelected--;
         }
-    }
-
-    private void toggleReefOffset() {
-        if (GLOBALOFFSET == 0)
-            GLOBALOFFSET = 0.327 / 2.0;
-        else if (GLOBALOFFSET == 0.327 / 2.0)
-            GLOBALOFFSET = -0.327 / 2.0;
-        else if (GLOBALOFFSET == -0.327 / 2.0)
-            GLOBALOFFSET = 0.0;
     }
 
     private String getConfig(){

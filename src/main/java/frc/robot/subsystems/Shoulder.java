@@ -96,31 +96,31 @@ public class Shoulder extends SubsystemBase {
 
         // Config Saving
         /* Retry config apply up to 5 times, report if failure */
-        StatusCode status = StatusCode.StatusCodeNotInitialized;
-        for (int i = 0; i < 5; ++i) {
-            status = shoulderMotor.getConfigurator().apply(configs);
-            if (status.isOK())
-                break;
-        }
-        if (!status.isOK()) {
-            System.out.println("Could not apply configs, error code: " + status.toString());
-        }
+        // StatusCode status = StatusCode.StatusCodeNotInitialized;
+        // for (int i = 0; i < 5; ++i) {
+        //     status = shoulderMotor.getConfigurator().apply(configs);
+        //     if (status.isOK())
+        //         break;
+        // }
+        // if (!status.isOK()) {
+        //     System.out.println("Could not apply configs, error code: " + status.toString());
+        // }
     }
 
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if (isShoulderFrontTrip() && shoulderMotor.getPosition().getValueAsDouble() != 0) {
-            shoulderMotor.setPosition(0);
-        }
+        // if (isShoulderFrontTrip() && shoulderMotor.getPosition().getValueAsDouble() != 0) {
+        //     shoulderMotor.setPosition(0);
+        // }
 
-        if (isShoulderBackTrip() && shoulderMotor.getPosition().getValueAsDouble() !=270) {
-            shoulderMotor.setPosition(270);
-        }
+        // if (isShoulderBackTrip() && shoulderMotor.getPosition().getValueAsDouble() !=270) {
+        //     shoulderMotor.setPosition(270);
+        // }
 
-        SmartDashboard.putBoolean("shoulderBackSwitch", shoulderBackSwitch.get());
-        SmartDashboard.putBoolean("shoulderFrontSwitch", shoulderFrontSwitch.get());
-        SmartDashboard.putNumber("Shoulder Position", shoulderMotor.getPosition().getValueAsDouble());
+        // SmartDashboard.putBoolean("shoulderBackSwitch", shoulderBackSwitch.get());
+        // SmartDashboard.putBoolean("shoulderFrontSwitch", shoulderFrontSwitch.get());
+        // SmartDashboard.putNumber("Shoulder Position", shoulderMotor.getPosition().getValueAsDouble());
 
     }
 
