@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.PoseSetter;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
@@ -44,7 +45,7 @@ public class GrabCoralLow extends SequentialCommandGroup {
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
               new ClawIntake(m_claw),
-              new InstantCommand(() -> Robot.getInstance().currentArrangementOthers())
+              new InstantCommand(() -> Robot.getInstance().currentArrangementOthers(PoseSetter.Ground))
         );
 
     }

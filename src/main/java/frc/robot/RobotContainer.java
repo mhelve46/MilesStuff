@@ -11,6 +11,8 @@ import static edu.wpi.first.units.Units.RotationsPerSecond;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.util.PathPlannerLogging;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -22,6 +24,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.AutonGrabCoral;
+import frc.robot.commands.AutonPlaceCoral;
 import frc.robot.commands.Climb;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
@@ -83,6 +87,10 @@ public class RobotContainer {
     public double GLOBALOFFSET = 0.0;
 
     public RobotContainer() {
+        
+        NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw));
+        NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_wrist, m_claw));
+
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
@@ -116,17 +124,17 @@ public class RobotContainer {
         // elevatorStage2).withWidget(BuiltInWidgets.kNumberSlider);
 
         // TODO investigate
-        // PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
-        // field.setRobotPose(pose);
-        // });
+        PathPlannerLogging.setLogCurrentPoseCallback((pose) -> {
+        field.setRobotPose(pose);
+        });
 
-        // PathPlannerLogging.setLogTargetPoseCallback((pose) -> {
-        // field.getObject("target pose").setPose(pose);
-        // });
+        PathPlannerLogging.setLogTargetPoseCallback((pose) -> {
+        field.getObject("target pose").setPose(pose);
+        });
 
-        // PathPlannerLogging.setLogActivePathCallback((poses) -> {
-        // field.getObject("path").setPoses(poses);
-        // });
+        PathPlannerLogging.setLogActivePathCallback((poses) -> {
+        field.getObject("path").setPoses(poses);
+        });
 
         configureBindings();
     }
@@ -162,10 +170,10 @@ public class RobotContainer {
         joystick.leftTrigger(.5).onTrue(new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new PlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers())
+        joystick.rightBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
         .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_wrist, m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers())
+        joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
         .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
@@ -177,7 +185,6 @@ public class RobotContainer {
 
         joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
         joystick.a().onTrue(new InstantCommand(() -> plus()));
-        joystick.x().onTrue(new InstantCommand(() -> toggleReefOffset()));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
@@ -196,11 +203,11 @@ public class RobotContainer {
         btnClimb.onTrue(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);        
-        btnZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers())
+        btnZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))
         .andThen(new ZeroAll(m_shoulder, m_elevator, m_wrist, m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnStore = new JoystickButton(accessory, XboxController.Button.kA.value);        
-        btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers())
+        btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
         .andThen(new Store(m_shoulder, m_elevator, m_wrist).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         drivetrain.registerTelemetry(logger::telemeterize);
@@ -229,15 +236,6 @@ public class RobotContainer {
         }
     }
 
-    private void toggleReefOffset() {
-        if (GLOBALOFFSET == 0)
-            GLOBALOFFSET = 0.327 / 2.0;
-        else if (GLOBALOFFSET == 0.327 / 2.0)
-            GLOBALOFFSET = -0.327 / 2.0;
-        else if (GLOBALOFFSET == -0.327 / 2.0)
-            GLOBALOFFSET = 0.0;
-    }
-
     private String getConfig(){
         String positionStatement = "blank";
         if (joystick.rightBumper().getAsBoolean()) positionStatement = "Feeder";
@@ -259,12 +257,12 @@ public class RobotContainer {
         return goalArrangement;
     }
 
-    public String goalArrangementOthers(){
-        Robot.getInstance().m_elevator.elevatorStage1Target = PoseSetter.positionsMap.get(getConfig())[0];
-        Robot.getInstance().m_elevator.elevatorStage2Target = PoseSetter.positionsMap.get(getConfig())[1];
-        Robot.getInstance().m_shoulder.shoulderTarget = PoseSetter.positionsMap.get(getConfig())[2];
-        Robot.getInstance().m_wrist.wristTarget = PoseSetter.positionsMap.get(getConfig())[3];
-        goalArrangement = getConfig();
+    public String goalArrangementOthers(String position){
+        Robot.getInstance().m_elevator.elevatorStage1Target = PoseSetter.positionsMap.get(position)[0];
+        Robot.getInstance().m_elevator.elevatorStage2Target = PoseSetter.positionsMap.get(position)[1];
+        Robot.getInstance().m_shoulder.shoulderTarget = PoseSetter.positionsMap.get(position)[2];
+        Robot.getInstance().m_wrist.wristTarget = PoseSetter.positionsMap.get(position)[3];
+        goalArrangement = position;
         SmartDashboard.putString("goal setting", goalArrangement);
         return goalArrangement;
     }
@@ -275,8 +273,8 @@ public class RobotContainer {
         return currentArrangement;
     }
 
-    public String currentArrangementOthers(){
-        currentArrangement = goalArrangementOthers();
+    public String currentArrangementOthers(String position){
+        currentArrangement = goalArrangementOthers(position);
         SmartDashboard.putString("current setting", currentArrangement);
         return currentArrangement;
     }

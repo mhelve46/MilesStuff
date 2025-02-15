@@ -8,6 +8,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -24,7 +25,7 @@ public class DriveToPosition extends Command {
 
     private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
-    // private static final TrapezoidProfile.Constraints Magnitude_Constraints = new TrapezoidProfile.Constraints(3, 2);
+    private static final TrapezoidProfile.Constraints Magnitude_Constraints = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
 
     private String _limelightName = Constants.VisionConstants.limeLightName;
@@ -32,12 +33,12 @@ public class DriveToPosition extends Command {
     private TagApproaches tagApproaches = TagApproaches.getInstance();
     private final CommandSwerveDrivetrain drivetrain;
     private Pose2d goalPose;
-    // private double initialR;
-    // private double angle;
+    private double initialR;
+    private double angle;
 
     private final ProfiledPIDController xController = new ProfiledPIDController(2, 0, 0, X_CONSTRAINTS);
     private final ProfiledPIDController yController = new ProfiledPIDController(2.5, 0, 0, Y_CONSTRAINTS);
-    // private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
+    private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
     private int lastTarget;
@@ -47,7 +48,6 @@ public class DriveToPosition extends Command {
     // private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
     //         .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
     //         .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
-    
     
     public DriveToPosition(CommandSwerveDrivetrain subsystem) {
         drivetrain = subsystem;
@@ -84,17 +84,12 @@ public class DriveToPosition extends Command {
         }
 
         goalPose = tagApproaches.DesiredRobotPos(Robot.getInstance().globalCurrNumSelected);
-        // initialR = goalPose.getTranslation().getDistance(drivetrain.getState().Pose.getTranslation());
+        initialR = goalPose.getTranslation().getDistance(drivetrain.getState().Pose.getTranslation());
 
-
-
-        SmartDashboard.putString("goal pose", goalPose.toString());
-
-        SmartDashboard.putString("currentPose", drivetrain.getState().Pose.toString());
         omegaController.reset(drivetrain.getState().Pose.getRotation().getRadians());
         yController.reset(drivetrain.getState().Pose.getY());
         xController.reset(drivetrain.getState().Pose.getX());
-        // magnitudeController.reset(drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation()));
+        magnitudeController.reset(drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation()));
         System.out.println("yo this works");
         
         Robot.getInstance().targetPoseField.setRobotPose(goalPose);
@@ -105,19 +100,24 @@ public class DriveToPosition extends Command {
     public void execute() {
 
             //update polar coords
-            // double currentR = drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation());
-            // double distCxGx = drivetrain.getState().Pose.getTranslation().getX() - goalPose.getTranslation().getX();
-            // if (drivetrain.getState().Pose.getY() < goalPose.getX()) {
-            //     angle = -1.0 * Math.acos(distCxGx / currentR);
-            // } else {
-            //     angle = Math.acos(distCxGx / currentR);
-            // }
-                                    
+            double currentR = drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation());
+            double distCxGx = drivetrain.getState().Pose.getTranslation().getX() - goalPose.getTranslation().getX();
+            if (drivetrain.getState().Pose.getY() > goalPose.getY()) {
+                angle = Math.toDegrees(-1.0 * Math.acos(distCxGx / currentR));
+                SmartDashboard.putBoolean("invertS", true);
+            } else {
+                angle = Math.toDegrees(Math.acos(distCxGx / currentR));
+                SmartDashboard.putBoolean("invertS", false);
+            }
+            SmartDashboard.putNumber("angleRJIEOFOS", angle);
+            SmartDashboard.putNumber("cR", currentR);
+            SmartDashboard.putNumber("dCXGX", distCxGx);
+
             // Drive
             xController.setGoal(goalPose.getX());
             yController.setGoal(goalPose.getY());
             omegaController.setGoal(goalPose.getRotation().getRadians());
-            // magnitudeController.setGoal(0);
+            magnitudeController.setGoal(0);
 
             // Drive to the target
             var xSpeed = xController.calculate(drivetrain.getState().Pose.getX());

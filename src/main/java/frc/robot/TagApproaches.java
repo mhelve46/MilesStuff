@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.TagApproach.gameTarget;
 
 public class TagApproaches {
-    public AprilTagFieldLayout FieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+    public AprilTagFieldLayout FieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
     private TagApproach[] tagArray;
 
     private static TagApproaches _TagApproaches = new TagApproaches();
@@ -152,7 +152,7 @@ public class TagApproaches {
 
     public Pose2d DesiredRobotPos(int tagID) {
         int indexInArray = tagID - 1;
-        // Alliance alliance = Robot.getInstance().m_Vision.MyAlliance();
+        Alliance alliance = Robot.getInstance().m_Vision.MyAlliance();
         // if (indexInArray > 21 && alliance != null && alliance != tagArray[indexInArray].TagAlliance()) {
             
         //    return RotatePose2d(indexInArray);
@@ -163,7 +163,7 @@ public class TagApproaches {
 
         if (tagArray[indexInArray].GameTarget() == gameTarget.Reef){ 
             System.out.println("shifting");
-            return shiftReefAllign(goalPose, Robot.getInstance().GLOBALOFFSET);
+            return shiftReefAllign(goalPose);
         }
         return goalPose;
                 // return tagArray[indexInArray].DesiredPos();
@@ -183,11 +183,20 @@ public class TagApproaches {
         return FieldLayout.getTagPose(id).get().getRotation().toRotation2d().getDegrees();
     }
 
-    public Pose2d shiftReefAllign(Pose2d goalBeforeShift, double robotRelativeShift) {
-        System.out.println(robotRelativeShift);
+    public Pose2d shiftReefAllign(Pose2d goalBeforeShift) {
+        double offset = 0;
+
+        if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
+            offset = 0.327 / 2.0;
+        } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
+            offset = -0.327 / 3.0;
+        } else {
+            offset = 0;
+        }
+
         Rotation2d goalAngle = goalBeforeShift.getRotation();
         Translation2d oldTranslation = goalBeforeShift.getTranslation();
-        Translation2d offsetTranslation = new Translation2d(robotRelativeShift, goalAngle.plus(Rotation2d.fromDegrees(90)));
+        Translation2d offsetTranslation = new Translation2d(offset, goalAngle.plus(Rotation2d.fromDegrees(90)));
         Translation2d newGoalTranslation = oldTranslation.plus(offsetTranslation);
         return new Pose2d(newGoalTranslation, goalAngle);
     }

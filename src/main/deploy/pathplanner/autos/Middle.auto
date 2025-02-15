@@ -5,9 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "MiddleBlueReef"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MiddleBlueReef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoral"
+                }
+              }
+            ]
           }
         }
       ]

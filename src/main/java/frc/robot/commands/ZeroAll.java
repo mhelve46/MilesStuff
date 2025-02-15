@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.PoseSetter;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
@@ -16,14 +17,14 @@ import frc.robot.subsystems.Wrist;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ZeroAll extends SequentialCommandGroup {
   /** Creates a new Store. */
-  public ZeroAll(Shoulder shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
+  public ZeroAll(Shoulder Shoulder, Elevator Elevator, Wrist Wrist, Claw Claw) {
     // Add Commands here:
     addCommands(
         // new MoveWrist(Wrist),
-        new MoveElevator(Elevator),
-        // new MoveShoulder(shoulder),
+        new ZeroElevator(Elevator),
+        // new MoveShoulder(Shoulder),
         // new ClawIntake(Claw),
-        new InstantCommand(() -> Robot.getInstance().currentArrangementOthers()));
+        new InstantCommand(() -> Robot.getInstance().currentArrangementOthers(PoseSetter.Zero)));
 
   }
 

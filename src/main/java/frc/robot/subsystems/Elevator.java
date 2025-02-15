@@ -96,31 +96,31 @@ public class Elevator extends SubsystemBase {
 
         /* Configure Motion Magic */
         MotionMagicConfigs motionMagicU = elevatorUpperConfig.MotionMagic;
-        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(5)) // (meachanism) rotations per second cruise
+        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
 
         MotionMagicConfigs motionMagicL = elevatorLowerConfig.MotionMagic;
-        motionMagicL.withMotionMagicCruiseVelocity(RotationsPerSecond.of(5)) // (meachanism) rotations per second cruise
+        motionMagicL.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        upperSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-        upperSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
         upperSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
         upperSlot0.kI = 0; // No output for integrated error
         upperSlot0.kD = 0.5; // A velocity error of 1 rps results in 0.5 V output
+        upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
+        upperSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
+        upperSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
 
         Slot0Configs lowerSlot0 = elevatorLowerConfig.Slot0;
+        lowerSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
+        lowerSlot0.kI = 0; // No output for integrated error
         lowerSlot0.kD = 0.5; // A velocity error of 1 rps results in 0.5 V output
         lowerSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         lowerSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
         lowerSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
-        lowerSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
-        lowerSlot0.kI = 0; // No output for integrated error
 
         StatusCode statusU = StatusCode.StatusCodeNotInitialized;
         for (int i = 0; i < 5; ++i) {
@@ -219,6 +219,20 @@ public class Elevator extends SubsystemBase {
     public void stopBothMotors() {
         stage1motor.set(0);
         stage2motor.set(0);
+    }
+
+    public void setElevatorZeroing(){
+        if (getBottomSwitch()) {
+            stage1motor.set(0);
+        } else {
+            stage1motor.set(-0.25);
+        }
+        if (getTopSwitch()) {
+            stage2motor.set(0);
+        } else {
+            stage2motor.set(0.25);
+        }
+
     }
 
 }
