@@ -8,6 +8,7 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import com.ctre.phoenix6.hardware.CANdi;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -52,6 +53,10 @@ public class RobotContainer {
     public final Claw m_claw = new Claw();
     public final Vision m_Vision = new Vision();
 
+  //  private CANdi wristAndClawCandi;
+  //  private CANdi shoulderAndTopCandi;
+
+
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
         // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
@@ -92,6 +97,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_wrist, m_claw));
 
+     //   wristAndClawCandi = new CANdi(30, "rio");
+     //   shoulderAndTopCandi = new CANdi(31, "rio");
+
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
@@ -104,14 +112,6 @@ public class RobotContainer {
         SmartDashboard.putData("Target Robot Position", targetPoseField);
 
         // selector spots
-        SmartDashboard.putBoolean("0-0", true);
-        SmartDashboard.putBoolean("1-0", false);
-        SmartDashboard.putBoolean("2-0", false);
-        SmartDashboard.putBoolean("3-0", false);
-        SmartDashboard.putBoolean("0-1", false);
-        SmartDashboard.putBoolean("1-1", false);
-        SmartDashboard.putBoolean("2-1", false);
-        SmartDashboard.putBoolean("3-1", false);
         Constants.Selector.PlacementSelector.initializeTab();
         SmartDashboard.putString("current setting", currentArrangement);
         SmartDashboard.putString("goal Setting", goalArrangement);
@@ -281,4 +281,17 @@ public class RobotContainer {
         SmartDashboard.putString("current setting", currentArrangement);
         return currentArrangement;
     }
+    
+    public Boolean getWristTripped() {
+        return false;
+       //return !shoulderAndTopCandi.getS2Closed().getValue();
+      }
+      public Boolean getTopStage2() {
+        return false;
+       // return shoulderAndTopCandi.getS1Closed().getValue();
+      }
+      public Boolean getCoralDetect() {
+        return false;
+        //return !wristAndClawCandi.getS1Closed().getValue();
+      }
 }
