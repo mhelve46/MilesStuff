@@ -48,7 +48,6 @@ public class Constants {
             private static boolean[][] array = new boolean[4][2];
             private static int currentRow = 0;
             private static int currentCol = 0;
-            private static GenericEntry[][] array1 = new GenericEntry[4][2];
             public static String level = "blank";
             public static String left = "left";
             public static String right = "right";
@@ -63,7 +62,6 @@ public class Constants {
                 // Set the current true element to false
                 array[currentRow][currentCol] = false;
                 SmartDashboard.putBoolean(currentRow + "-" + currentCol, false);
-                array1[currentRow][currentCol].setBoolean(false);
 
                 if (direction == Constants.Selector.DPAD.kDown && currentRow > 0) {
                     currentRow--;
@@ -78,7 +76,6 @@ public class Constants {
                 // Set the new position to true
                 array[currentRow][currentCol] = true;
                 SmartDashboard.putBoolean(currentRow + "-" + currentCol, true);
-                array1[currentRow][currentCol].setBoolean(true);
             }
 
             public static int getCurrentCol() {
@@ -90,15 +87,15 @@ public class Constants {
             }
 
             public static void initializeTab() {
-                // Add placement selector to REEFSCAPE tab
-                ShuffleboardTab mainTab = Shuffleboard.getTab("REEFSCAPE");
-                for (int i = 0; i < array1.length; i++) {
-                    for (int j = 0; j < array1[i].length; j++) {
-                        array1[i][j] = mainTab.add(i + "-" + j, false).withWidget(BuiltInWidgets.kBooleanBox)
-                                .withPosition(j, Math.abs(i - 3)).getEntry();
+                array[currentRow][currentCol] = true;
+                for (int i = 0; i<array.length; i++){
+                    for (int j = 0; j<array[i].length; j++){
+                        array[i][j] = false;
+                        SmartDashboard.putBoolean(i+"-"+j, false);
                     }
                 }
-                array1[currentRow][currentCol].setBoolean(true);
+                array[currentRow][currentCol] = true;
+                SmartDashboard.putBoolean(currentRow+"-"+currentCol, true);
 
             }
 

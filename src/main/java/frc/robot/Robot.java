@@ -6,6 +6,8 @@ package frc.robot;
 
 import com.ctre.phoenix6.Utils;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,6 +23,10 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     // m_robotContainer = new RobotContainer();
+        HttpCamera frontCam = new HttpCamera("FrontCam", "http://frcvision.local:1181/stream.mjpg");
+        CameraServer.addCamera(frontCam);
+        HttpCamera backCam = new HttpCamera("BackCam", "http://frcvision.local:1181/stream.mjpg");
+        CameraServer.addCamera(backCam);
   }
 
   public static RobotContainer getInstance(){
@@ -30,6 +36,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
+    SmartDashboard.putBoolean("Coral", m_robotContainer.getCoralDetect());
+    SmartDashboard.putBoolean("Wrist Zero", m_robotContainer.getWristTripped());
     
     /*
      * This example of adding Limelight is very simple and may not be sufficient for
