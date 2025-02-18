@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
@@ -32,7 +33,7 @@ public class Claw extends SubsystemBase {
     SparkMaxConfig NewSparkMaxConfig = new SparkMaxConfig();
     clawMotor.configure(NewSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     NewSparkMaxConfig.inverted(false);
-    NewSparkMaxConfig.idleMode(IdleMode.kCoast);
+    NewSparkMaxConfig.idleMode(IdleMode.kBrake);
 
     clawHoldingDetector = new DigitalInput(5);
   }
@@ -47,11 +48,11 @@ public class Claw extends SubsystemBase {
   }
 
   public void rotateInwards() {
-    clawMotor.set(0.10);
+    clawMotor.set(.7);
   }
 
   public void rotateOutwards() {
-    clawMotor.set(-0.10);
+    clawMotor.set(-1);
   }
 
   public void zero() {
@@ -59,7 +60,7 @@ public class Claw extends SubsystemBase {
   }
 
   public boolean getClawHoldingDetector() {
-      return clawHoldingDetector.get();
+      return Robot.getInstance().getCoralDetect();
   }
 
 }

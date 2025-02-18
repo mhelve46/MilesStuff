@@ -158,4 +158,9 @@ public class Shoulder extends SubsystemBase {
 
     }
 
+    public boolean isSafeToMoveWrist() {
+        double currPos = shoulderMotor.getPosition().getValueAsDouble();
+        return (currPos >= 0 && currPos <= 270);
+    }
+
 }
