@@ -11,7 +11,7 @@ import frc.robot.subsystems.Claw;
 public class ClawIntake extends Command {
 private final Claw m_claw;
 
-  /** Creates a new ClawDrop. */
+  /** Creates a new ClawIntake. */
   public ClawIntake(Claw subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
