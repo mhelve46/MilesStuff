@@ -23,9 +23,9 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     // m_robotContainer = new RobotContainer();
-        HttpCamera frontCam = new HttpCamera("FrontCam", "http://frcvision.local:1181/stream.mjpg");
+        HttpCamera frontCam = new HttpCamera("FrontCam", "http://10.48.59.11:5800");
         CameraServer.addCamera(frontCam);
-        HttpCamera backCam = new HttpCamera("BackCam", "http://frcvision.local:1181/stream.mjpg");
+        HttpCamera backCam = new HttpCamera("BackCam", "http://10.48.59.12:5800");
         CameraServer.addCamera(backCam);
   }
 
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
     SmartDashboard.putBoolean("Coral", m_robotContainer.getCoralDetect());
     SmartDashboard.putBoolean("Wrist Zero", m_robotContainer.getWristTripped());
+    SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
     
     /*
      * This example of adding Limelight is very simple and may not be sufficient for

@@ -8,6 +8,7 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import com.ctre.phoenix6.hardware.CANdi;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -50,15 +51,15 @@ import frc.robot.subsystems.Wrist;
 
 public class RobotContainer {
     // Subsystems
-    public final Shoulder m_shoulder = new Shoulder();
-    public final Wrist m_wrist = new Wrist();
-    public final Elevator m_elevator = new Elevator();
-    public final Claw m_claw = new Claw();
-    public final Vision m_Vision = new Vision();
-    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+   public final Shoulder m_shoulder = new Shoulder();
+   public final Wrist m_wrist = new Wrist();
+   public final Elevator m_elevator = new Elevator();
+   public final Claw m_claw = new Claw();
+   public final Vision m_Vision = new Vision();
+   public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-    // private CANdi wristAndClawCandi;
-    // private CANdi shoulderAndTopCandi;
+   private CANdi wristAndClawCandi;
+   private CANdi shoulderAndTopCandi;
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     // kSpeedAt12Volts desired top speed
@@ -100,8 +101,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_wrist, m_claw));
 
-        // wristAndClawCandi = new CANdi(30, "rio");
-        // shoulderAndTopCandi = new CANdi(31, "rio");
+        wristAndClawCandi = new CANdi(30, "rio");
+        shoulderAndTopCandi = new CANdi(31, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -313,17 +314,18 @@ public class RobotContainer {
     }
 
     public Boolean getWristTripped() {
-        return false;
-        // return !shoulderAndTopCandi.getS2Closed().getValue();
+        // return false;
+       return !wristAndClawCandi.getS2Closed().getValue();
     }
-
     public Boolean getTopStage2() {
-        return false;
-        // return shoulderAndTopCandi.getS1Closed().getValue();
+        // return false;
+        return shoulderAndTopCandi.getS2Closed().getValue();
     }
-
     public Boolean getCoralDetect() {
-        return false;
-        // return !wristAndClawCandi.getS1Closed().getValue();
+        // return false;
+        return !wristAndClawCandi.getS1Closed().getValue();
+    }
+    public Boolean getShoulderTripped() {
+        return !shoulderAndTopCandi.getS1Closed().getValue();
     }
 }
