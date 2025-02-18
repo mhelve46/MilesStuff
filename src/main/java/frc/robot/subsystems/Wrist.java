@@ -66,6 +66,7 @@ public class Wrist extends SubsystemBase {
         wristMotor.configure(NewSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         NewSparkMaxConfig.inverted(false);
         NewSparkMaxConfig.idleMode(IdleMode.kBrake);
+        NewSparkMaxConfig.smartCurrentLimit(10, 10);
 
         rotationZero = new DigitalInput(4);
         addChild("rotationZero", rotationZero);
