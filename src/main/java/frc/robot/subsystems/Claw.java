@@ -34,6 +34,7 @@ public class Claw extends SubsystemBase {
     clawMotor.configure(NewSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     NewSparkMaxConfig.inverted(false);
     NewSparkMaxConfig.idleMode(IdleMode.kBrake);
+    NewSparkMaxConfig.smartCurrentLimit(10, 10);
 
     clawHoldingDetector = new DigitalInput(5);
   }
