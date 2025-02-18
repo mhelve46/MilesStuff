@@ -88,6 +88,7 @@ public class RobotContainer {
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
+    private final SendableChooser<InstantCommand> autoLevelSelector = new SendableChooser<>();
 
     /* Fields */
     public Field2d field = new Field2d();
@@ -106,6 +107,12 @@ public class RobotContainer {
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
+
+        autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
+        autoLevelSelector.addOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
+        autoLevelSelector.addOption("L2", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(1)));
+        autoLevelSelector.addOption("L1", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(0)));
+        SmartDashboard.putData("Selected Auto Reef Level", autoLevelSelector);
 
         // SmartDashboard Commands
         // SmartDashboard.putData("AutonGrabCoral", new InstantCommand(() ->
@@ -255,6 +262,10 @@ public class RobotContainer {
 
     public Command getAutonomousCommand() {
         return autoChooser.getSelected();
+    }
+
+    public InstantCommand getSelectedAutoLevel() {
+        return autoLevelSelector.getSelected();
     }
 
     private void slow() {
