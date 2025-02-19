@@ -4,24 +4,24 @@
     {
       "anchor": {
         "x": 7.565467171717171,
-        "y": 6.007007575757575
+        "y": 6.149305555555555
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.335680914212657,
-        "y": 5.908527751112783
+        "x": 7.31556246858973,
+        "y": 6.1424034287249905
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.218,
-        "y": 5.296
+        "x": 5.197222222222222,
+        "y": 5.53945707070707
       },
       "prevControl": {
-        "x": 5.4531993497488305,
-        "y": 5.380742349965807
+        "x": 5.698569736181023,
+        "y": 5.683326361815698
       },
       "nextControl": null,
       "isLocked": false,
@@ -45,7 +45,7 @@
     "rotation": -119.99999999999999
   },
   "reversed": false,
-  "folder": "TopAuton",
+  "folder": null,
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
