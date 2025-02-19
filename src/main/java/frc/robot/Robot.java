@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private InstantCommand m_autonomousReefLevel;
 
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
@@ -86,9 +88,18 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousReefLevel = m_robotContainer.getSelectedAutoLevel();
 
     if (m_autonomousCommand != null) {
+      
+      if (m_autonomousReefLevel != null) {
+        m_autonomousReefLevel.schedule();
+      } else {
+        new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3));
+      }
+
       m_autonomousCommand.schedule();
+      
     }
   }
 

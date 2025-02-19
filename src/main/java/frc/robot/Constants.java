@@ -86,6 +86,20 @@ public class Constants {
                 return currentRow;
             }
 
+            public static void setCurrentRow(int newRow) {
+                // Set the current true element to false
+                array[currentRow][currentCol] = false;
+                SmartDashboard.putBoolean(currentRow + "-" + currentCol, false);
+
+                if (newRow >= 0 && newRow <= (array.length -1)) {
+                    currentRow = newRow;
+                }
+
+                // Set the new position to true
+                array[currentRow][currentCol] = true;
+                SmartDashboard.putBoolean(currentRow + "-" + currentCol, true);
+            }
+
             public static void initializeTab() {
                 for (int i = 0; i<array.length; i++){
                     for (int j = 0; j<array[i].length; j++){
@@ -109,8 +123,8 @@ public class Constants {
         
 
             public static String getLevel(){
-                if (DriverStation.isAutonomous()) level = "L4";
-                else if (getCurrentRow() == 0) level = "L1";
+                // if (DriverStation.isAutonomous()) level = "L4";
+                if (getCurrentRow() == 0) level = "L1";
                 else if (getCurrentRow() == 1) level = "L2";
                 else if (getCurrentRow() == 2) level = "L3";
                 else if (getCurrentRow() == 3) level = "L4";
