@@ -24,21 +24,41 @@
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "TopReef2Tree"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TopReef2Feeder"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonGrabCoral"
+                }
+              }
+            ]
           }
         },
         {
-          "type": "wait",
+          "type": "parallel",
           "data": {
-            "waitTime": 2.0
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "TopTree2Reef"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TopFeeder2Reef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoral"
+                }
+              }
+            ]
           }
         }
       ]
