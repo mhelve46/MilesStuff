@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceCoral;
 import frc.robot.commands.ClawDrop;
@@ -33,6 +34,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
+import frc.robot.commands.MoveWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
@@ -83,8 +85,7 @@ public class RobotContainer {
 
     public final CommandXboxController joystick = new CommandXboxController(0);
     public final XboxController accessory = new XboxController(1);
-    // private final CommandXboxController characterizationJoystick = new
-    // CommandXboxController(2);
+    private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
@@ -132,8 +133,8 @@ public class RobotContainer {
         // .andThen(new MoveElevator(m_elevator)));
         // SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> command)
         // .andThen(new MoveShoulder(m_shoulder)));
-        // SmartDashboard.putData("MoveWrist", new InstantCommand(() -> command)
-        // .andThen(new MoveWrist(m_wrist)));
+        SmartDashboard.putData("MoveWrist", new InstantCommand(() -> goalArrangementPlacing())
+        .andThen(new MoveWrist(m_wrist)));
         SmartDashboard.putData("PlaceCoral", new InstantCommand(() -> goalArrangementPlacing())
                 .andThen(new PlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("Store", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -192,10 +193,10 @@ public class RobotContainer {
 
         // Characterization buttons
         // Note that each routine should be run exactly once in a single log.
-        // characterizationJoystick.y().whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        // characterizationJoystick.a().whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        // characterizationJoystick.povUp().whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        // characterizationJoystick.povDown().whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        characterizationJoystick.y().whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        characterizationJoystick.a().whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
+        characterizationJoystick.povUp().whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        characterizationJoystick.povDown().whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // Operator buttons
         joystick.leftTrigger(.5).onTrue(new InstantCommand(() -> goalArrangementPlacing())
@@ -330,13 +331,13 @@ public class RobotContainer {
     }
     public Boolean getTopStage2() {
         // return false;
-        return shoulderAndTopCandi.getS2Closed().getValue();
+        return !shoulderAndTopCandi.getS2Closed().getValue();
     }
     public Boolean getCoralDetect() {
         // return false;
         return !wristAndClawCandi.getS1Closed().getValue();
     }
     public Boolean getShoulderTripped() {
-        return !shoulderAndTopCandi.getS1Closed().getValue();
+        return shoulderAndTopCandi.getS1Closed().getValue();
     }
 }
