@@ -25,7 +25,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceCoral;
 import frc.robot.commands.ClawDrop;
@@ -34,6 +33,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
+import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
@@ -85,7 +85,7 @@ public class RobotContainer {
 
     public final CommandXboxController joystick = new CommandXboxController(0);
     public final XboxController accessory = new XboxController(1);
-    private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
+//     private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
@@ -129,8 +129,8 @@ public class RobotContainer {
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("GrabCoralLow", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
                 .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)));
-        // SmartDashboard.putData("MoveElevator", new InstantCommand(() -> command)
-        // .andThen(new MoveElevator(m_elevator)));
+        SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
+        .andThen(new MoveElevator(m_elevator)));
         // SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> command)
         // .andThen(new MoveShoulder(m_shoulder)));
         SmartDashboard.putData("MoveWrist", new InstantCommand(() -> goalArrangementPlacing())
@@ -193,10 +193,10 @@ public class RobotContainer {
 
         // Characterization buttons
         // Note that each routine should be run exactly once in a single log.
-        characterizationJoystick.y().whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
-        characterizationJoystick.a().whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
-        characterizationJoystick.povUp().whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
-        characterizationJoystick.povDown().whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
+        // characterizationJoystick.y().whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        // characterizationJoystick.a().whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
+        // characterizationJoystick.povUp().whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        // characterizationJoystick.povDown().whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
         // Operator buttons
         joystick.leftTrigger(.5).onTrue(new InstantCommand(() -> goalArrangementPlacing())

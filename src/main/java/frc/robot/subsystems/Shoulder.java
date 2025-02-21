@@ -116,7 +116,6 @@ public class Shoulder extends SubsystemBase {
             shoulderMotor.setPosition(0);
         }
 
-        SmartDashboard.putBoolean("shoulderFrontSwitch", isShoulderTripped());
         SmartDashboard.putNumber("Shoulder Position", shoulderMotor.getPosition().getValueAsDouble());
 
     }

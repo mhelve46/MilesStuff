@@ -10,15 +10,6 @@
 
 package frc.robot;
 
-import java.security.PublicKey;
-
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.HttpCamera;
-import edu.wpi.first.networktables.GenericEntry;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -160,9 +151,9 @@ public class Constants {
             //
         }
 
-        public static final double stage2UpperLimit = 3;
+        public static final double stage2UpperLimit = 4;
         public static final double stage2LowerLimit = 0;
-        public static final double stage1UpperLimit = 2.5;
+        public static final double stage1UpperLimit = 2.75;
         public static final double stage1LowerLimit = 0;
 
     }
@@ -192,7 +183,7 @@ public class Constants {
     }
 
     public static final class VisionConstants {
-        public static final String limeLightName = "limelight";
+        public static final String limeLightName = "limelight-front";
         public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
         // public static final int Pipe2 = 1;
