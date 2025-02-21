@@ -179,7 +179,6 @@ public class Constants {
     }
 
     public static final class ClawConstants {
-        public static final double VOLTS_TO_DIST = 2.55;
     }
 
     public static final class VisionConstants {
