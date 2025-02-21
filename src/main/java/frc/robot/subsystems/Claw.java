@@ -24,7 +24,6 @@ public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
 
   private SparkMax clawMotor;
-  private DigitalInput clawHoldingDetector;
 
   public Claw() {
 
@@ -36,7 +35,6 @@ public class Claw extends SubsystemBase {
     NewSparkMaxConfig.idleMode(IdleMode.kBrake);
     NewSparkMaxConfig.smartCurrentLimit(10, 10);
 
-    clawHoldingDetector = new DigitalInput(5);
   }
 
   @Override
@@ -44,7 +42,6 @@ public class Claw extends SubsystemBase {
 
     // This method will be called once per scheduler run
     SmartDashboard.putBoolean("Claw Holding", getClawHoldingDetector());
-  
 
   }
 
