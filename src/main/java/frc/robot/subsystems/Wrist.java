@@ -130,11 +130,11 @@ public class Wrist extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void rotateToPosition() {
-
-        closedLoopController.setReference(wristTarget,
+        if (Robot.getInstance().m_shoulder.isSafeToMoveWrist()){
+            closedLoopController.setReference(wristTarget,
                 ControlType.kMAXMotionPositionControl,
                 ClosedLoopSlot.kSlot0);
-
+        }
     }
 
     public boolean atPosition() {
