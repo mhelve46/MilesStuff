@@ -33,6 +33,8 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
+import frc.robot.commands.MoveElevator;
+import frc.robot.commands.MoveWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
@@ -83,8 +85,7 @@ public class RobotContainer {
 
     public final CommandXboxController joystick = new CommandXboxController(0);
     public final XboxController accessory = new XboxController(1);
-    // private final CommandXboxController characterizationJoystick = new
-    // CommandXboxController(2);
+//     private final CommandXboxController characterizationJoystick = new CommandXboxController(2);
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
@@ -128,12 +129,12 @@ public class RobotContainer {
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("GrabCoralLow", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
                 .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)));
-        // SmartDashboard.putData("MoveElevator", new InstantCommand(() -> command)
-        // .andThen(new MoveElevator(m_elevator)));
+        SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
+        .andThen(new MoveElevator(m_elevator)));
         // SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> command)
         // .andThen(new MoveShoulder(m_shoulder)));
-        // SmartDashboard.putData("MoveWrist", new InstantCommand(() -> command)
-        // .andThen(new MoveWrist(m_wrist)));
+        SmartDashboard.putData("MoveWrist", new InstantCommand(() -> goalArrangementPlacing())
+        .andThen(new MoveWrist(m_wrist)));
         SmartDashboard.putData("PlaceCoral", new InstantCommand(() -> goalArrangementPlacing())
                 .andThen(new PlaceCoral(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("Store", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -330,13 +331,13 @@ public class RobotContainer {
     }
     public Boolean getTopStage2() {
         // return false;
-        return shoulderAndTopCandi.getS2Closed().getValue();
+        return !shoulderAndTopCandi.getS2Closed().getValue();
     }
     public Boolean getCoralDetect() {
         // return false;
         return !wristAndClawCandi.getS1Closed().getValue();
     }
     public Boolean getShoulderTripped() {
-        return !shoulderAndTopCandi.getS1Closed().getValue();
+        return shoulderAndTopCandi.getS1Closed().getValue();
     }
 }

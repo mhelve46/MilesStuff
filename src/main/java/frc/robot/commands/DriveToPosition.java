@@ -8,7 +8,6 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
@@ -29,7 +28,6 @@ public class DriveToPosition extends Command {
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
 
     private String _limelightName = Constants.VisionConstants.limeLightName;
-
     private TagApproaches tagApproaches = TagApproaches.getInstance();
     private final CommandSwerveDrivetrain drivetrain;
     private Pose2d goalPose;
@@ -42,21 +40,21 @@ public class DriveToPosition extends Command {
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
     private int lastTarget;
-/* old up */
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
     // private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
     //         .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
     //         .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     
+    
     public DriveToPosition(CommandSwerveDrivetrain subsystem) {
         drivetrain = subsystem;
 
-        xController.setTolerance(0.05);
-        yController.setTolerance(0.05);
-        omegaController.setTolerance(Units.degreesToRadians(2));
+        xController.setTolerance(0.0);
+        yController.setTolerance(0.0);
+        omegaController.setTolerance(Units.degreesToRadians(1));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
-        // magnitudeController.setTolerance(0.05);
+        magnitudeController.setTolerance(0.01);
 
         addRequirements(drivetrain);
     }
@@ -64,7 +62,7 @@ public class DriveToPosition extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        //ensure the active pipeline can process april tags
+        // // ensure the active pipeline can process april tags
         // if (LimelightHelpers.getCurrentPipelineType(_limelightName) != "pipe_fiducial") {
         //     LimelightHelpers.setPipelineIndex(_limelightName, Constants.aprilPipe);
         // }
@@ -72,20 +70,25 @@ public class DriveToPosition extends Command {
         // Set position of camera based on target seen 
         lastTarget = 0;
         // Verify that see a valid target for aliance and set current robot pose based on it.
-          if (LimelightHelpers.getTV("")) {
+          if (LimelightHelpers.getTV(_limelightName)) {
             int fidID = (int) LimelightHelpers.getFiducialID(_limelightName);
-            if ((fidID >= 0) && (fidID <= 22)) {
+            if ((fidID >= 1) && (fidID <= 22)) {
                 lastTarget = fidID;
                 
-                // goalPose = TagApproaches.getInstance().DesiredRobotPos(10);
+                goalPose = TagApproaches.getInstance().DesiredRobotPos(lastTarget);
 
                 // SmartDashboard.putString("goal pose", goalPose.toString());
             }
         }
 
-        goalPose = tagApproaches.DesiredRobotPos(Robot.getInstance().globalCurrNumSelected);
+        // goalPose = tagApproaches.DesiredRobotPos(Robot.getInstance().globalCurrNumSelected);
         initialR = goalPose.getTranslation().getDistance(drivetrain.getState().Pose.getTranslation());
 
+
+
+        SmartDashboard.putString("goal pose", goalPose.toString());
+
+        SmartDashboard.putString("currentPose", drivetrain.getState().Pose.toString());
         omegaController.reset(drivetrain.getState().Pose.getRotation().getRadians());
         yController.reset(drivetrain.getState().Pose.getY());
         xController.reset(drivetrain.getState().Pose.getX());
@@ -101,18 +104,17 @@ public class DriveToPosition extends Command {
 
             //update polar coords
             double currentR = drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation());
-            double distCxGx = drivetrain.getState().Pose.getTranslation().getX() - goalPose.getTranslation().getX();
-            if (drivetrain.getState().Pose.getY() > goalPose.getY()) {
-                angle = Math.toDegrees(-1.0 * Math.acos(distCxGx / currentR));
-                SmartDashboard.putBoolean("invertS", true);
+            double distCxGx = goalPose.getTranslation().getX() - drivetrain.getState().Pose.getTranslation().getX();
+            if (goalPose.getY() < drivetrain.getState().Pose.getY()) {
+                angle = -1.0 * Math.acos(distCxGx / currentR);
+                System.out.println("angle is odd");
+                
             } else {
-                angle = Math.toDegrees(Math.acos(distCxGx / currentR));
-                SmartDashboard.putBoolean("invertS", false);
+                angle = Math.acos(distCxGx / currentR);
+                System.out.println("angle is normal");
+                
             }
-            SmartDashboard.putNumber("angleRJIEOFOS", angle);
-            SmartDashboard.putNumber("cR", currentR);
-            SmartDashboard.putNumber("dCXGX", distCxGx);
-
+                                    
             // Drive
             xController.setGoal(goalPose.getX());
             yController.setGoal(goalPose.getY());
@@ -120,12 +122,12 @@ public class DriveToPosition extends Command {
             magnitudeController.setGoal(0);
 
             // Drive to the target
-            var xSpeed = xController.calculate(drivetrain.getState().Pose.getX());
+            double xSpeed = xController.calculate(drivetrain.getState().Pose.getX());
             if (xController.atGoal()) {
                 xSpeed = 0;
             }
 
-            var ySpeed = yController.calculate(drivetrain.getState().Pose.getY());
+            double ySpeed = yController.calculate(drivetrain.getState().Pose.getY());
             if (yController.atGoal()) {
                 ySpeed = 0;
             }
@@ -135,31 +137,40 @@ public class DriveToPosition extends Command {
                 omegaSpeed = 0;
             }
 
-            // var combinedSpeed = magnitudeController.calculate(currentR);
+            var combinedSpeed = magnitudeController.calculate(currentR);
                 
-            // double xSpeedFromPolar = -1 * Math.cos(angle) * combinedSpeed;
-            // double ySpeedFromPolar = -1 * Math.sin(angle) * combinedSpeed;
+            double xSpeedFromPolar = -1 * Math.cos(angle) * combinedSpeed;
+            double ySpeedFromPolar = -1 * Math.sin(angle) * combinedSpeed;
             
-            // if (magnitudeController.atGoal()) {
-            //     xSpeedFromPolar = 0;
-            //     ySpeedFromPolar = 0;
-            // }
+            if (magnitudeController.atGoal()) {
+                xSpeedFromPolar = 0;
+                ySpeedFromPolar = 0;
+            }
+
+            SmartDashboard.putNumber("combinedSpeed", combinedSpeed);
+            SmartDashboard.putNumber("xSpeedFromPolar", xSpeedFromPolar);
+            SmartDashboard.putNumber("ySpeedFromPolar", ySpeedFromPolar);
+            SmartDashboard.putNumber("angleRJIEOFOS", angle * (180/Math.PI));
+            SmartDashboard.putNumber("cR", currentR);
+            SmartDashboard.putNumber("dCXGX", distCxGx);
+            SmartDashboard.putNumber("ySpeed", ySpeed);
+            SmartDashboard.putNumber("xSpeed", xSpeed);
 
 
 
-        // drivetrain.setControl(
-        //     Robot.getInstance().drive
-        //         .withVelocityX(xSpeedFromPolar * MaxSpeed)
-        //         .withVelocityY(ySpeedFromPolar * MaxSpeed)
-        //         .withRotationalRate(omegaSpeed * MaxAngularRate)
-        // );
-        
         drivetrain.setControl(
             Robot.getInstance().drive
-                .withVelocityX(xSpeed * MaxSpeed)
-                .withVelocityY(ySpeed * MaxSpeed)
+                .withVelocityX(-xSpeedFromPolar * MaxSpeed)
+                .withVelocityY(-ySpeedFromPolar * MaxSpeed)
                 .withRotationalRate(omegaSpeed * MaxAngularRate)
         );
+        
+        // drivetrain.setControl(
+        //     Robot.getInstance().drive
+        //         .withVelocityX(-xSpeed * MaxSpeed)
+        //         .withVelocityY(-ySpeed * MaxSpeed)
+        //         .withRotationalRate(omegaSpeed * MaxAngularRate)
+        // );
 
         // System.out.println("Last Taget: " + lastTarget);
         // System.out.println();
@@ -179,7 +190,6 @@ public class DriveToPosition extends Command {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-//cancerl current trajectory
     }
 
     // Returns true when the command should end.

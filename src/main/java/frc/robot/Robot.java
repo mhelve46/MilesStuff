@@ -66,6 +66,17 @@ public class Robot extends TimedRobot {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
             Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
       }
+
+      // //keep if testing the two limelights independently
+      // LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limeLightName2, headingDeg, 0, 0, 0, 0, 0);
+      // var llMeasurement2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limeLightName2);
+      // // if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 2.0) {
+      // //   m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
+      // //       Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
+      // // }
+
+      // // Track error between the two cameras
+      // SmartDashboard.putNumber("Error between cams", llMeasurement.pose.getDistance(llMeasurement2.pose));
     }
 
     SmartDashboard.putNumber("tagselected", Robot.getInstance().globalCurrNumSelected); 
