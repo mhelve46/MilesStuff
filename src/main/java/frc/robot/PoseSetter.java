@@ -10,6 +10,7 @@ public class PoseSetter {
 	public static final String Ground = "Ground";
 	public static final String Climb = "Climb";
 	public static final String PreClimb = "PreClimb";
+	public static final String PreZero = "PreZero";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -87,6 +88,12 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderUpperLimit,
 					Constants.WristConstants.rotationHorizontalAlligned
+			});
+			put(PreZero, new double[] {
+				Constants.ElevatorConstants.stage2UpperLimit / 4,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				Constants.ShoulderConstants.shoulderLowerLimit,
+				Constants.WristConstants.rotationHorizontalAlligned
 			});
 
 		}

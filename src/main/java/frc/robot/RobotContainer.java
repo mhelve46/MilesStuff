@@ -110,8 +110,8 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
-        autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
-        autoLevelSelector.addOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
+        autoLevelSelector.setDefaultOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
+        autoLevelSelector.addOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
         autoLevelSelector.addOption("L2", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(1)));
         autoLevelSelector.addOption("L1", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(0)));
         SmartDashboard.putData("Selected Auto Reef Level", autoLevelSelector);
