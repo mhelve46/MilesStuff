@@ -210,9 +210,9 @@ public class RobotContainer {
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_wrist, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
-                .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
+        //         .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
         joystick.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
@@ -221,8 +221,8 @@ public class RobotContainer {
         joystick.b().whileTrue(
                 new DriveToPosition(drivetrain).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-        joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
-        joystick.a().onTrue(new InstantCommand(() -> plus()));
+        // joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
+        // joystick.a().onTrue(new InstantCommand(() -> plus()));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
@@ -237,12 +237,12 @@ public class RobotContainer {
         final POVButton pOVButtonUp = new POVButton(accessory, 0, 0);
         pOVButtonUp.onTrue(new SelectPlacement(0).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-        final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
-        btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
+        // btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
+        //         .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
+        //         .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))

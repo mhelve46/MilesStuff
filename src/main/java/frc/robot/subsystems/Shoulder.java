@@ -86,7 +86,7 @@ public class Shoulder extends SubsystemBase {
 
         MotionMagicConfigs motionMagicOn = configs.MotionMagic;
         motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(400))
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(80))
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(70))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
     //     FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
     //    // shoulderFeed.SensorToMechanismRatio = 270;
