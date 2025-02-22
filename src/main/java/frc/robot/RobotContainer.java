@@ -146,6 +146,8 @@ public class RobotContainer {
         SmartDashboard.putData("ZeroElevator", new ZeroElevator(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("ZeroWrist", new ZeroWrist(m_wrist));
+        SmartDashboard.putData("PreZero", new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreZero)).andThen(new MoveElevator(m_elevator)));
+
 
         // Field Widgets
         SmartDashboard.putData("Current Robot Position", field);

@@ -22,7 +22,7 @@ public class StorePreMatch extends SequentialCommandGroup {
     //
     addCommands(
           new MoveWrist(m_wrist),           
-           new MoveShoulder(m_shoulder),
+          //  new MoveShoulder(m_shoulder),
           new MoveElevator(m_elevator),
           new InstantCommand(() -> m_claw.zero()),
         new InstantCommand(() -> Robot.getInstance().currentArrangementOthers(PoseSetter.Stored)));
