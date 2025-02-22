@@ -71,7 +71,7 @@ public class Shoulder extends SubsystemBase {
         // Current Limits
         configs.withCurrentLimits(
                 new CurrentLimitsConfigs()
-                        .withStatorCurrentLimit(Amps.of(4))
+                        .withStatorCurrentLimit(Amps.of(15))
                         .withStatorCurrentLimitEnable(true));
         configs.withMotorOutput(
                 new MotorOutputConfigs()
