@@ -202,6 +202,7 @@ public class Elevator extends SubsystemBase {
                 m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(elevatorStage2Target).withSlot(0));
+        System.out.println("s2 target " + elevatorStage2Target);
     }
 
     public void setClimb() {
@@ -225,11 +226,10 @@ public class Elevator extends SubsystemBase {
             stage1motor.set(-0.25);
         }
         if (getTopSwitch()) {
-            stage2motor.set(0);
+           stage2motor.set(0);
         } else {
             stage2motor.set(0.25);
         }
-
     }
 
     

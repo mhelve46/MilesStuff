@@ -88,11 +88,11 @@ public class Shoulder extends SubsystemBase {
         motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10))
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
-        FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
-       // shoulderFeed.SensorToMechanismRatio = 270;
+    //     FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
+    //    // shoulderFeed.SensorToMechanismRatio = 270;
         MotorOutputConfigs shoulderOutput = shoulderConf.MotorOutput;
-        shoulderOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-        shoulderOutput.NeutralMode = NeutralModeValue.Brake;
+        shoulderOutput.Inverted = InvertedValue.Clockwise_Positive;
+        shoulderOutput.NeutralMode = NeutralModeValue.Coast;
 
         // Config 
         
