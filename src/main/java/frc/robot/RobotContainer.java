@@ -249,10 +249,10 @@ public class RobotContainer {
                 .andThen(new ZeroAll(m_shoulder, m_elevator, m_wrist, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
-        btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
-                .andThen(new StorePreMatch(m_shoulder, m_elevator, m_wrist, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
+        // btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+        //         .andThen(new StorePreMatch(m_shoulder, m_elevator, m_wrist, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnStore = new JoystickButton(accessory, XboxController.Button.kA.value);
         btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))

@@ -39,7 +39,7 @@ public class AutonPlaceCoral extends SequentialCommandGroup {
             // new ZeroElevator(m_elevator),
             new InstantCommand(() -> Robot.getInstance().goalArrangementPlacing()),      
             new MoveElevator(m_elevator),
-            //new MoveShoulder(m_shoulder),
+            new MoveShoulder(m_shoulder),
             new MoveWrist(m_wrist),           
             new ClawDrop(m_claw)
         );
