@@ -34,6 +34,7 @@ import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
 import frc.robot.commands.MoveElevator;
+import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.MoveWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
@@ -131,8 +132,8 @@ public class RobotContainer {
                 .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveElevator(m_elevator)));
-        // SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> command)
-        // .andThen(new MoveShoulder(m_shoulder)));
+        SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+         .andThen(new MoveShoulder(m_shoulder)));
         SmartDashboard.putData("MoveWrist", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveWrist(m_wrist)));
         SmartDashboard.putData("PlaceCoral", new InstantCommand(() -> goalArrangementPlacing())

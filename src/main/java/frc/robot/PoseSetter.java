@@ -62,7 +62,7 @@ public class PoseSetter {
 			put(Stored, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					1.5,
-					1,
+					90,
 					Constants.WristConstants.rotationHorizontalAlligned
 
 			});

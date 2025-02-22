@@ -164,7 +164,7 @@ public class Constants {
         public static final int I = 0;
         public static final double D = 0.1f;
 
-        public static final double shoulderUpperLimit = 12;
+        public static final double shoulderUpperLimit = 150;
         public static final double shoulderLowerLimit = 0;
         //
     }
