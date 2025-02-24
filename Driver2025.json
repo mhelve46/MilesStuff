@@ -925,6 +925,32 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/ClawIntake",
+              "_title": "/SmartDashboard/ClawIntake",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/ClawDrop",
+              "_title": "/SmartDashboard/ClawDrop",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -933,7 +959,7 @@
   "windowGeometry": {
     "x": -8.0,
     "y": -8.0,
-    "width": 1382.0,
-    "height": 744.0
+    "width": 1297.3333740234375,
+    "height": 737.3333129882812
   }
 }
