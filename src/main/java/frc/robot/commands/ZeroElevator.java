@@ -63,8 +63,7 @@ public class ZeroElevator extends Command {
     @Override
     public void end(boolean interrupted) {
         System.out.println("ending elevator");
-        Robot.getInstance().goalArrangementOthers(PoseSetter.Zero);
-        m_elevator.setElevatorPosition();
+
         //Robot.getInstance().currentArrangementOthers() to do
 
     }

@@ -71,7 +71,7 @@ public class Shoulder extends SubsystemBase {
         // Current Limits
         configs.withCurrentLimits(
                 new CurrentLimitsConfigs()
-                        .withStatorCurrentLimit(Amps.of(15))
+                        .withStatorCurrentLimit(Amps.of(20))
                         .withStatorCurrentLimitEnable(true));
         configs.withMotorOutput(
                 new MotorOutputConfigs()
@@ -85,13 +85,13 @@ public class Shoulder extends SubsystemBase {
         configs.Voltage.withPeakForwardVoltage(Volts.of(8)).withPeakReverseVoltage(Volts.of(-8));
 
         MotionMagicConfigs motionMagicOn = configs.MotionMagic;
-        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10))
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
+        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(300))
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(50))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
-        FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
-       // shoulderFeed.SensorToMechanismRatio = 270;
+    //     FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
+    //    // shoulderFeed.SensorToMechanismRatio = 270;
         MotorOutputConfigs shoulderOutput = shoulderConf.MotorOutput;
-        shoulderOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+        shoulderOutput.Inverted = InvertedValue.Clockwise_Positive;
         shoulderOutput.NeutralMode = NeutralModeValue.Brake;
 
         // Config 
@@ -127,7 +127,8 @@ public class Shoulder extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void shoulderMove() {
-        shoulderMotor.setControl(m_motionMagicReq.withPosition(shoulderTarget));
+        //if (Robot.getInstance().m_elevator.isSafeToMoveShoulder(Robot.getInstance().currentArrangementPlacing()))
+            shoulderMotor.setControl(m_motionMagicReq.withPosition(shoulderTarget));
     }
 
     public void stopShoulder() {
@@ -149,14 +150,17 @@ public class Shoulder extends SubsystemBase {
         if (isShoulderTripped()) {
             shoulderMotor.set(0);
         } else {
-            shoulderMotor.set(-0.25);
+            shoulderMotor.set(0.25);
         }
 
     }
 
-    public boolean isSafeToMoveWrist() {
-        double currPos = shoulderMotor.getPosition().getValueAsDouble();
-        return (currPos >= 0 && currPos <= 270);
-    }
+    // public boolean isSafeToMoveWrist() {
+    //     double currPos = shoulderMotor.getPosition().getValueAsDouble();
+    //     double quadrant = Constants.ShoulderConstants.shoulderUpperLimit / 4;
+    //     double safeLower = Constants.ShoulderConstants.shoulderLowerLimit + quadrant;
+    //     double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
+    //     return (currPos >= safeLower && currPos <= safeUpper);
+    // }
 
 }

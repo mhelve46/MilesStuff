@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     Robot.getInstance().m_elevator.stopBothMotors();
     Robot.getInstance().m_shoulder.stopShoulder();
-    Robot.getInstance().m_wrist.stopMotor();
     Robot.getInstance().m_claw.zero();
   }
 
@@ -98,6 +97,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    kUseLimelight = false;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_autonomousReefLevel = m_robotContainer.getSelectedAutoLevel();
 
@@ -118,8 +118,9 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {}
 
   @Override
-  public void autonomousExit() {}
-
+  public void autonomousExit() {
+  kUseLimelight = true;
+  }
   @Override
   public void teleopInit() {
     if (m_autonomousCommand != null) {
