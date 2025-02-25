@@ -63,7 +63,6 @@ public class MoveElevator extends Command {
     @Override
     public void end(boolean interrupted) {
         System.out.println("ending elevator");
-        m_elevator.stopBothMotors();
 
     }
 

@@ -34,6 +34,7 @@ import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.GrabCoralLow;
 import frc.robot.commands.MoveElevator;
+import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.MoveWrist;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
@@ -109,8 +110,8 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
-        autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
-        autoLevelSelector.addOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
+        autoLevelSelector.setDefaultOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
+        autoLevelSelector.addOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
         autoLevelSelector.addOption("L2", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(1)));
         autoLevelSelector.addOption("L1", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(0)));
         SmartDashboard.putData("Selected Auto Reef Level", autoLevelSelector);
@@ -131,8 +132,8 @@ public class RobotContainer {
                 .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveElevator(m_elevator)));
-        // SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> command)
-        // .andThen(new MoveShoulder(m_shoulder)));
+        SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+         .andThen(new MoveShoulder(m_shoulder)));
         SmartDashboard.putData("MoveWrist", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveWrist(m_wrist)));
         SmartDashboard.putData("PlaceCoral", new InstantCommand(() -> goalArrangementPlacing())
@@ -145,6 +146,8 @@ public class RobotContainer {
         SmartDashboard.putData("ZeroElevator", new ZeroElevator(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("ZeroWrist", new ZeroWrist(m_wrist));
+        SmartDashboard.putData("PreZero", new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreZero)).andThen(new MoveElevator(m_elevator)));
+
 
         // Field Widgets
         SmartDashboard.putData("Current Robot Position", field);
@@ -209,9 +212,9 @@ public class RobotContainer {
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_wrist, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
-                .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Ground))
+        //         .andThen(new GrabCoralLow(m_shoulder, m_elevator, m_wrist, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
         joystick.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
@@ -220,8 +223,8 @@ public class RobotContainer {
         joystick.b().whileTrue(
                 new DriveToPosition(drivetrain).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-        joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
-        joystick.a().onTrue(new InstantCommand(() -> plus()));
+        // joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
+        // joystick.a().onTrue(new InstantCommand(() -> plus()));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
@@ -236,22 +239,22 @@ public class RobotContainer {
         final POVButton pOVButtonUp = new POVButton(accessory, 0, 0);
         pOVButtonUp.onTrue(new SelectPlacement(0).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
-        final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
-        btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
+        // btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
+        //         .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
+        //         .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))
                 .andThen(new ZeroAll(m_shoulder, m_elevator, m_wrist, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
-        btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
-                .andThen(new StorePreMatch(m_shoulder, m_elevator, m_wrist, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
+        // btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+        //         .andThen(new StorePreMatch(m_shoulder, m_elevator, m_wrist, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnStore = new JoystickButton(accessory, XboxController.Button.kA.value);
         btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))

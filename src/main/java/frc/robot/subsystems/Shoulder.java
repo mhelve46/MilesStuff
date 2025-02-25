@@ -71,7 +71,7 @@ public class Shoulder extends SubsystemBase {
         // Current Limits
         configs.withCurrentLimits(
                 new CurrentLimitsConfigs()
-                        .withStatorCurrentLimit(Amps.of(4))
+                        .withStatorCurrentLimit(Amps.of(20))
                         .withStatorCurrentLimitEnable(true));
         configs.withMotorOutput(
                 new MotorOutputConfigs()
@@ -85,13 +85,13 @@ public class Shoulder extends SubsystemBase {
         configs.Voltage.withPeakForwardVoltage(Volts.of(8)).withPeakReverseVoltage(Volts.of(-8));
 
         MotionMagicConfigs motionMagicOn = configs.MotionMagic;
-        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10))
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
+        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(300))
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(50))
                 .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
-        FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
-       // shoulderFeed.SensorToMechanismRatio = 270;
+    //     FeedbackConfigs shoulderFeed = shoulderConf.Feedback;
+    //    // shoulderFeed.SensorToMechanismRatio = 270;
         MotorOutputConfigs shoulderOutput = shoulderConf.MotorOutput;
-        shoulderOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+        shoulderOutput.Inverted = InvertedValue.Clockwise_Positive;
         shoulderOutput.NeutralMode = NeutralModeValue.Brake;
 
         // Config 
@@ -150,7 +150,7 @@ public class Shoulder extends SubsystemBase {
         if (isShoulderTripped()) {
             shoulderMotor.set(0);
         } else {
-            shoulderMotor.set(-0.25);
+            shoulderMotor.set(0.25);
         }
 
     }

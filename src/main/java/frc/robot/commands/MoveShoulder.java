@@ -62,7 +62,6 @@ public class MoveShoulder extends Command {
     @Override
     public void end(boolean interrupted) {
         System.out.println("ending shoulder");
-        m_shoulder.stopShoulder();
 
     }
 
