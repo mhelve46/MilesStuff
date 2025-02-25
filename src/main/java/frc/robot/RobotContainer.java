@@ -56,7 +56,7 @@ public class RobotContainer {
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-   private CANdi wristAndClawCandi;
+   private CANdi clawCandi;
    private CANdi shoulderAndTopCandi;
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -99,7 +99,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
 
-        wristAndClawCandi = new CANdi(30, "rio");
+        clawCandi = new CANdi(30, "rio");
         shoulderAndTopCandi = new CANdi(31, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
@@ -311,17 +311,13 @@ public class RobotContainer {
         return currentArrangement;
     }
 
-    public Boolean getWristTripped() {
-        // return false;
-       return !wristAndClawCandi.getS2Closed().getValue();
-    }
     public Boolean getTopStage2() {
         // return false;
         return !shoulderAndTopCandi.getS2Closed().getValue();
     }
     public Boolean getCoralDetect() {
         // return false;
-        return !wristAndClawCandi.getS1Closed().getValue();
+        return !clawCandi.getS2Closed().getValue();
     }
     public Boolean getShoulderTripped() {
         return shoulderAndTopCandi.getS1Closed().getValue();

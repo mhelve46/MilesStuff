@@ -203,7 +203,7 @@ public class Elevator extends SubsystemBase {
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(elevatorStage2Target).withSlot(0));
         System.out.println("s2 target " + elevatorStage2Target);
-    }
+    } 
 
     public void setClimb() {
         if (Robot.getInstance().accessory.getRightTriggerAxis() >= .5) {

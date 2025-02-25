@@ -40,7 +40,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
     SmartDashboard.putBoolean("Coral", m_robotContainer.getCoralDetect());
-    SmartDashboard.putBoolean("Wrist Zero", m_robotContainer.getWristTripped());
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
     
     /*
