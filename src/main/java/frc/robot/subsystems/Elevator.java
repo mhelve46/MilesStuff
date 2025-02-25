@@ -231,20 +231,14 @@ public class Elevator extends SubsystemBase {
             stage2motor.set(0.25);
         }
     }
+    /*change below to fit for elevator limit for arm
+    public boolean isSafeToMoveArm() {
+        double currPos = shoulderMotor.getPosition().getValueAsDouble();
+        double quadrant = Constants.ShoulderConstants.shoulderUpperLimit / 4;
+        double safeLower = Constants.ShoulderConstants.shoulderLowerLimit + quadrant;
+        double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
+        return (currPos >= safeLower && currPos <= safeUpper);
+    } */
 
-    
-     
-    public boolean isSafeToMoveShoulder(String position) {
-        double currPos = stage2motor.getPosition().getValueAsDouble();
-        double half = Constants.ElevatorConstants.stage2UpperLimit / 2;
-        //double safeLower = Constants.ElevatorConstants.shoulderLowerLimit + half;
-        //double safeUpper = Constants.ElevatorConstants.shoulderUpperLimit - half;
-        if (currPos <= half && !position.equals(PoseSetter.PreClimb)) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }
     
 }
