@@ -127,7 +127,7 @@ public class Shoulder extends SubsystemBase {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void shoulderMove() {
-        if (Robot.getInstance().m_elevator.isSafeToMoveShoulder(Robot.getInstance().currentArrangementPlacing()))
+        //if (Robot.getInstance().m_elevator.isSafeToMoveShoulder(Robot.getInstance().currentArrangementPlacing()))
             shoulderMotor.setControl(m_motionMagicReq.withPosition(shoulderTarget));
     }
 
@@ -155,12 +155,12 @@ public class Shoulder extends SubsystemBase {
 
     }
 
-    public boolean isSafeToMoveWrist() {
-        double currPos = shoulderMotor.getPosition().getValueAsDouble();
-        double quadrant = Constants.ShoulderConstants.shoulderUpperLimit / 4;
-        double safeLower = Constants.ShoulderConstants.shoulderLowerLimit + quadrant;
-        double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
-        return (currPos >= safeLower && currPos <= safeUpper);
-    }
+    // public boolean isSafeToMoveWrist() {
+    //     double currPos = shoulderMotor.getPosition().getValueAsDouble();
+    //     double quadrant = Constants.ShoulderConstants.shoulderUpperLimit / 4;
+    //     double safeLower = Constants.ShoulderConstants.shoulderLowerLimit + quadrant;
+    //     double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
+    //     return (currPos >= safeLower && currPos <= safeUpper);
+    // }
 
 }

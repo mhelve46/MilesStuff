@@ -86,7 +86,6 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     Robot.getInstance().m_elevator.stopBothMotors();
     Robot.getInstance().m_shoulder.stopShoulder();
-    Robot.getInstance().m_wrist.stopMotor();
     Robot.getInstance().m_claw.zero();
   }
 
