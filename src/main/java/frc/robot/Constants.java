@@ -10,6 +10,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -186,6 +190,8 @@ public class Constants {
         public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
         // public static final int Pipe2 = 1;
+
+        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(16), new Rotation2d(Math.PI));
     }
 
 }
