@@ -76,12 +76,12 @@ public class Shoulder extends SubsystemBase {
         shoulderConf.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
 
         // Peak output of 8 V
-        shoulderConf.Voltage.withPeakForwardVoltage(Volts.of(8)).withPeakReverseVoltage(Volts.of(-8));
+        shoulderConf.Voltage.withPeakForwardVoltage(Volts.of(10)).withPeakReverseVoltage(Volts.of(-10));
 
         MotionMagicConfigs motionMagicOn = shoulderConf.MotionMagic;
-        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(300))
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(50))
-                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
+        motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999))
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10000))
+                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100)); // 0 makes it fast
         
         /* Retry config apply up to 5 times, report if failure */
         StatusCode status = StatusCode.StatusCodeNotInitialized;

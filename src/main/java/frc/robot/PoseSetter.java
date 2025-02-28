@@ -82,11 +82,17 @@ public class PoseSetter {
 					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
-			put(AlgaeRemove, new double[] {
+			put(AlgaeRemove + "L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
 					15,
 			});
+
+			put(AlgaeRemove + "L3", new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				15,
+		    });
 
 		}
 	};
