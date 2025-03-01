@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
@@ -22,7 +21,7 @@ public class PreZero extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       Commands.parallel(
-        new InstantCommand(() -> m_claw.zero()),
+        new InstantCommand(() -> m_claw.coralZero()),
         new MoveElevator(m_elevator),
         new MoveShoulder(m_shoulder)
       )

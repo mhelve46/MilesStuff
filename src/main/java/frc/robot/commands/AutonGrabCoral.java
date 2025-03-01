@@ -34,7 +34,7 @@ public class AutonGrabCoral extends SequentialCommandGroup {
         addCommands(      
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
-              new ClawIntake(m_claw)
+              new CoralClawIntake(m_claw)
         );
         
     }

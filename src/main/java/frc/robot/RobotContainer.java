@@ -27,9 +27,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceCoral;
-import frc.robot.commands.ClawDrop;
-import frc.robot.commands.ClawIntake;
-import frc.robot.commands.Climb;
+import frc.robot.commands.CoralClawDrop;
+import frc.robot.commands.CoralClawIntake;
+import frc.robot.commands.CoralClimb;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
@@ -60,7 +60,7 @@ public class RobotContainer {
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-   private CANdi clawCandi;
+   
    private CANdi shoulderAndTopCandi;
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -103,7 +103,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
 
-        clawCandi = new CANdi(30, "rio");
+        
         shoulderAndTopCandi = new CANdi(31, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
@@ -120,10 +120,10 @@ public class RobotContainer {
         // command).andThen(new Command()));
         // SmartDashboard.putData("AutonPlaceCoral", new InstantCommand(() ->
         // command).andThen(new Command()));
-        SmartDashboard.putData("ClawDrop", new ClawDrop(m_claw));
-        SmartDashboard.putData("ClawIntake", new ClawIntake(m_claw));
+        SmartDashboard.putData("ClawDrop", new CoralClawDrop(m_claw));
+        SmartDashboard.putData("ClawIntake", new CoralClawIntake(m_claw));
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator)));
+                .andThen(new CoralClimb(m_elevator)));
         SmartDashboard.putData("DriveToPosition", new DriveToPosition(drivetrain));
         SmartDashboard.putData("GrabCoralHigh", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)));
@@ -201,7 +201,7 @@ public class RobotContainer {
                 .andThen(new PlaceCoral(m_shoulder, m_elevator)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.leftTrigger(.5).onFalse(new ClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        joystick.leftTrigger(.5).onFalse(new CoralClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         joystick.rightBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)
@@ -246,10 +246,10 @@ public class RobotContainer {
 
         final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
         btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+                .andThen(new CoralClimb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+                .andThen(new CoralClimb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnZeroAll.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))
@@ -339,10 +339,7 @@ public class RobotContainer {
         // return false;
         return !shoulderAndTopCandi.getS2Closed().getValue();
     }
-    public Boolean getCoralDetect() {
-        // return false;
-        return !clawCandi.getS2Closed().getValue();
-    }
+    
     public Boolean getShoulderTripped() {
         return shoulderAndTopCandi.getS1Closed().getValue();
     }

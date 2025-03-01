@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.CANdi;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel;
@@ -11,45 +12,76 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
 public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
 
-  private SparkMax clawMotor;
+  private SparkMax coralClawMotor;
+  private SparkMax algaeClawMotor;
+  private CANdi clawCandi;
 
   public Claw() {
 
-    clawMotor = new SparkMax(18, SparkLowLevel.MotorType.kBrushless);
+    clawCandi = new CANdi(30, "rio");
 
-    SparkMaxConfig NewSparkMaxConfig = new SparkMaxConfig();
-    clawMotor.configure(NewSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-    NewSparkMaxConfig.inverted(false);
-    NewSparkMaxConfig.idleMode(IdleMode.kBrake);
-    NewSparkMaxConfig.smartCurrentLimit(10, 10);
+    coralClawMotor = new SparkMax(18, SparkLowLevel.MotorType.kBrushless);
+    SparkMaxConfig CoralSparkMaxConfig = new SparkMaxConfig();
+    coralClawMotor.configure(CoralSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    CoralSparkMaxConfig.inverted(false);
+    CoralSparkMaxConfig.idleMode(IdleMode.kBrake);
+    CoralSparkMaxConfig.smartCurrentLimit(10, 10);
+
+    algaeClawMotor = new SparkMax(17, SparkLowLevel.MotorType.kBrushless);
+    SparkMaxConfig AlgaeSparkMaxConfig = new SparkMaxConfig();
+    algaeClawMotor.configure(AlgaeSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    AlgaeSparkMaxConfig.inverted(false);
+    AlgaeSparkMaxConfig.idleMode(IdleMode.kBrake);
+    AlgaeSparkMaxConfig.smartCurrentLimit(10, 10);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("Coral", getCoralDetect());
+  }
+  public Boolean getCoralDetect() {
+    // return false;
+    return !clawCandi.getS2Closed().getValue();
   }
 
-  public void rotateInwards() {
-    clawMotor.set(.7);
+  public Boolean getAlgaeDetect() {
+    // return false;
+    return !clawCandi.getS2Closed().getValue();
   }
 
-  public void rotateOutwards() {
-    clawMotor.set(-1);
+  public void coralRotateInwards() {
+    coralClawMotor.set(.7);
   }
 
-  public void zero() {
-    clawMotor.set(0);
+  public void algaeRotateInwards() {
+    coralClawMotor.set(.7);
   }
 
-  public boolean getClawHoldingDetector() {
-      return Robot.getInstance().getCoralDetect();
+  public void coralRotateOutwards() {
+    coralClawMotor.set(-1);
   }
+
+  public void algaeRotateOutwards() {
+    coralClawMotor.set(-1);
+  }
+
+  public void coralZero() {
+    coralClawMotor.set(0);
+  }
+
+  public void algaeZero() {
+    coralClawMotor.set(0);
+  }
+
+ 
 
 }
