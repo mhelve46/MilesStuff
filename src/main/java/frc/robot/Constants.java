@@ -46,6 +46,7 @@ public class Constants {
             public static String level = "blank";
             public static String left = "left";
             public static String right = "right";
+            public static String algaeLevel = "blank";
 
             public PlacementSelector() {
 
@@ -115,7 +116,6 @@ public class Constants {
                     System.out.println();
                 }
             }
-        
 
             public static String getLevel(){
                 // if (DriverStation.isAutonomous()) level = "L4";
@@ -164,9 +164,11 @@ public class Constants {
 
     public static final class ShoulderConstants {
         //
-        public static final double P = 2.4f;
+        public static final double P = 7.5;
         public static final int I = 0;
         public static final double D = 0.1f;
+        public static final double G = 1.75;
+        public static final double S = 0.05;
 
         public static final double shoulderUpperLimit = 150;
         public static final double shoulderLowerLimit = 0;

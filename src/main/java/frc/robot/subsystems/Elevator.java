@@ -203,7 +203,7 @@ public class Elevator extends SubsystemBase {
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(elevatorStage2Target).withSlot(0));
         System.out.println("s2 target " + elevatorStage2Target);
-    }
+    } 
 
     public void setClimb() {
         if (Robot.getInstance().accessory.getRightTriggerAxis() >= .5) {
@@ -230,6 +230,14 @@ public class Elevator extends SubsystemBase {
         } else {
             stage2motor.set(0.25);
         }
+    }
+
+    public void increase(){
+        elevatorStage2Target += 0.1f;
+    }
+
+    public void decrease(){
+        elevatorStage2Target -= 0.1f;
     }
     /*change below to fit for elevator limit for arm
     public boolean isSafeToMoveArm() {

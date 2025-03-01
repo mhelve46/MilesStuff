@@ -11,47 +11,41 @@ public class PoseSetter {
 	public static final String Climb = "Climb";
 	public static final String PreClimb = "PreClimb";
 	public static final String PreZero = "PreZero";
+	public static final String AlgaeRemove = "AlgaeRemove";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
-		{ // place to go to stage 1, stage 2, shoulder, wrist
-		
+		{ // place to go to stage 1, stage 2, shoulder
+
 			put("L1", new double[] {
-				Constants.ElevatorConstants.stage1LowerLimit,
-				1,
-				-30,
-				Constants.WristConstants.rotationHorizontalAlligned
-		});
+					Constants.ElevatorConstants.stage1LowerLimit,
+					1.3,
+					2,
+			});
 
-		put("L2", new double[] {
-				Constants.ElevatorConstants.stage1LowerLimit,
-				2.3,
-				-28,
-				Constants.WristConstants.rotationVerticalAlligned
-		});
+			put("L2", new double[] {
+					Constants.ElevatorConstants.stage1LowerLimit,
+					2.8,
+					Constants.ShoulderConstants.shoulderLowerLimit,
+			});
 
-		put("L3", new double[] {
-				1.5,
-				Constants.ElevatorConstants.stage2UpperLimit,
-				-28,
-				Constants.WristConstants.rotationVerticalAlligned
-		});
+			put("L3", new double[] {
+					1.47,
+					Constants.ElevatorConstants.stage2UpperLimit,
+					Constants.ShoulderConstants.shoulderLowerLimit,
+			});
 
-		put("L4", new double[] {
-				Constants.ElevatorConstants.stage1UpperLimit,
-				Constants.ElevatorConstants.stage2UpperLimit,
-				6,
-				Constants.WristConstants.rotationVerticalAlligned
+			put("L4", new double[] {
+					Constants.ElevatorConstants.stage1UpperLimit,
+					Constants.ElevatorConstants.stage2UpperLimit,
+					6,
 
-		}); // dont use
-
-
-		// THESE ARE THE SAME REGARDLESS OF SHOULDER LOCK/ROT
+			}); // dont use
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2LowerLimit + 1.5,
-					-61,
+					Constants.ElevatorConstants.stage2LowerLimit,
+					120,
 			});
 
 			put(Zero, new double[] {
@@ -59,24 +53,14 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderLowerLimit,
 
-
 			});
 
 			put(Stored, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					-103,
-
+					78,
 
 			});
-
-			put(Ground, new double[] {
-					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2UpperLimit,
-					Constants.ShoulderConstants.shoulderUpperLimit,
-
-
-			}); // dont use
 
 			put(Climb, new double[] {
 					-1.25,
@@ -84,7 +68,7 @@ public class PoseSetter {
 					Constants.ShoulderConstants.shoulderUpperLimit,
 
 			}); // dont use
-			
+
 			put(PreClimb, new double[] {
 					1.0f,
 					Constants.ElevatorConstants.stage2UpperLimit,
@@ -93,10 +77,22 @@ public class PoseSetter {
 			}); // dont use
 
 			put(PreZero, new double[] {
-				Constants.ElevatorConstants.stage1UpperLimit / 4,
-				Constants.ElevatorConstants.stage2UpperLimit,
-				Constants.ShoulderConstants.shoulderLowerLimit,
+					Constants.ElevatorConstants.stage1UpperLimit / 4,
+					Constants.ElevatorConstants.stage2UpperLimit,
+					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
+
+			put(AlgaeRemove + "L2", new double[] {
+					Constants.ElevatorConstants.stage1LowerLimit,
+					Constants.ElevatorConstants.stage2LowerLimit,
+					12,
+			});
+
+			put(AlgaeRemove + "L3", new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				15,
+		    });
 
 		}
 	};
