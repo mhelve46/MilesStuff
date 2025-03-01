@@ -21,7 +21,7 @@ public class RemoveAlgae extends SequentialCommandGroup {
     addCommands(
       new MoveElevator(m_elevator),  
       new MoveShoulder(m_shoulder),
-      new ClawDrop(m_claw),
+      new ClawRun(m_claw),
       new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
 
     );

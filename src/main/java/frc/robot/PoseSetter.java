@@ -15,7 +15,7 @@ public class PoseSetter {
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
-		{ // place to go to stage 1, stage 2, shoulder, wrist
+		{ // place to go to stage 1, stage 2, shoulder
 
 			put("L1", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
@@ -25,14 +25,14 @@ public class PoseSetter {
 
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					3.5,
-					2,
+					2.8,
+					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
 			put("L3", new double[] {
-					1.85,
+					1.47,
 					Constants.ElevatorConstants.stage2UpperLimit,
-					2,
+					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
 			put("L4", new double[] {
@@ -45,7 +45,7 @@ public class PoseSetter {
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					121,
+					120,
 			});
 
 			put(Zero, new double[] {
@@ -85,7 +85,7 @@ public class PoseSetter {
 			put(AlgaeRemove + "L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					15,
+					12,
 			});
 
 			put(AlgaeRemove + "L3", new double[] {

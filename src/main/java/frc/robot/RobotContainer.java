@@ -37,6 +37,7 @@ import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.PlaceCoral;
+import frc.robot.commands.RemoveAlgae;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
 import frc.robot.commands.StorePreMatch;
@@ -204,8 +205,8 @@ public class RobotContainer {
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightTrigger(.5).onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaeRemove + Constants.Selector.PlacementSelector.getLevel()))
-                .andThen(new PlaceCoral(m_shoulder, m_elevator, m_claw)
+        joystick.rightTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaeRemove + Constants.Selector.PlacementSelector.getLevel()))
+                .andThen(new RemoveAlgae(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
