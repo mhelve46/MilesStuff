@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
@@ -16,6 +18,12 @@ public class RemoveAlgae extends SequentialCommandGroup {
   /** Creates a new RemoveAlgae. */
   public RemoveAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
 
-    addCommands();
+    addCommands(
+      new MoveElevator(m_elevator),  
+      new MoveShoulder(m_shoulder),
+      new ClawDrop(m_claw),
+      new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
+
+    );
   }
 }
