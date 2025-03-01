@@ -55,7 +55,7 @@ public class Claw extends SubsystemBase {
 
   public Boolean getAlgaeDetect() {
     // return false;
-    return !clawCandi.getS2Closed().getValue();
+    return !clawCandi.getS1Closed().getValue();
   }
 
   public void coralRotateInwards() {
