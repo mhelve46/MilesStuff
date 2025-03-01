@@ -26,6 +26,7 @@ import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.GravityTypeValue;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
@@ -74,6 +75,9 @@ public class Shoulder extends SubsystemBase {
         shoulderConf.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
         shoulderConf.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
         shoulderConf.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
+        shoulderConf.Slot0.kG = Constants.ShoulderConstants.G; // kG value
+        shoulderConf.Slot0.kG = Constants.ShoulderConstants.S; // kS value
+        shoulderConf.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
 
         // Peak output of 8 V
         shoulderConf.Voltage.withPeakForwardVoltage(Volts.of(10)).withPeakReverseVoltage(Volts.of(-10));
@@ -81,7 +85,7 @@ public class Shoulder extends SubsystemBase {
         MotionMagicConfigs motionMagicOn = shoulderConf.MotionMagic;
         motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999))
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10000))
-                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100)); // 0 makes it fast
+                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(.01)); // 0 makes it fast
         
         /* Retry config apply up to 5 times, report if failure */
         StatusCode status = StatusCode.StatusCodeNotInitialized;
