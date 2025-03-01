@@ -12,6 +12,7 @@
 
 package frc.robot.subsystems;
 
+import static edu.wpi.first.units.Units.Celsius;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecondPerSecond;
 import static edu.wpi.first.units.Units.Second;
@@ -148,6 +149,7 @@ public class Elevator extends SubsystemBase {
         SmartDashboard.putNumber("Bottom Pos", stage1motor.getPosition().getValueAsDouble());
         SmartDashboard.putNumber("Top Vol", stage2motor.getVelocity().getValueAsDouble());
         SmartDashboard.putNumber("Top Pos", stage2motor.getPosition().getValueAsDouble());
+        SmartDashboard.putNumber("Stg2 Target", elevatorStage2Target);
 
         // SmartDashboard.putBoolean("Climbing", enabledClimb);
 
@@ -233,11 +235,13 @@ public class Elevator extends SubsystemBase {
     }
 
     public void increase(){
-        elevatorStage2Target += 0.1f;
+        if (elevatorStage2Target + 0.1f <= Constants.ElevatorConstants.stage2UpperLimit)
+            elevatorStage2Target += 0.1f;
     }
 
     public void decrease(){
-        elevatorStage2Target -= 0.1f;
+        if (elevatorStage2Target - 0.1f >= Constants.ElevatorConstants.stage2LowerLimit)
+            elevatorStage2Target -= 0.1f;
     }
     /*change below to fit for elevator limit for arm
     public boolean isSafeToMoveArm() {

@@ -131,7 +131,7 @@ public class RobotContainer {
         SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
          .andThen(new MoveShoulder(m_shoulder)));
         SmartDashboard.putData("PlaceCoral", new InstantCommand(() -> goalArrangementPlacing())
-                .andThen(new PlaceCoral(m_shoulder, m_elevator, m_claw)));
+                .andThen(new PlaceCoral(m_shoulder, m_elevator)));
         SmartDashboard.putData("Store", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new Store(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("StorePreMatch", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -196,7 +196,7 @@ public class RobotContainer {
 
         // Operator buttons
         joystick.leftTrigger(.5).onTrue(new InstantCommand(() -> goalArrangementPlacing())
-                .andThen(new PlaceCoral(m_shoulder, m_elevator, m_claw)
+                .andThen(new PlaceCoral(m_shoulder, m_elevator)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.leftTrigger(.5).onFalse(new ClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
@@ -233,10 +233,10 @@ public class RobotContainer {
         pOVButtonUp.onTrue(new SelectPlacement(0).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         final JoystickButton btnIncreaseElevator = new JoystickButton(accessory, XboxController.Button.kY.value);
-        btnIncreaseElevator.onTrue(new ElevatorIncrease(m_elevator));
+        btnIncreaseElevator.onTrue(new ElevatorIncrease(m_elevator).andThen(new MoveElevator(m_elevator)));
 
         final JoystickButton btnDecreaseElevator = new JoystickButton(accessory, XboxController.Button.kA.value);
-        btnDecreaseElevator.onTrue(new ElevatorDecrease(m_elevator));
+        btnDecreaseElevator.onTrue(new ElevatorDecrease(m_elevator).andThen(new MoveElevator(m_elevator)));
 
         final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
         btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
