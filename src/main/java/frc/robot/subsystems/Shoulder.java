@@ -71,12 +71,19 @@ public class Shoulder extends SubsystemBase {
         MotorOutputConfigs shoulderOutput = shoulderConf.MotorOutput;
         shoulderOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         shoulderOutput.NeutralMode = NeutralModeValue.Brake;
+  
+        shoulderConf.Slot0.kP = 0.75; // An error of 1 rotation results in 2.4 V output
+        shoulderConf.Slot0.kI = 0.0075;; // No output for integrated error
+        shoulderConf.Slot0.kD = 0; // A velocity of 1 rps results in 0.1 V output
+        shoulderConf.Slot0.kS = 0.25;
+        shoulderConf.Slot0.kV = 0.12;
+        shoulderConf.Slot0.kA = 0.005;
 
-        shoulderConf.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
-        shoulderConf.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
-        shoulderConf.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
-        shoulderConf.Slot0.kG = Constants.ShoulderConstants.G; // kG value
-        shoulderConf.Slot0.kG = Constants.ShoulderConstants.S; // kS value
+       // shoulderConf.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
+       // shoulderConf.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
+       // shoulderConf.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
+       // shoulderConf.Slot0.kG = Constants.ShoulderConstants.G; // kG value
+       // shoulderConf.Slot0.kG = Constants.ShoulderConstants.S; // kS value
         shoulderConf.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
 
         // Peak output of 8 V
@@ -85,7 +92,7 @@ public class Shoulder extends SubsystemBase {
         MotionMagicConfigs motionMagicOn = shoulderConf.MotionMagic;
         motionMagicOn.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999))
                 .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10000))
-                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(.01)); // 0 makes it fast
+                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(0)); // 0 makes it fast
         
         /* Retry config apply up to 5 times, report if failure */
         StatusCode status = StatusCode.StatusCodeNotInitialized;
