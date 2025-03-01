@@ -91,7 +91,7 @@ public class PoseSetter {
 			put(AlgaeRemove + "L3", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				15,
+				10,
 		    });
 
 		}
