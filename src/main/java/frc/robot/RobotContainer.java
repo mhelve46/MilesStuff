@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceCoral;
+import frc.robot.commands.AutonRemoveAlgae;
 import frc.robot.commands.ClawDrop;
 import frc.robot.commands.ClawIntake;
 import frc.robot.commands.Climb;
@@ -101,6 +102,7 @@ public class RobotContainer {
 
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonRemoveAlgae", new AutonRemoveAlgae(m_shoulder, m_elevator, m_claw));
 
         clawCandi = new CANdi(30, "rio");
         shoulderAndTopCandi = new CANdi(31, "rio");
@@ -108,8 +110,8 @@ public class RobotContainer {
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
-        autoLevelSelector.setDefaultOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
-        autoLevelSelector.addOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
+        autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
+        autoLevelSelector.addOption("L3", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(2)));
         autoLevelSelector.addOption("L2", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(1)));
         autoLevelSelector.addOption("L1", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(0)));
         SmartDashboard.putData("Selected Auto Reef Level", autoLevelSelector);

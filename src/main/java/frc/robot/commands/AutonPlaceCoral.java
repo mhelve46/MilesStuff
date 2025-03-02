@@ -34,12 +34,12 @@ public class AutonPlaceCoral extends SequentialCommandGroup {
         System.out.println("starting to place coral in auton");
         addCommands(
             // new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.PreZero)),
-            // new MoveElevator(m_elevator),
-            // new ZeroElevator(m_elevator),
+            // new ZeroAll(),
             new InstantCommand(() -> Robot.getInstance().goalArrangementPlacing()),      
-            new MoveElevator(m_elevator),
             new MoveShoulder(m_shoulder),         
-            new ClawDrop(m_claw)
+            new MoveElevator(m_elevator),
+            new ClawDrop(m_claw),
+            new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
         );
         
     }

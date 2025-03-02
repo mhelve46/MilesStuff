@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueReef"
+                  "pathName": "RightStart2ReefL3"
                 }
               },
               {
@@ -30,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueReef2Feeder"
+                  "pathName": "RightReef2FeederL3"
                 }
               },
               {
@@ -49,7 +49,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueFeeder2Reef"
+                  "pathName": "RightFeeder2ReefL3"
                 }
               },
               {

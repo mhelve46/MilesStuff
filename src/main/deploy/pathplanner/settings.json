@@ -1,12 +1,12 @@
 {
-  "robotWidth": 0.927,
-  "robotLength": 0.927,
+  "robotWidth": 0.9144,
+  "robotLength": 0.9144,
   "holonomicMode": true,
   "pathFolders": [
-    "LowAuton",
+    "LeftAutons",
     "MiddleAuton",
-    "RubiconDrift",
-    "TopAuton"
+    "RightAutons",
+    "RubiconDrift"
   ],
   "autoFolders": [],
   "defaultMaxVel": 3.0,
@@ -33,7 +33,5 @@
   "brModuleY": -0.311,
   "bumperOffsetX": 0.0,
   "bumperOffsetY": 0.0,
-  "robotFeatures": [
-    "{\"name\":\"Rectangle\",\"type\":\"rounded_rect\",\"data\":{\"center\":{\"x\":0.0,\"y\":0.0},\"size\":{\"width\":1.587,\"length\":1.587},\"borderRadius\":0.05,\"strokeWidth\":0.02,\"filled\":false}}"
-  ]
+  "robotFeatures": []
 }
