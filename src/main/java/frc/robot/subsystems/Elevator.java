@@ -76,7 +76,7 @@ public class Elevator extends SubsystemBase {
         elevatorBottomSwitch = new DigitalInput(0);
         FeedbackConfigs elevatorUpperFeedback = elevatorUpperConfig.Feedback;
         FeedbackConfigs elevatorLowerFeedback = elevatorLowerConfig.Feedback;
-        elevatorUpperFeedback.SensorToMechanismRatio = 14.4;
+        elevatorUpperFeedback.SensorToMechanismRatio = 45;
         elevatorLowerFeedback.SensorToMechanismRatio = 45;
         CurrentLimitsConfigs elevatorLowerCurrent = elevatorLowerConfig.CurrentLimits;
         CurrentLimitsConfigs elevatorUpperCurrent = elevatorUpperConfig.CurrentLimits;
@@ -230,7 +230,7 @@ public class Elevator extends SubsystemBase {
         if (getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(0.25);
+            stage2motor.set(1);
         }
     }
 
