@@ -155,7 +155,7 @@ public class Constants {
             //
         }
 
-        public static final double stage2UpperLimit = 4;
+        public static final double stage2UpperLimit = 5.5;
         public static final double stage2LowerLimit = 0;
         public static final double stage1UpperLimit = 2.75;
         public static final double stage1LowerLimit = 0;
