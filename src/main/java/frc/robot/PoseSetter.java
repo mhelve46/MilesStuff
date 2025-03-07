@@ -84,25 +84,25 @@ public class PoseSetter {
 
 			put(AlgaeRemove + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2LowerLimit+1.5,
+				Constants.ElevatorConstants.stage2LowerLimit,
 				12,
 			}); //: should be the same for L2
 
 			put(AlgaeRemove + "L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2LowerLimit+1.5,
+					Constants.ElevatorConstants.stage2LowerLimit,
 					12,
 			});
 
 			put(AlgaeRemove + "L3", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2UpperLimit+1.5,
+				5,
 				10,
 		    });
 
 			put(AlgaeRemove + "L4", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2UpperLimit+1.5,
+				5,
 				10,
 		    }); //: should be the same as L3
 
