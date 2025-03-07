@@ -25,13 +25,13 @@ public class PoseSetter {
 
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					1.2,
+					2.7,
 					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
 			put("L3", new double[] {
 					1.47,
-					3.6,
+					5,
 					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
@@ -44,7 +44,7 @@ public class PoseSetter {
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2LowerLimit+1.3,
+					1,
 					120,
 			});
 
