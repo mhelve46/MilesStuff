@@ -95,9 +95,9 @@ public class Elevator extends SubsystemBase {
 
         /* Configure Motion Magic */
         MotionMagicConfigs motionMagicU = elevatorUpperConfig.MotionMagic;
-        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
-                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
+        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999)) // (meachanism) rotations per second cruise
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10000))
+                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(0));
 
         MotionMagicConfigs motionMagicL = elevatorLowerConfig.MotionMagic;
         motionMagicL.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
@@ -106,12 +106,12 @@ public class Elevator extends SubsystemBase {
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
-        upperSlot0.kI = 0; // No output for integrated error
-        upperSlot0.kD = 0.5; // A velocity error of 1 rps results in 0.5 V output
+        upperSlot0.kP = 8; // A position error of 0.2 rotations results in 12 V output
+        upperSlot0.kI = 0.08; // No output for integrated error
+        upperSlot0.kD = 0; // A velocity error of 1 rps results in 0.5 V output
         upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        upperSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-        upperSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
+        upperSlot0.kS = 0.22; // Add 0.25 V output to overcome static friction
+        upperSlot0.kA = 0.02; // An acceleration of 1 rps/s requires 0.01 V output
 
         Slot0Configs lowerSlot0 = elevatorLowerConfig.Slot0;
         lowerSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
