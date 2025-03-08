@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.AutonClawDrop;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceCoral;
 import frc.robot.commands.AutonRemoveAlgae;
@@ -101,7 +102,8 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-        NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
+        NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonRemoveAlgae", new AutonRemoveAlgae(m_shoulder, m_elevator, m_claw));
 
