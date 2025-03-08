@@ -44,7 +44,7 @@ public class PoseSetter {
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					1,
+					2.05,
 					120,
 			});
 
