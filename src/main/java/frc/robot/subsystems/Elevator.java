@@ -106,8 +106,8 @@ public class Elevator extends SubsystemBase {
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kP = 8; // A position error of 0.2 rotations results in 12 V output
-        upperSlot0.kI = 0.08; // No output for integrated error
+        upperSlot0.kP = 4; // A position error of 0.2 rotations results in 12 V output
+        upperSlot0.kI = 0.04; // No output for integrated error
         upperSlot0.kD = 0; // A velocity error of 1 rps results in 0.5 V output
         upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         upperSlot0.kS = 0.22; // Add 0.25 V output to overcome static friction
