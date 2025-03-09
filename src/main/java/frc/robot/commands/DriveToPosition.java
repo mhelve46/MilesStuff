@@ -95,7 +95,6 @@ public class DriveToPosition extends Command {
         yController.reset(drivetrain.getState().Pose.getY());
         xController.reset(drivetrain.getState().Pose.getX());
         magnitudeController.reset(drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation()));
-        System.out.println("yo this works");
         
         Robot.getInstance().targetPoseField.setRobotPose(goalPose);
     }
@@ -109,11 +108,9 @@ public class DriveToPosition extends Command {
             double distCxGx = goalPose.getTranslation().getX() - drivetrain.getState().Pose.getTranslation().getX();
             if (goalPose.getY() < drivetrain.getState().Pose.getY()) {
                 angle = -1.0 * Math.acos(distCxGx / currentR);
-                System.out.println("angle is odd");
                 
             } else {
                 angle = Math.acos(distCxGx / currentR);
-                System.out.println("angle is normal");
                 
             }
                                     
