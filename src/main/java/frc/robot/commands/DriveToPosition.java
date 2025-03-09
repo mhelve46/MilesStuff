@@ -26,8 +26,8 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
  */
 public class DriveToPosition extends Command {
 
-    private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
-    private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
+    // private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
+    // private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints Magnitude_Constraints = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
 
@@ -37,8 +37,8 @@ public class DriveToPosition extends Command {
     private Pose2d goalPose;
     private double angle;
 
-    private final ProfiledPIDController xController = new ProfiledPIDController(2, 0, 0, X_CONSTRAINTS);
-    private final ProfiledPIDController yController = new ProfiledPIDController(2.5, 0, 0, Y_CONSTRAINTS);
+    // private final ProfiledPIDController xController = new ProfiledPIDController(2, 0, 0, X_CONSTRAINTS);
+    // private final ProfiledPIDController yController = new ProfiledPIDController(2.5, 0, 0, Y_CONSTRAINTS);
     private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
@@ -53,8 +53,8 @@ public class DriveToPosition extends Command {
     public DriveToPosition(CommandSwerveDrivetrain subsystem) {
         drivetrain = subsystem;
 
-        xController.setTolerance(0.0);
-        yController.setTolerance(0.0);
+        // xController.setTolerance(0.0);
+        // yController.setTolerance(0.0);
         omegaController.setTolerance(Units.degreesToRadians(1));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
         magnitudeController.setTolerance(0.001);
@@ -92,8 +92,8 @@ public class DriveToPosition extends Command {
 
         SmartDashboard.putString("currentPose", drivetrain.getState().Pose.toString());
         omegaController.reset(drivetrain.getState().Pose.getRotation().getRadians());
-        yController.reset(drivetrain.getState().Pose.getY());
-        xController.reset(drivetrain.getState().Pose.getX());
+        // yController.reset(drivetrain.getState().Pose.getY());
+        // xController.reset(drivetrain.getState().Pose.getX());
         magnitudeController.reset(drivetrain.getState().Pose.getTranslation().getDistance(goalPose.getTranslation()));
         
         Robot.getInstance().targetPoseField.setRobotPose(goalPose);
@@ -115,21 +115,21 @@ public class DriveToPosition extends Command {
             }
                                     
             // Drive
-            xController.setGoal(goalPose.getX());
-            yController.setGoal(goalPose.getY());
+            // xController.setGoal(goalPose.getX());
+            // yController.setGoal(goalPose.getY());
             omegaController.setGoal(goalPose.getRotation().getRadians());
             magnitudeController.setGoal(0);
 
             // Drive to the target
-            double xSpeed = xController.calculate(drivetrain.getState().Pose.getX());
-            if (xController.atGoal()) {
-                xSpeed = 0;
-            }
+            // double xSpeed = xController.calculate(drivetrain.getState().Pose.getX());
+            // if (xController.atGoal()) {
+            //     xSpeed = 0;
+            // }
 
-            double ySpeed = yController.calculate(drivetrain.getState().Pose.getY());
-            if (yController.atGoal()) {
-                ySpeed = 0;
-            }
+            // double ySpeed = yController.calculate(drivetrain.getState().Pose.getY());
+            // if (yController.atGoal()) {
+            //     ySpeed = 0;
+            // }
 
             var omegaSpeed = omegaController.calculate(drivetrain.getState().Pose.getRotation().getRadians());
             if (omegaController.atGoal()) {
@@ -152,8 +152,8 @@ public class DriveToPosition extends Command {
             SmartDashboard.putNumber("angleRJIEOFOS", angle * (180/Math.PI));
             SmartDashboard.putNumber("cR", currentR);
             SmartDashboard.putNumber("dCXGX", distCxGx);
-            SmartDashboard.putNumber("ySpeed", ySpeed);
-            SmartDashboard.putNumber("xSpeed", xSpeed);
+            // SmartDashboard.putNumber("ySpeed", ySpeed);
+            // SmartDashboard.putNumber("xSpeed", xSpeed);
 
 
 
