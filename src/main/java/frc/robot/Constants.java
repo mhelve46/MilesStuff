@@ -175,15 +175,6 @@ public class Constants {
         //
     }
 
-    public static final class WristConstants {
-            public static final double wristMotorGearRatio = 251.52; //X input rotations for each output rotation
-        
-            // public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.25; // quarter of a rotation on the output shaft
-            public static final double rotationVerticalAlligned = 54;
-            public static final double rotationHorizontalAlligned = 0;
-            public static final double tolerance = wristMotorGearRatio / (360.0 * 2.0); // 1/2 degree on the output mechanism
-    }
-
     public static final class ClawConstants {
     }
 
