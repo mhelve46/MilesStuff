@@ -153,14 +153,14 @@ public class Elevator extends SubsystemBase {
 
         // SmartDashboard.putBoolean("Climbing", enabledClimb);
 
-        if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
-            stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
+//         if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
+//             stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
 
-        }
-        if (getTopSwitch() && Math.abs(stage2motor.getPosition().getValueAsDouble() - Constants.ElevatorConstants.stage2UpperLimit) < 0.1) {
-            stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
-//TODO CONSTANTS TOP POS
-        }
+//         }
+//         if (getTopSwitch() && Math.abs(stage2motor.getPosition().getValueAsDouble() - Constants.ElevatorConstants.stage2UpperLimit) < 0.1) {
+//             stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
+// //TODO CONSTANTS TOP POS
+//         }
 
         SmartDashboard.putBoolean("bottomSwitch", getBottomSwitch());
     }
@@ -228,12 +228,29 @@ public class Elevator extends SubsystemBase {
         }
     }
 
+    public void setElevatorHomingS1(){
+        if (!getBottomSwitch()) {
+            stage1motor.set(0);
+        } else {
+            stage1motor.set(0.25);
+        }
+    }
+
     public void setElevatorZeroingS2(){
         if (getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(1);
+            stage2motor.set(0.5);
         }
+    }
+
+    public void setElevatorHomingS2(){
+        if (!getTopSwitch()) {
+           stage2motor.set(0);
+        } else {
+            stage2motor.set(-0.25);
+        }
+
     }
 
     public void increase(){
@@ -256,6 +273,14 @@ public class Elevator extends SubsystemBase {
     public void stage1move() {
         stage1motor.setControl(
                     m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
+    }
+
+    public void setStage1MotorPosition(double position){
+        stage1motor.setPosition(position);
+    }
+
+    public void setStage2MotorPosition(double position){
+        stage2motor.setPosition(position);
     }
     
 }

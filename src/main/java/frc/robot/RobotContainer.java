@@ -36,6 +36,7 @@ import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
 import frc.robot.commands.GrabCoralHigh;
+import frc.robot.commands.HomeElevatorS2;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.PlaceCoral;
@@ -268,6 +269,9 @@ public class RobotContainer {
        final JoystickButton btnClawIntake = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
         btnClawIntake.whileTrue(new ClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
         
+        final JoystickButton btnHomeS2 = new JoystickButton(accessory, XboxController.Button.kX.value);
+        btnHomeS2.onTrue(new ZeroElevatorS2(m_elevator)
+                .andThen(new HomeElevatorS2(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
         
         // final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
         // btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
