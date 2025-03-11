@@ -23,7 +23,7 @@ public class PreZero extends SequentialCommandGroup {
     addCommands(
       Commands.parallel(
         new InstantCommand(() -> m_claw.zero()),
-        new MoveElevator(m_elevator),
+        new InstantCommand(() -> m_elevator.stage1move()), 
         new MoveShoulder(m_shoulder)
       )
     );

@@ -155,10 +155,12 @@ public class Constants {
             //
         }
 
-        public static final double stage2UpperLimit = 5.5;
+        public static final double stage2UpperLimit = 5.7;
         public static final double stage2LowerLimit = 0;
+        public static final double stage2SensorLimit = 5.76;
         public static final double stage1UpperLimit = 2.75;
-        public static final double stage1LowerLimit = 0;
+        public static final double stage1LowerLimit = 0.06;
+        public static final double stage1SensorLimit = 0;
 
     }
 
@@ -171,17 +173,9 @@ public class Constants {
         public static final double S = 0.05;
 
         public static final double shoulderUpperLimit = 150;
-        public static final double shoulderLowerLimit = 0;
+        public static final double shoulderLowerLimit = 0.06;
+        public static final double shoulderSensorLimit = 0;
         //
-    }
-
-    public static final class WristConstants {
-            public static final double wristMotorGearRatio = 251.52; //X input rotations for each output rotation
-        
-            // public static final double rotationVerticalAlligned = wristMotorGearRatio * 0.25; // quarter of a rotation on the output shaft
-            public static final double rotationVerticalAlligned = 54;
-            public static final double rotationHorizontalAlligned = 0;
-            public static final double tolerance = wristMotorGearRatio / (360.0 * 2.0); // 1/2 degree on the output mechanism
     }
 
     public static final class ClawConstants {

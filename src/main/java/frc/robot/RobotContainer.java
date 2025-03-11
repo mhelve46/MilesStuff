@@ -36,6 +36,7 @@ import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
 import frc.robot.commands.GrabCoralHigh;
+import frc.robot.commands.HomeElevatorS2;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.PlaceCoral;
@@ -45,7 +46,7 @@ import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
 import frc.robot.commands.StorePreMatch;
 import frc.robot.commands.ZeroAll;
-import frc.robot.commands.ZeroElevator;
+import frc.robot.commands.ZeroElevatorS2;
 import frc.robot.commands.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Claw;
@@ -142,7 +143,7 @@ public class RobotContainer {
         SmartDashboard.putData("StorePreMatch", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new StorePreMatch(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("ZeroAll", new ZeroAll(m_shoulder, m_elevator, m_claw));
-        SmartDashboard.putData("ZeroElevator", new ZeroElevator(m_elevator));
+        SmartDashboard.putData("ZeroElevator", new ZeroElevatorS2(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("PreZero", new InstantCommand(() -> 
         goalArrangementOthers(PoseSetter.PreZero)).andThen(new PreZero(m_shoulder, m_elevator, m_claw)));
@@ -264,7 +265,14 @@ public class RobotContainer {
         btnPreZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreZero))
                 .andThen(new PreZero(m_shoulder, m_elevator,  m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
-
+        
+       final JoystickButton btnClawIntake = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
+        btnClawIntake.whileTrue(new ClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        
+        final JoystickButton btnHomeS2 = new JoystickButton(accessory, XboxController.Button.kX.value);
+        btnHomeS2.onTrue(new ZeroElevatorS2(m_elevator)
+                .andThen(new HomeElevatorS2(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        
         // final JoystickButton btnStorePreMatch = new JoystickButton(accessory, XboxController.Button.kBack.value);
         // btnStorePreMatch.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
         //         .andThen(new StorePreMatch(m_shoulder, m_elevator,  m_claw)

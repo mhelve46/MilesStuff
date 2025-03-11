@@ -106,8 +106,8 @@ public class Elevator extends SubsystemBase {
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kP = 8; // A position error of 0.2 rotations results in 12 V output
-        upperSlot0.kI = 0.08; // No output for integrated error
+        upperSlot0.kP = 10; // A position error of 0.2 rotations results in 12 V output
+        upperSlot0.kI = 0.0; // No output for integrated error
         upperSlot0.kD = 0; // A velocity error of 1 rps results in 0.5 V output
         upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
         upperSlot0.kS = 0.22; // Add 0.25 V output to overcome static friction
@@ -153,14 +153,14 @@ public class Elevator extends SubsystemBase {
 
         // SmartDashboard.putBoolean("Climbing", enabledClimb);
 
-        if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
-            stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
+//         if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
+//             stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
 
-        }
-        if (getTopSwitch() && stage2motor.getPosition().getValueAsDouble() != Constants.ElevatorConstants.stage2UpperLimit) {
-            stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
-//TODO CONSTANTS TOP POS
-        }
+//         }
+//         if (getTopSwitch() && Math.abs(stage2motor.getPosition().getValueAsDouble() - Constants.ElevatorConstants.stage2UpperLimit) < 0.1) {
+//             stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
+// //TODO CONSTANTS TOP POS
+//         }
 
         SmartDashboard.putBoolean("bottomSwitch", getBottomSwitch());
     }
@@ -204,7 +204,6 @@ public class Elevator extends SubsystemBase {
                 m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(elevatorStage2Target).withSlot(0));
-        System.out.println("s2 target " + elevatorStage2Target);
     } 
 
     public void setClimb() {
@@ -221,17 +220,37 @@ public class Elevator extends SubsystemBase {
         stage2motor.set(0);
     }
 
-    public void setElevatorZeroing(){
+    public void setElevatorZeroingS1(){
         if (getBottomSwitch()) {
             stage1motor.set(0);
         } else {
             stage1motor.set(-0.25);
         }
+    }
+
+    public void setElevatorHomingS1(){
+        if (!getBottomSwitch()) {
+            stage1motor.set(0);
+        } else {
+            stage1motor.set(0.25);
+        }
+    }
+
+    public void setElevatorZeroingS2(){
         if (getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(1);
+            stage2motor.set(0.5);
         }
+    }
+
+    public void setElevatorHomingS2(){
+        if (!getTopSwitch()) {
+           stage2motor.set(0);
+        } else {
+            stage2motor.set(-0.25);
+        }
+
     }
 
     public void increase(){
@@ -251,6 +270,17 @@ public class Elevator extends SubsystemBase {
         double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
         return (currPos >= safeLower && currPos <= safeUpper);
     } */
+    public void stage1move() {
+        stage1motor.setControl(
+                    m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
+    }
 
+    public void setStage1MotorPosition(double position){
+        stage1motor.setPosition(position);
+    }
+
+    public void setStage2MotorPosition(double position){
+        stage2motor.setPosition(position);
+    }
     
 }
