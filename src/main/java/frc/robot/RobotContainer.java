@@ -238,7 +238,7 @@ public class RobotContainer {
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
-        joystick.start().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+        joystick.start().onTrue(new InstantCommand(() -> m_Vision.tempDisable(0.5)).andThen(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())));
 
         // Op Test Buttons TODO Reassign
         joystick.b().whileTrue(
@@ -284,7 +284,7 @@ public class RobotContainer {
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
         
        final JoystickButton btnClawIntake = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
-        btnClawIntake.whileTrue(new ClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        btnClawIntake.whileTrue(new CoralClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
         
         final JoystickButton btnHomeS2 = new JoystickButton(accessory, XboxController.Button.kX.value);
         btnHomeS2.onTrue(new ZeroElevatorS2(m_elevator)
