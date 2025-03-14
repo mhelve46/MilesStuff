@@ -28,19 +28,19 @@ public class AutonClawDrop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_claw.rotateOutwards();
+    m_claw.coralRotateOutwards();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_claw.zero();
+    m_claw.coralZero();
     System.out.println("end claw");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_claw.getClawHoldingDetector() == false;
+    return m_claw.getCoralDetect() == false;
   }
 }
