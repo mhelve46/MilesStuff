@@ -28,10 +28,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AlgaeClawDrop;
 import frc.robot.commands.AlgaeClawIntake;
 import frc.robot.commands.AutonAlgaeCarry;
-import frc.robot.commands.AutonGrabAlgae;
-
 import frc.robot.commands.AutonClawDrop;
-
+import frc.robot.commands.AutonGrabAlgae;
 import frc.robot.commands.AutonGrabCoral;
 import frc.robot.commands.AutonPlaceAlgae;
 import frc.robot.commands.AutonPlaceCoral;
@@ -113,7 +111,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
         NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
-        NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator));
         NamedCommands.registerCommand("AutonGrabAlgae", new AutonGrabAlgae(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_claw)); // use with race group
 
@@ -284,7 +282,7 @@ public class RobotContainer {
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
         
        final JoystickButton btnClawIntake = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
-        btnClawIntake.whileTrue(new ClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        btnClawIntake.whileTrue(new CoralClawIntake(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
         
         final JoystickButton btnHomeS2 = new JoystickButton(accessory, XboxController.Button.kX.value);
         btnHomeS2.onTrue(new ZeroElevatorS2(m_elevator)
