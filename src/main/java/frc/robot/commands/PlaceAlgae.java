@@ -4,9 +4,9 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
@@ -14,18 +14,15 @@ import frc.robot.subsystems.Shoulder;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class PreZero extends SequentialCommandGroup {
-  /** Creates a new PreZero. */
-  public PreZero(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
+public class PlaceAlgae extends SequentialCommandGroup {
+  /** Creates a new RemoveAlgae. */
+  public PlaceAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
+
     addCommands(
-      Commands.parallel(
-        new InstantCommand(() -> m_claw.coralZero()),
-        new InstantCommand(() -> m_claw.algaeZero()),
-        new InstantCommand(() -> m_elevator.stage1move()), 
-        new MoveShoulder(m_shoulder)
-      )
+      new MoveElevator(m_elevator),  
+      new MoveShoulder(m_shoulder),
+      new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
+
     );
   }
 }

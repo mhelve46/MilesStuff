@@ -14,14 +14,14 @@ import frc.robot.subsystems.Shoulder;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class RemoveAlgae extends SequentialCommandGroup {
+public class GrabAlgae extends SequentialCommandGroup {
   /** Creates a new RemoveAlgae. */
-  public RemoveAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
+  public GrabAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
 
     addCommands(
       new MoveElevator(m_elevator),  
       new MoveShoulder(m_shoulder),
-      new ClawRun(m_claw),
+      new AlgaeClawIntake(m_claw),
       new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
 
     );

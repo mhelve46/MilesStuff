@@ -11,7 +11,9 @@ public class PoseSetter {
 	public static final String Climb = "Climb";
 	public static final String PreClimb = "PreClimb";
 	public static final String PreZero = "PreZero";
-	public static final String AlgaeRemove = "AlgaeRemove";
+	public static final String AlgaeGrab = "AlgaeRemove";
+	public static final String Processor = "Processor";
+	public static final String LowAlgaeGrab = "LowAlgaeGrab";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -40,7 +42,7 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage2UpperLimit,
 					6,
 
-			}); // dont use
+			});
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
@@ -67,14 +69,14 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage2LowerLimit,
 					Constants.ShoulderConstants.shoulderUpperLimit,
 
-			}); // dont use
+			});
 
 			put(PreClimb, new double[] {
 					1.0f,
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderUpperLimit,
 
-			}); // dont use
+			});
 
 			put(PreZero, new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit / 4,
@@ -82,29 +84,41 @@ public class PoseSetter {
 					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
-			put(AlgaeRemove + "L1", new double[] {
+			put(AlgaeGrab + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
 				12,
-			}); //: should be the same for L2
+			});
 
-			put(AlgaeRemove + "L2", new double[] {
+			put(AlgaeGrab + "L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
 					12,
 			});
 
-			put(AlgaeRemove + "L3", new double[] {
+			put(AlgaeGrab + "L3", new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				10,
+		    });
+
+			put(AlgaeGrab + "L4", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				5,
 				10,
 		    });
 
-			put(AlgaeRemove + "L4", new double[] {
+			put(Processor, new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
-				5,
-				10,
-		    }); //: should be the same as L3
+				Constants.ElevatorConstants.stage2LowerLimit,
+				0
+			});
+
+			put(LowAlgaeGrab, new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2LowerLimit,
+				130,
+		    });
 
 		}
 	};

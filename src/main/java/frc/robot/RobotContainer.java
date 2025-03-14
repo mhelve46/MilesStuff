@@ -25,23 +25,30 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.AlgaeClawDrop;
+import frc.robot.commands.AlgaeClawIntake;
+import frc.robot.commands.AutonAlgaeCarry;
+import frc.robot.commands.AutonGrabAlgae;
+
 import frc.robot.commands.AutonClawDrop;
+
 import frc.robot.commands.AutonGrabCoral;
+import frc.robot.commands.AutonPlaceAlgae;
 import frc.robot.commands.AutonPlaceCoral;
-import frc.robot.commands.AutonRemoveAlgae;
-import frc.robot.commands.ClawDrop;
-import frc.robot.commands.ClawIntake;
 import frc.robot.commands.Climb;
+import frc.robot.commands.CoralClawDrop;
+import frc.robot.commands.CoralClawIntake;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
+import frc.robot.commands.GrabAlgae;
 import frc.robot.commands.GrabCoralHigh;
 import frc.robot.commands.HomeElevatorS2;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
+import frc.robot.commands.PlaceAlgae;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.PreZero;
-import frc.robot.commands.RemoveAlgae;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
 import frc.robot.commands.StorePreMatch;
@@ -63,7 +70,7 @@ public class RobotContainer {
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-   private CANdi clawCandi;
+   
    private CANdi shoulderAndTopCandi;
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -106,9 +113,11 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
         NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
-        NamedCommands.registerCommand("AutonRemoveAlgae", new AutonRemoveAlgae(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonGrabAlgae", new AutonGrabAlgae(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_claw)); // use with race group
 
-        clawCandi = new CANdi(30, "rio");
+        
         shoulderAndTopCandi = new CANdi(31, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
@@ -121,12 +130,10 @@ public class RobotContainer {
         SmartDashboard.putData("Selected Auto Reef Level", autoLevelSelector);
 
         // SmartDashboard Commands
-        // SmartDashboard.putData("AutonGrabCoral", new InstantCommand(() ->
-        // command).andThen(new Command()));
-        // SmartDashboard.putData("AutonPlaceCoral", new InstantCommand(() ->
-        // command).andThen(new Command()));
-        SmartDashboard.putData("ClawDrop", new ClawDrop(m_claw));
-        SmartDashboard.putData("ClawIntake", new ClawIntake(m_claw));
+        SmartDashboard.putData("CoralClawDrop", new CoralClawDrop(m_claw));
+        SmartDashboard.putData("CoralClawIntake", new CoralClawIntake(m_claw));
+        SmartDashboard.putData("AlgaeClawDrop", new AlgaeClawDrop(m_claw));
+        SmartDashboard.putData("AlgaeClawIntake", new AlgaeClawIntake(m_claw));
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
                 .andThen(new Climb(m_elevator)));
         SmartDashboard.putData("DriveToPosition", new DriveToPosition(drivetrain));
@@ -206,7 +213,7 @@ public class RobotContainer {
                 .andThen(new PlaceCoral(m_shoulder, m_elevator)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightTrigger(.5).onFalse(new ClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        joystick.rightTrigger(.5).onFalse(new CoralClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         joystick.rightBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)
@@ -216,8 +223,18 @@ public class RobotContainer {
                 .andThen(new Store(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.leftTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaeRemove + Constants.Selector.PlacementSelector.getLevel()))
-                .andThen(new RemoveAlgae(m_shoulder, m_elevator, m_claw)
+        joystick.leftTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Processor))
+                .andThen(new PlaceAlgae(m_shoulder, m_elevator, m_claw)
+                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        
+        joystick.leftTrigger(.5).onFalse(new AlgaeClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+
+        joystick.leftBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaeGrab + Constants.Selector.PlacementSelector.getLevel()))
+                .andThen(new GrabAlgae(m_shoulder, m_elevator, m_claw)
+                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+
+        joystick.leftBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+                .andThen(new Store(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
@@ -351,10 +368,7 @@ public class RobotContainer {
         // return false;
         return !shoulderAndTopCandi.getS2Closed().getValue();
     }
-    public Boolean getCoralDetect() {
-        // return false;
-        return !clawCandi.getS2Closed().getValue();
-    }
+    
     public Boolean getShoulderTripped() {
         return shoulderAndTopCandi.getS1Closed().getValue();
     }
