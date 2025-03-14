@@ -28,17 +28,19 @@ public class AlgaeClawDrop extends Command {
   @Override
   public void execute() {
     m_claw.algaeRotateOutwards();
+    m_claw.coralRotateOutwards();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_claw.algaeZero();
+    m_claw.coralZero();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_claw.getAlgaeDetect() == false;
+    return !m_claw.getAlgaeDetect() && !m_claw.getCoralDetect();
   }
 }
