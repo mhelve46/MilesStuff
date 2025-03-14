@@ -22,7 +22,6 @@ public class CoralClawDrop extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("dropping claw");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +34,6 @@ public class CoralClawDrop extends Command {
   @Override
   public void end(boolean interrupted) {
     m_claw.coralZero();
-    System.out.println("end claw");
   }
 
   // Returns true when the command should end.

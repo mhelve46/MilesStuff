@@ -22,7 +22,6 @@ public class AlgaeClawDrop extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("dropping claw (algae)");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,7 +34,6 @@ public class AlgaeClawDrop extends Command {
   @Override
   public void end(boolean interrupted) {
     m_claw.algaeZero();
-    System.out.println("end claw (algae)");
   }
 
   // Returns true when the command should end.

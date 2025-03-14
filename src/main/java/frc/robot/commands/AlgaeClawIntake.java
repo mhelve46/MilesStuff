@@ -23,7 +23,6 @@ private final Claw m_claw;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("intaking claw(algae)");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,14 +34,12 @@ private final Claw m_claw;
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_claw.algaeZero();
-    System.out.println("end claw(algae)");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_claw.getAlgaeDetect();
-  
+    // return m_claw.getAlgaeDetect();
+    return false;
   }
 }

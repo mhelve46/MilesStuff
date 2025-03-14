@@ -8,37 +8,24 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Claw;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralClawRun extends Command {
+public class AutonAlgaeCarry extends Command {
   private final Claw m_claw;
-
-  /** Creates a new ClawRun. */
-  public CoralClawRun(Claw subsystem) {
-    // Use addRequirements() here to declare subsystem dependencies.
-
+  /** Creates a new AutonAlgaeCarry. */
+  public AutonAlgaeCarry(Claw subsystem) {
+    
     m_claw = subsystem;
     addRequirements(m_claw);
   }
-
-  // Called when the command is initially scheduled.
+  // run this with a race group or deadline group in pathplanner
   @Override
-  public void initialize() {
-    System.out.println("running claw");
-  }
+  public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_claw.coralRotateOutwards();
-  }
+  public void execute() {}
 
-  // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_claw.coralZero();
-    System.out.println("end claw");
-  }
+  public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

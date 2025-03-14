@@ -11,7 +11,9 @@ public class PoseSetter {
 	public static final String Climb = "Climb";
 	public static final String PreClimb = "PreClimb";
 	public static final String PreZero = "PreZero";
-	public static final String AlgaeRemove = "AlgaeRemove";
+	public static final String AlgaeGrab = "AlgaeRemove";
+	public static final String Processor = "Processor";
+	public static final String LowAlgaeGrab = "LowAlgaeGrab";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -82,16 +84,40 @@ public class PoseSetter {
 					Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
-			put(AlgaeRemove + "L2", new double[] {
+			put(AlgaeGrab + "L1", new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2LowerLimit,
+				12,
+			});
+
+			put(AlgaeGrab + "L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
 					12,
 			});
 
-			put(AlgaeRemove + "L3", new double[] {
+			put(AlgaeGrab + "L3", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
 				10,
+		    });
+
+			put(AlgaeGrab + "L4", new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				10,
+		    });
+
+			put(Processor, new double[]{
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2LowerLimit,
+				0
+			});
+
+			put(LowAlgaeGrab, new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2LowerLimit,
+				130,
 		    });
 
 		}
