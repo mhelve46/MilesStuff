@@ -11,7 +11,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueReef"
+                  "pathName": "LeftStart2ReefL2"
                 }
               },
               {
@@ -24,13 +24,19 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutonClawDrop"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueReef2Feeder"
+                  "pathName": "LeftReef2FeederL2"
                 }
               },
               {
@@ -49,7 +55,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LowBlueFeeder2Reef"
+                  "pathName": "LeftFeeder2ReefL2"
                 }
               },
               {
@@ -59,6 +65,12 @@
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonClawDrop"
           }
         }
       ]

@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 
 public class Vision extends SubsystemBase {
@@ -47,7 +48,9 @@ public class Vision extends SubsystemBase {
         // _turnToTargetPID.setTolerance(2);
         // _rotateToTargetPID.setTolerance(2);
 
-        LimelightHelpers.setCameraPose_RobotSpace("", -0.073, 0, 0.44, 0, 0, 0);
+        LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limeLightName, -0.09, 0, 0.44, 0, 0,0);
+        // LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limeLightName, -0.09, 0.22, 0.49, 0, -5,0); // not normal one
+        LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limeLightName2, -0.093, 0, 0.44, 0, 21, 0);
     }
 
     private Pose2d currentOptimalPose;

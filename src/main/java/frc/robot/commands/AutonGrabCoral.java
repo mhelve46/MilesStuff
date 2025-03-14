@@ -34,8 +34,8 @@ public class AutonGrabCoral extends SequentialCommandGroup {
         // Add Commands here:
         // Also add parallel commands using the
         //
-        addCommands(      
-              new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.Feeder)),
+        addCommands(
+            new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.Feeder)),
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
               new CoralClawIntake(m_claw)

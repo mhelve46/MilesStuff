@@ -76,7 +76,7 @@ public class Elevator extends SubsystemBase {
         elevatorBottomSwitch = new DigitalInput(0);
         FeedbackConfigs elevatorUpperFeedback = elevatorUpperConfig.Feedback;
         FeedbackConfigs elevatorLowerFeedback = elevatorLowerConfig.Feedback;
-        elevatorUpperFeedback.SensorToMechanismRatio = 14.4;
+        elevatorUpperFeedback.SensorToMechanismRatio = 45;
         elevatorLowerFeedback.SensorToMechanismRatio = 45;
         CurrentLimitsConfigs elevatorLowerCurrent = elevatorLowerConfig.CurrentLimits;
         CurrentLimitsConfigs elevatorUpperCurrent = elevatorUpperConfig.CurrentLimits;
@@ -95,9 +95,9 @@ public class Elevator extends SubsystemBase {
 
         /* Configure Motion Magic */
         MotionMagicConfigs motionMagicU = elevatorUpperConfig.MotionMagic;
-        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10))
-                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(100));
+        motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999)) // (meachanism) rotations per second cruise
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(10000))
+                .withMotionMagicJerk(RotationsPerSecondPerSecond.per(Second).of(0));
 
         MotionMagicConfigs motionMagicL = elevatorLowerConfig.MotionMagic;
         motionMagicL.withMotionMagicCruiseVelocity(RotationsPerSecond.of(10)) // (meachanism) rotations per second cruise
@@ -106,12 +106,12 @@ public class Elevator extends SubsystemBase {
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
-        upperSlot0.kI = 0; // No output for integrated error
-        upperSlot0.kD = 0.5; // A velocity error of 1 rps results in 0.5 V output
+        upperSlot0.kP = 10; // A position error of 0.2 rotations results in 12 V output
+        upperSlot0.kI = 0.0; // No output for integrated error
+        upperSlot0.kD = 0; // A velocity error of 1 rps results in 0.5 V output
         upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        upperSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-        upperSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
+        upperSlot0.kS = 0.22; // Add 0.25 V output to overcome static friction
+        upperSlot0.kA = 0.02; // An acceleration of 1 rps/s requires 0.01 V output
 
         Slot0Configs lowerSlot0 = elevatorLowerConfig.Slot0;
         lowerSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
@@ -153,14 +153,14 @@ public class Elevator extends SubsystemBase {
 
         // SmartDashboard.putBoolean("Climbing", enabledClimb);
 
-        if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
-            stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
+//         if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
+//             stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
 
-        }
-        if (getTopSwitch() && stage2motor.getPosition().getValueAsDouble() != Constants.ElevatorConstants.stage2UpperLimit) {
-            stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
-//TODO CONSTANTS TOP POS
-        }
+//         }
+//         if (getTopSwitch() && Math.abs(stage2motor.getPosition().getValueAsDouble() - Constants.ElevatorConstants.stage2UpperLimit) < 0.1) {
+//             stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
+// //TODO CONSTANTS TOP POS
+//         }
 
         SmartDashboard.putBoolean("bottomSwitch", getBottomSwitch());
     }
@@ -204,7 +204,6 @@ public class Elevator extends SubsystemBase {
                 m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
         stage2motor.setControl(
                 m_motionMagicReqU.withPosition(elevatorStage2Target).withSlot(0));
-        System.out.println("s2 target " + elevatorStage2Target);
     } 
 
     public void setClimb() {
@@ -221,17 +220,37 @@ public class Elevator extends SubsystemBase {
         stage2motor.set(0);
     }
 
-    public void setElevatorZeroing(){
+    public void setElevatorZeroingS1(){
         if (getBottomSwitch()) {
             stage1motor.set(0);
         } else {
             stage1motor.set(-0.25);
         }
+    }
+
+    public void setElevatorHomingS1(){
+        if (!getBottomSwitch()) {
+            stage1motor.set(0);
+        } else {
+            stage1motor.set(0.25);
+        }
+    }
+
+    public void setElevatorZeroingS2(){
         if (getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(0.25);
+            stage2motor.set(0.5);
         }
+    }
+
+    public void setElevatorHomingS2(){
+        if (!getTopSwitch()) {
+           stage2motor.set(0);
+        } else {
+            stage2motor.set(-0.25);
+        }
+
     }
 
     public void increase(){
@@ -251,6 +270,17 @@ public class Elevator extends SubsystemBase {
         double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
         return (currPos >= safeLower && currPos <= safeUpper);
     } */
+    public void stage1move() {
+        stage1motor.setControl(
+                    m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
+    }
 
+    public void setStage1MotorPosition(double position){
+        stage1motor.setPosition(position);
+    }
+
+    public void setStage2MotorPosition(double position){
+        stage2motor.setPosition(position);
+    }
     
 }

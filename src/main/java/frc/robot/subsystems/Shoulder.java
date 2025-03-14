@@ -109,9 +109,6 @@ public class Shoulder extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        if (isShoulderTripped() && shoulderMotor.getPosition().getValueAsDouble() != 0) {
-            shoulderMotor.setPosition(0);
-        }
 
         SmartDashboard.putNumber("Shoulder Position", shoulderMotor.getPosition().getValueAsDouble());
 
@@ -138,10 +135,8 @@ public class Shoulder extends SubsystemBase {
     }
 
     public boolean isShoulderAtGoalPos() {
-        SmartDashboard.putBoolean("isShoulderAtGoal",
-                Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderTarget) < 1 / (365 * 2));
 
-        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderTarget) < 1.0;
+        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderTarget) < .15;
     }
 
     public void setShoulderZeroing() {
@@ -151,6 +146,19 @@ public class Shoulder extends SubsystemBase {
             shoulderMotor.set(-0.25);
         }
 
+    }
+
+    public void setShoulderHoming(){
+    if (!isShoulderTripped()) {
+        shoulderMotor.set(0);
+    } else {
+        shoulderMotor.set(0.25);
+    }
+
+}
+
+    public void setShoulderMotorPosition(double position){
+        shoulderMotor.setPosition(position);
     }
 
     // public boolean isSafeToMoveWrist() {
