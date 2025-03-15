@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.Elevator;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -21,7 +22,7 @@ public class ElevatorDecrease extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    System.out.println("elevator increase");
+    if (Robot.COMMAND_DEBUG) System.out.println("elevator increase");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
