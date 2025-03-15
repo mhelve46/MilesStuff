@@ -40,7 +40,7 @@ import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
 import frc.robot.commands.GrabAlgae;
-import frc.robot.commands.GrabCoralHigh;
+import frc.robot.commands.GrabCoral;
 import frc.robot.commands.HomeElevatorS2;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
@@ -68,7 +68,6 @@ public class RobotContainer {
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
-   
    private CANdi shoulderAndTopCandi;
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
@@ -136,7 +135,7 @@ public class RobotContainer {
                 .andThen(new Climb(m_elevator)));
         SmartDashboard.putData("DriveToPosition", new DriveToPosition(drivetrain));
         SmartDashboard.putData("GrabCoralHigh", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
-                .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)));
+                .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveElevator(m_elevator)));
         SmartDashboard.putData("MoveShoulder", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -214,7 +213,7 @@ public class RobotContainer {
         joystick.rightTrigger(.5).onFalse(new CoralClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         joystick.rightBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
-                .andThen(new GrabCoralHigh(m_shoulder, m_elevator, m_claw)
+                .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.rightBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -337,7 +336,6 @@ public class RobotContainer {
                 .get(Constants.Selector.PlacementSelector.getLevel())[2];
         goalArrangement = Constants.Selector.PlacementSelector.getLevel();
         SmartDashboard.putString("goal setting", goalArrangement);
-        System.out.println("goal setting is " + goalArrangement);
         return goalArrangement;
     }
 

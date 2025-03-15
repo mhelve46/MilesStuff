@@ -23,6 +23,10 @@ public class Robot extends TimedRobot {
 
   private boolean kUseLimelight = true;
 
+  public static boolean VISIONTEST = false;
+  public static boolean COMMAND_DEBUG = false;
+  public static boolean DRIVE_TO_POSITION_DEBUG = false;
+
   public Robot() {
     // m_robotContainer = new RobotContainer();
         HttpCamera frontCam = new HttpCamera("FrontCam", "http://10.48.59.11:5800");

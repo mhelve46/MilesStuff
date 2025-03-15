@@ -5,6 +5,7 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.TagApproach.gameTarget;
 
@@ -162,15 +163,12 @@ public class TagApproaches {
         /* also exists for the unassiated pose rotation */
         // Alliance alliance = Robot.getInstance().m_Vision.MyAlliance();
         // if (indexInArray > 21 && alliance != null && alliance != tagArray[indexInArray].TagAlliance()) {
-            
-        //    return RotatePose2d(indexInArray);
-                    
+        //    return RotatePose2d(indexInArray);          
         // }
         
         Pose2d goalPose = tagArray[indexInArray].DesiredPos();
 
         if (tagArray[indexInArray].GameTarget() == gameTarget.Reef){ 
-            System.out.println("shifting");
             return shiftReefAllign(goalPose);
         }
         return goalPose;
@@ -192,21 +190,24 @@ public class TagApproaches {
     
     public Pose2d addTagCentricOffset(Pose2d goalBeforeShift, Pose2d offsetTagRelative) { //goalBeforeShift if field relative ||| offsetTagRelative is tagRelative
 
-
-        System.out.println("goalBS" + goalBeforeShift);
-        System.out.println("offsetTR" + offsetTagRelative);
         Rotation2d TagAngle = goalBeforeShift.getRotation();
         Translation2d offsetTagRelativeTranslation = offsetTagRelative.getTranslation();
         Rotation2d offsetRotation = offsetTagRelative.getRotation();
-        System.out.println("tA" + TagAngle);
-
+        
         Translation2d TagTranslation = goalBeforeShift.getTranslation();
-        System.out.println("tagT" + TagTranslation);
         Translation2d fieldOrientedOffset = offsetTagRelativeTranslation.rotateBy(TagAngle.minus(new Rotation2d(Math.PI / 2)));
-        System.out.println("fieldOO" + fieldOrientedOffset);
         Translation2d newTranslation = TagTranslation.plus(fieldOrientedOffset);
-        System.out.println("newT" + newTranslation);
         Pose2d newPose = new Pose2d(newTranslation, TagAngle.plus(offsetRotation));
+        
+        if (Robot.VISIONTEST) {
+            System.out.println("goalBS" + goalBeforeShift);
+            System.out.println("offsetTR" + offsetTagRelative);
+            System.out.println("tA" + TagAngle);
+            System.out.println("tagT" + TagTranslation);
+            System.out.println("fieldOO" + fieldOrientedOffset);
+            System.out.println("newT" + newTranslation);
+        }
+        
         return newPose;
     }
 
@@ -215,13 +216,13 @@ public class TagApproaches {
 
         if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
             offset = 0.225;
-            System.out.println("moving left");
+            if (Robot.VISIONTEST) System.out.println("moving left");
         } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
             offset = -.165;
-            System.out.println("moving right");
+            if (Robot.VISIONTEST) System.out.println("moving right");
         } else {
             offset = 0;
-            System.out.println("staying in the center");
+            if (Robot.VISIONTEST) System.out.println("staying in the center");
             
         }
 
@@ -232,5 +233,4 @@ public class TagApproaches {
 
         return new Pose2d(newGoalTranslation, goalAngle);
     }
-
 }

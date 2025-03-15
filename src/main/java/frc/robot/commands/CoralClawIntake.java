@@ -40,6 +40,6 @@ private final Claw m_claw;
   @Override
   public boolean isFinished() {
     return m_claw.getCoralDetect();
-  
+    
   }
 }
