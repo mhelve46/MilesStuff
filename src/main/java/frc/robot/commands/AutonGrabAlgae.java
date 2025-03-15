@@ -37,7 +37,7 @@ public class AutonGrabAlgae extends SequentialCommandGroup {
               new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.LowAlgaeGrab)),
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
-              new AlgaeClawIntake(m_claw)
+              new AutonAlgaeIntake(m_claw)
         );
         
     }
