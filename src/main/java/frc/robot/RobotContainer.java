@@ -8,6 +8,8 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.RotationsPerSecond;
 
+import java.util.function.Consumer;
+
 import com.ctre.phoenix6.hardware.CANdi;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -118,6 +120,11 @@ public class RobotContainer {
         shoulderAndTopCandi = new CANdi(31, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
+        autoChooser.onChange(new Consumer<Command>() {
+                public void accept(Command t) {
+                    m_Vision.updateAutoStartPosition(autoChooser.getSelected().getName());
+                };
+            });
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
