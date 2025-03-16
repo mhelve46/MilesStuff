@@ -41,6 +41,7 @@ import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
 import frc.robot.commands.GrabAlgae;
 import frc.robot.commands.GrabCoral;
+import frc.robot.commands.HomeElevatorS1;
 import frc.robot.commands.HomeElevatorS2;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
@@ -51,6 +52,7 @@ import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
 import frc.robot.commands.StorePreMatch;
 import frc.robot.commands.ZeroAll;
+import frc.robot.commands.ZeroElevatorS1;
 import frc.robot.commands.ZeroElevatorS2;
 import frc.robot.commands.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
@@ -147,10 +149,13 @@ public class RobotContainer {
         SmartDashboard.putData("StorePreMatch", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new StorePreMatch(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("ZeroAll", new ZeroAll(m_shoulder, m_elevator, m_claw));
-        SmartDashboard.putData("ZeroElevator", new ZeroElevatorS2(m_elevator));
+        SmartDashboard.putData("Zero S1", new ZeroElevatorS1(m_elevator));
+        SmartDashboard.putData("Zero S2", new ZeroElevatorS2(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("PreZero", new InstantCommand(() -> 
         goalArrangementOthers(PoseSetter.PreZero)).andThen(new PreZero(m_shoulder, m_elevator, m_claw)));
+        SmartDashboard.putData("Home S1", new HomeElevatorS1(m_elevator));
+        SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
 
 
         // Field Widgets
@@ -362,10 +367,10 @@ public class RobotContainer {
 
     public Boolean getTopStage2() {
         // return false;
-        return !shoulderAndTopCandi.getS2Closed().getValue();
+        return !shoulderAndTopCandi.getS1Closed().getValue();
     }
     
     public Boolean getShoulderTripped() {
-        return shoulderAndTopCandi.getS1Closed().getValue();
+        return !shoulderAndTopCandi.getS2Closed().getValue();
     }
 }

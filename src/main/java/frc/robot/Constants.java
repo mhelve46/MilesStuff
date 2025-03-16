@@ -155,10 +155,11 @@ public class Constants {
             //
         }
 
-        public static final double stage2UpperLimit = 5.7;
+        public static final double stage2UpperLimit = 2.86;
         public static final double stage2LowerLimit = 0;
-        public static final double stage2SensorLimit = 5.76;
-        public static final double stage1UpperLimit = 2.75;
+        public static final double stage2SensorLimit = 2.92;
+
+        public static final double stage1UpperLimit = 5.17;
         public static final double stage1LowerLimit = 0.06;
         public static final double stage1SensorLimit = 0;
 

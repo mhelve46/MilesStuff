@@ -77,7 +77,7 @@ public class Elevator extends SubsystemBase {
         FeedbackConfigs elevatorUpperFeedback = elevatorUpperConfig.Feedback;
         FeedbackConfigs elevatorLowerFeedback = elevatorLowerConfig.Feedback;
         elevatorUpperFeedback.SensorToMechanismRatio = 45;
-        elevatorLowerFeedback.SensorToMechanismRatio = 45;
+        elevatorLowerFeedback.SensorToMechanismRatio = 20;
         CurrentLimitsConfigs elevatorLowerCurrent = elevatorLowerConfig.CurrentLimits;
         CurrentLimitsConfigs elevatorUpperCurrent = elevatorUpperConfig.CurrentLimits;
         elevatorLowerCurrent.StatorCurrentLimit = 25;

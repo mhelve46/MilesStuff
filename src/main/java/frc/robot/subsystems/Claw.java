@@ -55,13 +55,11 @@ public class Claw extends SubsystemBase {
     SmartDashboard.putBoolean("Algae", getAlgaeDetect());
   }
   public Boolean getCoralDetect() {
-    return coralSwitch.get();
-    // return !clawCandi.getS2Closed().getValue();
+    return !clawCandi.getS2Closed().getValue();
   }
 
   public Boolean getAlgaeDetect() {
-    // return !clawCandi.getS1Closed().getValue();
-    return algaeSwitch.get();
+    return !clawCandi.getS1Closed().getValue();
   }
 
   public void coralRotateInwards() {
