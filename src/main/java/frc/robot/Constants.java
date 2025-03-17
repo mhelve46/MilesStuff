@@ -155,9 +155,9 @@ public class Constants {
             //
         }
 
-        public static final double stage2UpperLimit = 2.86;
+        public static final double stage2UpperLimit = 3.34;
         public static final double stage2LowerLimit = 0;
-        public static final double stage2SensorLimit = 2.92;
+        public static final double stage2SensorLimit = 3.4;
 
         public static final double stage1UpperLimit = 5.17;
         public static final double stage1LowerLimit = 0.06;
@@ -173,7 +173,7 @@ public class Constants {
         public static final double G = 1.75;
         public static final double S = 0.05;
 
-        public static final double shoulderUpperLimit = 150;
+        public static final double shoulderUpperLimit = 218;
         public static final double shoulderLowerLimit = 0.06;
         public static final double shoulderSensorLimit = 0;
         //

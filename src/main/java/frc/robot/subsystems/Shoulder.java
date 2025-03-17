@@ -136,7 +136,7 @@ public class Shoulder extends SubsystemBase {
 
     public boolean isShoulderAtGoalPos() {
 
-        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderTarget) < .15;
+        return Math.abs(shoulderMotor.getPosition().getValueAsDouble() - shoulderTarget) < .3;
     }
 
     public void setShoulderZeroing() {
@@ -149,24 +149,14 @@ public class Shoulder extends SubsystemBase {
     }
 
     public void setShoulderHoming(){
-    if (!isShoulderTripped()) {
-        shoulderMotor.set(0);
-    } else {
-        shoulderMotor.set(0.25);
+        if (!isShoulderTripped()) {
+            shoulderMotor.set(0);
+        } else {
+            shoulderMotor.set(0.05);
+        }
+
     }
-
-}
-
     public void setShoulderMotorPosition(double position){
         shoulderMotor.setPosition(position);
     }
-
-    // public boolean isSafeToMoveWrist() {
-    //     double currPos = shoulderMotor.getPosition().getValueAsDouble();
-    //     double quadrant = Constants.ShoulderConstants.shoulderUpperLimit / 4;
-    //     double safeLower = Constants.ShoulderConstants.shoulderLowerLimit + quadrant;
-    //     double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
-    //     return (currPos >= safeLower && currPos <= safeUpper);
-    // }
-
 }
