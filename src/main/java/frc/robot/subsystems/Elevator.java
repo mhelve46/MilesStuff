@@ -77,7 +77,7 @@ public class Elevator extends SubsystemBase {
         FeedbackConfigs elevatorUpperFeedback = elevatorUpperConfig.Feedback;
         FeedbackConfigs elevatorLowerFeedback = elevatorLowerConfig.Feedback;
         elevatorUpperFeedback.SensorToMechanismRatio = 45;
-        elevatorLowerFeedback.SensorToMechanismRatio = 45;
+        elevatorLowerFeedback.SensorToMechanismRatio = 20;
         CurrentLimitsConfigs elevatorLowerCurrent = elevatorLowerConfig.CurrentLimits;
         CurrentLimitsConfigs elevatorUpperCurrent = elevatorUpperConfig.CurrentLimits;
         elevatorLowerCurrent.StatorCurrentLimit = 25;
@@ -232,7 +232,7 @@ public class Elevator extends SubsystemBase {
         if (!getBottomSwitch()) {
             stage1motor.set(0);
         } else {
-            stage1motor.set(0.25);
+            stage1motor.set(0.1);
         }
     }
 
@@ -248,7 +248,7 @@ public class Elevator extends SubsystemBase {
         if (!getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(-0.25);
+            stage2motor.set(-0.1);
         }
 
     }

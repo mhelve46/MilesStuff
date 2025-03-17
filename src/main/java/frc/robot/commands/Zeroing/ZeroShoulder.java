@@ -2,8 +2,6 @@
 package frc.robot.commands.Zeroing;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.PoseSetter;
-import frc.robot.Robot;
 import frc.robot.subsystems.Shoulder;
 
 public class ZeroShoulder extends Command {

@@ -48,9 +48,6 @@ import frc.robot.commands.AutonomousCommands.AutonGrabAlgae;
 import frc.robot.commands.AutonomousCommands.AutonGrabCoral;
 import frc.robot.commands.AutonomousCommands.AutonPlaceAlgae;
 import frc.robot.commands.AutonomousCommands.AutonPlaceCoral;
-import frc.robot.commands.Zeroing.HomeElevatorS2;
-import frc.robot.commands.Zeroing.PreZero;
-import frc.robot.commands.Zeroing.ZeroAll;
 import frc.robot.commands.Zeroing.ZeroElevatorS2;
 import frc.robot.commands.Zeroing.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
@@ -134,7 +131,7 @@ public class RobotContainer {
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
                 .andThen(new Climb(m_elevator)));
         SmartDashboard.putData("DriveToPosition", new DriveToPosition(drivetrain));
-        SmartDashboard.putData("GrabCoralHigh", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
+        SmartDashboard.putData("GrabCoral", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
         .andThen(new MoveElevator(m_elevator)));
@@ -147,10 +144,15 @@ public class RobotContainer {
         SmartDashboard.putData("StorePreMatch", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new StorePreMatch(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("ZeroAll", new ZeroAll(m_shoulder, m_elevator, m_claw));
-        SmartDashboard.putData("ZeroElevator", new ZeroElevatorS2(m_elevator));
+        SmartDashboard.putData("Zero S1", new ZeroElevatorS1(m_elevator));
+        SmartDashboard.putData("Zero S2", new ZeroElevatorS2(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("PreZero", new InstantCommand(() -> 
         goalArrangementOthers(PoseSetter.PreZero)).andThen(new PreZero(m_shoulder, m_elevator, m_claw)));
+        SmartDashboard.putData("Home S1", new HomeElevatorS1(m_elevator));
+        SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
+        SmartDashboard.putData("Home Shoulder", new HomeShoulder(m_shoulder));
+        SmartDashboard.putData("Place Algae", new PlaceAlgae(m_shoulder, m_elevator, m_claw));
 
 
         // Field Widgets
@@ -362,10 +364,10 @@ public class RobotContainer {
 
     public Boolean getTopStage2() {
         // return false;
-        return !shoulderAndTopCandi.getS2Closed().getValue();
+        return !shoulderAndTopCandi.getS1Closed().getValue();
     }
     
     public Boolean getShoulderTripped() {
-        return shoulderAndTopCandi.getS1Closed().getValue();
+        return !shoulderAndTopCandi.getS2Closed().getValue();
     }
 }

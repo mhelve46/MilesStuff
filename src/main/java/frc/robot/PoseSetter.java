@@ -14,6 +14,7 @@ public class PoseSetter {
 	public static final String AlgaeGrab = "AlgaeRemove";
 	public static final String Processor = "Processor";
 	public static final String LowAlgaeGrab = "LowAlgaeGrab";
+	public static final String Net = "Net";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -22,103 +23,107 @@ public class PoseSetter {
 			put("L1", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					Constants.ShoulderConstants.shoulderLowerLimit,
+					99
 			});
 
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					1.9,
-					Constants.ShoulderConstants.shoulderLowerLimit,
+					Constants.ElevatorConstants.stage2LowerLimit,
+					99,
 			});
 
 			put("L3", new double[] {
-					1.47,
-					4.1,
-					Constants.ShoulderConstants.shoulderLowerLimit,
+					Constants.ElevatorConstants.stage1LowerLimit,
+					1.73,
+					99,
 			});
 
 			put("L4", new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit,
 					Constants.ElevatorConstants.stage2UpperLimit,
-					6,
+					103,
 
 			});
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					2.05,
-					120,
-			});
+					1.61,
+					Constants.ShoulderConstants.shoulderUpperLimit,
+			});//tune
 
 			put(Zero, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderLowerLimit,
-
 			});
 
 			put(Stored, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					0.74,
-	 				78,
+	 				120,
 
-			});
+			});//tune
 
 			put(Climb, new double[] {
 					-1.25,
 					Constants.ElevatorConstants.stage2LowerLimit,
 					Constants.ShoulderConstants.shoulderUpperLimit,
-
-			});
+			});//tune
 
 			put(PreClimb, new double[] {
 					1.0f,
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderUpperLimit,
 
-			});
+			});//tune
 
 			put(PreZero, new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit / 4,
 					Constants.ElevatorConstants.stage2UpperLimit,
-					Constants.ShoulderConstants.shoulderLowerLimit,
+					Constants.ShoulderConstants.shoulderLowerLimit + 8,
 			});
 
 			put(AlgaeGrab + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2LowerLimit,
-				12,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				19,
 			});
 
 			put(AlgaeGrab + "L2", new double[] {
-					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2LowerLimit,
-					12,
+				Constants.ElevatorConstants.stage1LowerLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				19,
 			});
 
 			put(AlgaeGrab + "L3", new double[] {
-				Constants.ElevatorConstants.stage1LowerLimit,
+				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				10,
+				22,
 		    });
 
 			put(AlgaeGrab + "L4", new double[] {
-				Constants.ElevatorConstants.stage1LowerLimit,
-				5,
-				10,
+				4.6,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				22,
 		    });
 
 			put(Processor, new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2LowerLimit,
-				0
-			});
+				0.74,
+				25
+			}); //tune
 
 			put(LowAlgaeGrab, new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
 				130,
-		    });
+		    }); //tune
+
+			put(Net, new double[] {
+				Constants.ElevatorConstants.stage1UpperLimit,
+				Constants.ElevatorConstants.stage2UpperLimit,
+				140
+			});
 
 		}
 	};

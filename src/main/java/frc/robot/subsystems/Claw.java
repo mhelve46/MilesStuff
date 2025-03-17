@@ -23,20 +23,16 @@ public class Claw extends SubsystemBase {
   private SparkMax coralClawMotor;
   private SparkMax algaeClawMotor;
   private CANdi clawCandi;
-  private DigitalInput coralSwitch;
-  private DigitalInput algaeSwitch;
 
   public Claw() {
 
     clawCandi = new CANdi(30, "rio");
-    coralSwitch = new DigitalInput(1);
-    algaeSwitch = new DigitalInput(2);
 
     coralClawMotor = new SparkMax(18, SparkLowLevel.MotorType.kBrushless);
     SparkMaxConfig CoralSparkMaxConfig = new SparkMaxConfig();
     CoralSparkMaxConfig.inverted(true);
     CoralSparkMaxConfig.idleMode(IdleMode.kBrake);
-    CoralSparkMaxConfig.smartCurrentLimit(10, 10);
+    CoralSparkMaxConfig.smartCurrentLimit(15, 10);
     coralClawMotor.configure(CoralSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     algaeClawMotor = new SparkMax(17, SparkLowLevel.MotorType.kBrushless);
@@ -55,13 +51,11 @@ public class Claw extends SubsystemBase {
     SmartDashboard.putBoolean("Algae", getAlgaeDetect());
   }
   public Boolean getCoralDetect() {
-    return coralSwitch.get();
-    // return !clawCandi.getS2Closed().getValue();
+    return clawCandi.getS1Closed().getValue();
   }
 
   public Boolean getAlgaeDetect() {
-    // return !clawCandi.getS1Closed().getValue();
-    return algaeSwitch.get();
+    return !clawCandi.getS2Closed().getValue();
   }
 
   public void coralRotateInwards() {
@@ -69,7 +63,7 @@ public class Claw extends SubsystemBase {
   }
 
   public void algaeRotateInwards() {
-    coralClawMotor.set(.5);
+    algaeClawMotor.set(1);
   }
 
   public void coralRotateOutwards() {
@@ -77,7 +71,7 @@ public class Claw extends SubsystemBase {
   }
 
   public void algaeRotateOutwards() {
-    coralClawMotor.set(-1);
+    algaeClawMotor.set(-1);
   }
 
   public void coralZero() {
@@ -85,7 +79,7 @@ public class Claw extends SubsystemBase {
   }
 
   public void algaeZero() {
-    coralClawMotor.set(0);
+    algaeClawMotor.set(0);
   }
 
  
