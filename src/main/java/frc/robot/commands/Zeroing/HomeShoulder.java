@@ -1,19 +1,19 @@
 
-package frc.robot.commands;
+package frc.robot.commands.Zeroing;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.PoseSetter;
-import frc.robot.Robot;
+import frc.robot.Constants;
 import frc.robot.subsystems.Shoulder;
 
-public class ZeroShoulder extends Command {
+public class HomeShoulder extends Command {
 
     private final Shoulder m_shoulder;
 
-    public ZeroShoulder(Shoulder subsystem) {
+    public HomeShoulder(Shoulder subsystem) {
 
         m_shoulder = subsystem;
         addRequirements(m_shoulder);
+
 
     }
 
@@ -25,21 +25,21 @@ public class ZeroShoulder extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_shoulder.setShoulderZeroing();
+        m_shoulder.setShoulderHoming();
 
     }
 
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-
+        m_shoulder.setShoulderMotorPosition(Constants.ShoulderConstants.shoulderSensorLimit);
 
     }
 
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return m_shoulder.isShoulderTripped();
+        return !m_shoulder.isShoulderTripped();
     }
 
     @Override
