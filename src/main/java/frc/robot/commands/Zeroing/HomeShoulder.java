@@ -14,7 +14,6 @@ public class HomeShoulder extends Command {
         m_shoulder = subsystem;
         addRequirements(m_shoulder);
 
-
     }
 
     // Called when the command is initially scheduled.

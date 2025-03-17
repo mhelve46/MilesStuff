@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PoseSetter;
 import frc.robot.Robot;
-import frc.robot.commands.AlgaeClawIntake;
 import frc.robot.commands.MoveElevator;
 import frc.robot.commands.MoveShoulder;
 import frc.robot.subsystems.Claw;
@@ -40,7 +39,7 @@ public class AutonGrabAlgae extends SequentialCommandGroup {
               new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.LowAlgaeGrab)),
               new MoveShoulder(m_shoulder),
               new MoveElevator(m_elevator),
-              new AlgaeClawIntake(m_claw)
+              new AutonAlgaeIntake(m_claw)
         );
         
     }
