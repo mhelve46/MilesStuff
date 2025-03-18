@@ -23,6 +23,7 @@ public class Claw extends SubsystemBase {
   private SparkMax coralClawMotor;
   private SparkMax algaeClawMotor;
   private CANdi clawCandi;
+  public double coralDropSpeed;
 
   public Claw() {
 
@@ -67,7 +68,7 @@ public class Claw extends SubsystemBase {
   }
 
   public void coralRotateOutwards() {
-    coralClawMotor.set(-1);
+    coralClawMotor.set(coralDropSpeed);
   }
 
   public void algaeRotateOutwards() {

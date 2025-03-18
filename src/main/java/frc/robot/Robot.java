@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -91,6 +92,9 @@ public class Robot extends TimedRobot {
     Robot.getInstance().m_shoulder.stopShoulder();
     Robot.getInstance().m_claw.coralZero();
     Robot.getInstance().m_claw.algaeZero();
+
+    // CHARACTERIZING
+    // SignalLogger.stop();
   }
 
   @Override
@@ -131,7 +135,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    // RUN TO ZERO PLEASE //
+    // SignalLogger.start();
+    // TURN ON FOR CHARACTERIZING
 
   }
 

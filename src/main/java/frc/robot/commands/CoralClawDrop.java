@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -25,6 +26,12 @@ public class CoralClawDrop extends Command {
   public void initialize() {
     timer.reset();
     timer.start();
+
+    if (Robot.getInstance().goalArrangement == "L1"){
+      m_claw.coralDropSpeed = -0.5;
+    } else if (Robot.getInstance().goalArrangement == "L4"){
+      m_claw.coralDropSpeed = -0.5;
+    } else m_claw.coralDropSpeed = -1;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

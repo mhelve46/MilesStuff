@@ -14,7 +14,7 @@ public class PoseSetter {
 	public static final String AlgaeGrab = "AlgaeRemove";
 	public static final String Processor = "Processor";
 	public static final String LowAlgaeGrab = "LowAlgaeGrab";
-	public static final String Net = "Net";
+	public static final String Barge = "Net";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -119,7 +119,7 @@ public class PoseSetter {
 				130,
 		    }); //tune
 
-			put(Net, new double[] {
+			put(Barge, new double[] {
 				Constants.ElevatorConstants.stage1UpperLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
 				140
