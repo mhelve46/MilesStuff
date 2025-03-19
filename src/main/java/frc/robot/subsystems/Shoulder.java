@@ -73,11 +73,11 @@ public class Shoulder extends SubsystemBase {
         shoulderOutput.NeutralMode = NeutralModeValue.Brake;
   
         shoulderConf.Slot0.kP = 0.75; // An error of 1 rotation results in 2.4 V output
-        shoulderConf.Slot0.kI = 0.0075;; // No output for integrated error
+        shoulderConf.Slot0.kI = 0.0075; // No output for integrated error
         shoulderConf.Slot0.kD = 0; // A velocity of 1 rps results in 0.1 V output
-        shoulderConf.Slot0.kS = 0.25;
-        shoulderConf.Slot0.kV = 0.12;
-        shoulderConf.Slot0.kA = 0.005;
+        shoulderConf.Slot0.kS = 0.17558;
+        shoulderConf.Slot0.kV = 0.11202;
+        shoulderConf.Slot0.kA = 0.0024753;
 
        // shoulderConf.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
        // shoulderConf.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error

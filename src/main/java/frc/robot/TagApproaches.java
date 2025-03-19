@@ -215,10 +215,10 @@ public class TagApproaches {
         double offset = 0;
 
         if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
-            offset = 0.225;
+            offset = 0.1234;
             if (Robot.VISIONTEST) System.out.println("moving left");
         } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
-            offset = -.165;
+            offset = -0.235;
             if (Robot.VISIONTEST) System.out.println("moving right");
         } else {
             offset = 0;

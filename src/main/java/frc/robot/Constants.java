@@ -173,7 +173,7 @@ public class Constants {
         public static final double G = 1.75;
         public static final double S = 0.05;
 
-        public static final double shoulderUpperLimit = 218;
+        public static final double shoulderUpperLimit = 221.5;
         public static final double shoulderLowerLimit = 0.06;
         public static final double shoulderSensorLimit = 0;
         //
@@ -188,7 +188,7 @@ public class Constants {
         public static final int aprilPipe = 0;
         // public static final int Pipe2 = 1;
 
-        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(19.5), new Rotation2d(Math.PI));
+        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(16.25), new Rotation2d(Math.PI));
     }
 
 }

@@ -19,7 +19,6 @@ public class ZeroAll extends SequentialCommandGroup {
   public ZeroAll(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
     // Add Commands here:
     addCommands(
-      new CoralClawDrop(m_claw),
       new InstantCommand(() -> m_claw.coralZero()),
       new InstantCommand(() -> m_claw.algaeZero()),
       new ZeroElevatorS1(m_elevator),

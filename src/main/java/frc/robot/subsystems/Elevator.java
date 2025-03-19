@@ -254,7 +254,7 @@ public class Elevator extends SubsystemBase {
     }
 
     public void increase(){
-        if (elevatorStage2Target + 0.1f <= Constants.ElevatorConstants.stage2UpperLimit)
+        // if (elevatorStage2Target + 0.1f <= Constants.ElevatorConstants.stage2UpperLimit)
             elevatorStage2Target += 0.1f;
     }
 

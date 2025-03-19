@@ -23,25 +23,25 @@ public class PoseSetter {
 			put("L1", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					99
+					103
 			});
 
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					99,
+					101.5,
 			});
 
 			put("L3", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					1.73,
-					99,
+					2.93,
+					106,
 			});
 
 			put("L4", new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit,
-					Constants.ElevatorConstants.stage2UpperLimit,
-					103,
+					Constants.ElevatorConstants.stage2UpperLimit+0.2,
+					116,
 
 			});
 
@@ -49,7 +49,7 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					1.61,
 					Constants.ShoulderConstants.shoulderUpperLimit,
-			});//tune
+			});
 
 			put(Zero, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
@@ -62,7 +62,7 @@ public class PoseSetter {
 					0.74,
 	 				120,
 
-			});//tune
+			});
 
 			put(Climb, new double[] {
 					-1.25,
@@ -86,43 +86,43 @@ public class PoseSetter {
 			put(AlgaeGrab + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				19,
+				24.8,
 			});
 
 			put(AlgaeGrab + "L2", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				19,
+				24.8,
 			});
 
 			put(AlgaeGrab + "L3", new double[] {
 				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				22,
+				29.4,
 		    });
 
 			put(AlgaeGrab + "L4", new double[] {
 				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				22,
+				29.4,
 		    });
 
 			put(Processor, new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
 				0.74,
 				25
-			}); //tune
+			}); 
 
 			put(LowAlgaeGrab, new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
-				130,
-		    }); //tune
+				192.4,
+		    }); 
 
 			put(Barge, new double[] {
 				Constants.ElevatorConstants.stage1UpperLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				140
+				127
 			});
 
 		}

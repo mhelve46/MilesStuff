@@ -158,7 +158,7 @@ public class RobotContainer {
         SmartDashboard.putData("Home S1", new HomeElevatorS1(m_elevator));
         SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
         SmartDashboard.putData("Home Shoulder", new HomeShoulder(m_shoulder));
-        SmartDashboard.putData("Place Algae", new PlaceAlgae(m_shoulder, m_elevator, m_claw));
+        SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgae(m_shoulder, m_elevator, m_claw));
 
 
         // Field Widgets
@@ -238,9 +238,10 @@ public class RobotContainer {
                 .andThen(new GrabAlgae(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.leftBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
-                .andThen(new Store(m_shoulder, m_elevator, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // joystick.leftBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+        //         .andThen(new Store(m_shoulder, m_elevator, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // BREAKS THINGS NO GOOD :(
 
         joystick.y().onTrue(new InstantCommand(() -> slow()));
         joystick.start().onTrue(new InstantCommand(() -> m_Vision.tempDisable(0.5)).andThen(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())));
@@ -285,6 +286,7 @@ public class RobotContainer {
 
         final JoystickButton btnPreZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnPreZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreZero))
+                .andThen(new CoralClawDrop(m_claw))
                 .andThen(new PreZero(m_shoulder, m_elevator,  m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
         

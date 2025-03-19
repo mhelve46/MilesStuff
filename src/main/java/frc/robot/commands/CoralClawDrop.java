@@ -30,7 +30,7 @@ public class CoralClawDrop extends Command {
     if (Robot.getInstance().goalArrangement == "L1"){
       m_claw.coralDropSpeed = -0.5;
     } else if (Robot.getInstance().goalArrangement == "L4"){
-      m_claw.coralDropSpeed = -0.5;
+      m_claw.coralDropSpeed = -0.25;
     } else m_claw.coralDropSpeed = -1;
   }
 
