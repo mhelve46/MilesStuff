@@ -40,7 +40,7 @@ public class PoseSetter {
 
 			put("L4", new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit,
-					Constants.ElevatorConstants.stage2UpperLimit+0.2,
+					Constants.ElevatorConstants.stage2UpperLimit + 0.11,
 					116,
 
 			});
@@ -109,7 +109,7 @@ public class PoseSetter {
 
 			put(Processor, new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
-				0.74,
+				0.24,
 				25
 			}); 
 
@@ -121,7 +121,7 @@ public class PoseSetter {
 
 			put(Barge, new double[] {
 				Constants.ElevatorConstants.stage1UpperLimit,
-				Constants.ElevatorConstants.stage2UpperLimit,
+				Constants.ElevatorConstants.stage2UpperLimit + 0.11,
 				127
 			});
 

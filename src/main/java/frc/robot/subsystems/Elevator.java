@@ -81,7 +81,7 @@ public class Elevator extends SubsystemBase {
         CurrentLimitsConfigs elevatorLowerCurrent = elevatorLowerConfig.CurrentLimits;
         CurrentLimitsConfigs elevatorUpperCurrent = elevatorUpperConfig.CurrentLimits;
         elevatorLowerCurrent.StatorCurrentLimit = 25;
-        elevatorUpperCurrent.StatorCurrentLimit = 25;
+        elevatorUpperCurrent.StatorCurrentLimit = 40;
         // SoftwareLimitSwitchConfigs elevatorLowerSoftSwitch = elevatorLowerConfig.SoftwareLimitSwitch;
         // elevatorLowerSoftSwitch.ForwardSoftLimitEnable = true;
         // elevatorLowerSoftSwitch.ForwardSoftLimitThreshold = 2.5;
@@ -106,20 +106,20 @@ public class Elevator extends SubsystemBase {
 
 
         Slot0Configs upperSlot0 = elevatorUpperConfig.Slot0;
-        upperSlot0.kP = 10; // A position error of 0.2 rotations results in 12 V output
-        upperSlot0.kI = 0.0; // No output for integrated error
+        upperSlot0.kP = 25; // A position error of 0.2 rotations results in 12 V output
+        upperSlot0.kI = 0.25; // No output for integrated error
         upperSlot0.kD = 0; // A velocity error of 1 rps results in 0.5 V output
-        upperSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        upperSlot0.kS = 0.22; // Add 0.25 V output to overcome static friction
-        upperSlot0.kA = 0.02; // An acceleration of 1 rps/s requires 0.01 V output
+        upperSlot0.kV = 5.1659; // A velocity target of 1 rps results in 0.12 V output
+        upperSlot0.kS = 0.051841; // Add 0.25 V output to overcome static friction
+        upperSlot0.kA = 0.095406; // An acceleration of 1 rps/s requires 0.01 V output
 
         Slot0Configs lowerSlot0 = elevatorLowerConfig.Slot0;
         lowerSlot0.kP = 60; // A position error of 0.2 rotations results in 12 V output
         lowerSlot0.kI = 0; // No output for integrated error
         lowerSlot0.kD = 0.5; // A velocity error of 1 rps results in 0.5 V output
-        lowerSlot0.kV = 0.12; // A velocity target of 1 rps results in 0.12 V output
-        lowerSlot0.kS = 0.25; // Add 0.25 V output to overcome static friction
-        lowerSlot0.kA = 0.01; // An acceleration of 1 rps/s requires 0.01 V output
+        lowerSlot0.kV = 5.226; // A velocity target of 1 rps results in 0.12 V output
+        lowerSlot0.kS = 0.15296; // Add 0.25 V output to overcome static friction
+        lowerSlot0.kA = 0.055325; // An acceleration of 1 rps/s requires 0.01 V output
 
         StatusCode statusU = StatusCode.StatusCodeNotInitialized;
         for (int i = 0; i < 5; ++i) {

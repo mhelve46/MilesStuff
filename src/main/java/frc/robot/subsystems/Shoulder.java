@@ -79,11 +79,6 @@ public class Shoulder extends SubsystemBase {
         shoulderConf.Slot0.kV = 0.11202;
         shoulderConf.Slot0.kA = 0.0024753;
 
-       // shoulderConf.Slot0.kP = Constants.ShoulderConstants.P; // An error of 1 rotation results in 2.4 V output
-       // shoulderConf.Slot0.kI = Constants.ShoulderConstants.I; // No output for integrated error
-       // shoulderConf.Slot0.kD = Constants.ShoulderConstants.D; // A velocity of 1 rps results in 0.1 V output
-       // shoulderConf.Slot0.kG = Constants.ShoulderConstants.G; // kG value
-       // shoulderConf.Slot0.kG = Constants.ShoulderConstants.S; // kS value
         shoulderConf.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
 
         // Peak output of 8 V

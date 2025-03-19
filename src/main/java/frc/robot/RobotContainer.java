@@ -306,6 +306,12 @@ public class RobotContainer {
         btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new Store(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        final JoystickButton btnBarge = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
+        btnBarge.whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Barge))
+                        .andThen(new PlaceAlgae(m_shoulder, m_elevator, m_claw)
+                                .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+                
+        btnBarge.onFalse(new AlgaeClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         drivetrain.registerTelemetry(logger::telemeterize);
     }
