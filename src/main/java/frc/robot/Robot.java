@@ -30,6 +30,7 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     // m_robotContainer = new RobotContainer();
+        LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
         HttpCamera frontCam = new HttpCamera("FrontCam", "http://10.48.59.11:5800");
         CameraServer.addCamera(frontCam);
         HttpCamera backCam = new HttpCamera("BackCam", "http://10.48.59.12:5800");
@@ -133,6 +134,7 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
     }
 
     // SignalLogger.start();
