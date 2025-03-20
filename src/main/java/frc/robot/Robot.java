@@ -50,9 +50,9 @@ public class Robot extends TimedRobot {
     
     if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
         && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
-      {Robot.getInstance().percentSlow = .3;}
-    else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
       {Robot.getInstance().percentSlow = .5;}
+    else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
+      {Robot.getInstance().percentSlow = .75;}
     else Robot.getInstance().percentSlow = 1;
     
     /*
