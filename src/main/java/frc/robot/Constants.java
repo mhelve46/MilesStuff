@@ -143,17 +143,6 @@ public class Constants {
     }
 
     public static final class ElevatorConstants {
-        public static final class PID {
-            //
-            public static final double P = 2.4f;
-            public static final int I = 0;
-            public static final double D = 0.1f;
-            //
-            public static final int P2 = 60;
-            public static final int I2 = 0;
-            public static final int D2 = 6;
-            //
-        }
 
         public static final double stage2UpperLimit = 3.34;
         public static final double stage2LowerLimit = 0;
@@ -180,9 +169,9 @@ public class Constants {
         public static final String limeLightName = "limelight-front";
         public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
-        // public static final int Pipe2 = 1;
 
         public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(16.25), new Rotation2d(Math.PI));
+        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(18), new Rotation2d(Math.PI));
     }
 
 }
