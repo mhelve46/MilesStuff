@@ -93,15 +93,19 @@ public class Vision extends SubsystemBase {
 
     public void updateTargetData(String llName) {
         if (LimelightHelpers.getTV(llName)) {
+            int fidID = (int) LimelightHelpers.getFiducialID(_limelightName);
+            if (!(fidID >= 1) || !(fidID <= 22)) {
+                    fidID = 1;
+            }
             if (llName == Constants.VisionConstants.limeLightName) {
-                lastTargetFront = ((int)LimelightHelpers.getFiducialID(llName));
+                lastTargetFront = fidID;
             }
             if (llName == Constants.VisionConstants.limeLightName2) {
-                lastTargetBack = ((int)LimelightHelpers.getFiducialID(llName));
+                lastTargetBack = fidID;
             }
         }
     }
-
+    
     public void tempDisable(double seconds) {
         tempDisable = true;
         double currentTime = Utils.getCurrentTimeSeconds();
