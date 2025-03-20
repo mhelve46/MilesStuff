@@ -12,9 +12,8 @@ public class PoseSetter {
 	public static final String PreClimb = "PreClimb";
 	public static final String PreZero = "PreZero";
 	public static final String AlgaeGrab = "AlgaeRemove";
-	public static final String Processor = "Processor";
-	public static final String LowAlgaeGrab = "LowAlgaeGrab";
-	public static final String Barge = "Net";
+	public static final String LowAlgaeGrabAuton = "LowAlgaeGrabAuton";
+	public static final String AlgaePlace = "AlgaePlace";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -29,7 +28,7 @@ public class PoseSetter {
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					101.5,
+					108,
 			});
 
 			put("L3", new double[] {
@@ -80,14 +79,15 @@ public class PoseSetter {
 			put(PreZero, new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit / 4,
 					Constants.ElevatorConstants.stage2UpperLimit,
-					Constants.ShoulderConstants.shoulderLowerLimit + 8,
+					Constants.ShoulderConstants.shoulderLowerLimit + 30,
 			});
 
+			// ground
 			put(AlgaeGrab + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2UpperLimit,
-				24.8,
-			});
+				Constants.ElevatorConstants.stage2LowerLimit,
+				196,
+			}); 
 
 			put(AlgaeGrab + "L2", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
@@ -107,24 +107,39 @@ public class PoseSetter {
 				29.4,
 		    });
 
-			put(Processor, new double[]{
-				Constants.ElevatorConstants.stage1LowerLimit,
-				0.24,
-				25
-			}); 
-
-			put(LowAlgaeGrab, new double[] {
+			put(LowAlgaeGrabAuton, new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
 				192.4,
 		    }); 
 
-			put(Barge, new double[] {
-				Constants.ElevatorConstants.stage1UpperLimit,
-				Constants.ElevatorConstants.stage2UpperLimit + 0.11,
-				127
-			});
+			// processor
+			put(AlgaePlace + "L1", new double[]{
+				Constants.ElevatorConstants.stage1LowerLimit,
+				0.24,
+				25
+			}); 
 
+			// processor
+			put(AlgaePlace + "L2", new double[]{
+				Constants.ElevatorConstants.stage1LowerLimit,
+				0.24,
+				25
+			}); 
+
+			// barge
+			put(AlgaePlace + "L3", new double[] {
+				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
+				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
+				127
+		    }); 
+
+			// barge
+			put(AlgaePlace + "L4", new double[] {
+				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
+				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
+				127
+		    }); 
 		}
 	};
 

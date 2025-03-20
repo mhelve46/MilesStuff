@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import java.util.Optional;
 
 import com.ctre.phoenix6.Utils;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.util.FlippingUtil;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -37,7 +39,9 @@ public class Vision extends SubsystemBase {
 
     @Override
     public void periodic() {
-        
+        if (timestampToReEnable < Utils.getCurrentTimeSeconds() && tempDisable == true){
+            tempDisable = false; 
+        }
 
         SmartDashboard.putBoolean("tempDisable", tempDisable);
 
@@ -57,7 +61,9 @@ public class Vision extends SubsystemBase {
 
                 SmartDashboard.putNumber("Auto config distance", distance);
                 SmartDashboard.putNumber("Auto config rotation distance", rot_distance);
-                if (distance < 0.2 && (Units.radiansToDegrees(rot_distance) < 4)) {
+                if (distance < 0.2) {
+                // if (distance < 0.2 && (Units.radiansToDegrees(rot_distance) < 4)) {
+
                     LimelightHelpers.setLEDMode_ForceOn(_limelightName);
                 } else {
                     LimelightHelpers.setLEDMode_ForceOff(_limelightName);
@@ -100,9 +106,27 @@ public class Vision extends SubsystemBase {
     }
 
 
-public void updateAutoStartPosition(String autoName) {
-    if (timestampToReEnable < Utils.getCurrentTimeSeconds() && tempDisable == true){
-        tempDisable = false; 
+ public void updateAutoStartPosition(String autoName) {
+
+
+
+        // Instant Command is the name of the "None" Auto
+
+
+        if (!autoName.equals("InstantCommand")) {
+            try {
+                autoStartPose = PathPlannerAuto.getPathGroupFromAutoFile(autoName).get(0).getStartingDifferentialPose(); 
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+                autoStartPose = new Pose2d();
+            }
+            if (DriverStation.getAlliance().get() == Alliance.Red) {
+                autoStartPose = FlippingUtil.flipFieldPose(autoStartPose);
+            }
+        } else {
+            autoStartPose = new Pose2d();
+        } 
+
+
     }
-}
 }

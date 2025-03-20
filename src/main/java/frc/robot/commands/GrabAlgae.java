@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
@@ -19,8 +20,9 @@ public class GrabAlgae extends SequentialCommandGroup {
   public GrabAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
 
     addCommands(
+      Commands.parallel(
       new MoveElevator(m_elevator),  
-      new MoveShoulder(m_shoulder),
+      new MoveShoulder(m_shoulder)),
       new AlgaeClawIntake(m_claw),
       new InstantCommand(() -> Robot.getInstance().currentArrangementPlacing())
 

@@ -31,7 +31,7 @@ public class AutonPlaceAlgae extends SequentialCommandGroup {
     public AutonPlaceAlgae(Shoulder m_shoulder, Elevator m_elevator){
 
         addCommands(
-            new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.Processor)),
+            new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.AlgaePlace + "L1")),
             new MoveElevator(m_elevator),
             new MoveShoulder(m_shoulder) 
         );

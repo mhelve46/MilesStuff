@@ -48,6 +48,11 @@ public class Robot extends TimedRobot {
     
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
     
+    if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
+        && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
+      {Robot.getInstance().percentSlow = .3;}
+    else Robot.getInstance().percentSlow = 1;
+    
     /*
      * This example of adding Limelight is very simple and may not be sufficient for
      * on-field use.
