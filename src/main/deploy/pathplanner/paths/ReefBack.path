@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 12.261,
+        "y": 5.113
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 12.119002525252526,
+        "y": 5.641098484848485
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 12.139,
+        "y": 5.641098484848485
+      },
+      "prevControl": {
+        "x": 12.15932828282828,
+        "y": 5.346338383838385
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -61.63095370672151
+  },
+  "reversed": false,
+  "folder": "ProcessorAuton",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -62.042869934845974
+  },
+  "useDefaultConstraints": true
+}
