@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.267878787878788,
-        "y": 2.5711484848484853
+        "x": 5.268371212121212,
+        "y": 2.5511994949494943
       },
       "isLocked": false,
       "linkedName": null
@@ -20,8 +20,8 @@
         "y": 0.5488636363636362
       },
       "prevControl": {
-        "x": 5.959532828282828,
-        "y": 0.9147727272727273
+        "x": 5.868055555555555,
+        "y": 0.7826388888888891
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 90.0
   },
   "reversed": false,
   "folder": "ProcessorAuton",

@@ -20,8 +20,8 @@
         "y": 2.205618686868687
       },
       "prevControl": {
-        "x": 2.142908005899071,
-        "y": 2.0842079540740297
+        "x": 2.1429080058990713,
+        "y": 2.0842079540740293
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "ProcessorAuton",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 90.0
   },
   "useDefaultConstraints": true
 }
