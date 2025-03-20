@@ -11,16 +11,28 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "MiddleStart2Reef"
+                  "pathName": "MiddleStart2Algae"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabAlgaeHigh"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiddleReefAlgae2Coral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonPlaceCoral"
           }
         },
         {

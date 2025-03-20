@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.55530303030303,
+        "x": 5.858,
         "y": 4.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.208361883356673,
-        "y": 4.034191854502183
+        "x": 6.396590909090909,
+        "y": 3.7099116161616155
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.857891414141415,
-        "y": 4.1774621212121215
+        "x": 5.858,
+        "y": 4.187626262626263
       },
       "prevControl": {
-        "x": 6.106627236926212,
-        "y": 4.152352552048747
+        "x": 6.437247474747476,
+        "y": 4.360416666666667
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -179.21517539700818
   },
   "reversed": false,
   "folder": "MiddleAuton",
