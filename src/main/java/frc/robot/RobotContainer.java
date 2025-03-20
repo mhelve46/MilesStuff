@@ -116,7 +116,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator));
-        NamedCommands.registerCommand("AutonGrabAlgae", new AutonGrabAlgae(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonGrabAlgaeHigh", new AutonGrabAlgaeHigh(m_shoulder, m_elevator, m_claw));
+        NamedCommands.registerCommand("AutonGrabAlgaeLow", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_claw)); // use with race group
 
         
@@ -143,7 +144,6 @@ public class RobotContainer {
         SmartDashboard.putData("AlgaeClawIntake", new AlgaeClawIntake(m_claw));
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
                 .andThen(new Climb(m_elevator)));
-        SmartDashboard.putData("DriveToPosition", new DriveToPosition(drivetrain));
         SmartDashboard.putData("GrabCoral", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
@@ -165,7 +165,7 @@ public class RobotContainer {
         SmartDashboard.putData("Home S1", new HomeElevatorS1(m_elevator));
         SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
         SmartDashboard.putData("Home Shoulder", new HomeShoulder(m_shoulder));
-        SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgae(m_shoulder, m_elevator, m_claw));
+        SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_claw));
 
 
         // Field Widgets
@@ -255,10 +255,10 @@ public class RobotContainer {
 
         // Op Test Buttons TODO Reassign
         joystick.b().whileTrue(
-                new DriveToPosition(drivetrain).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
-
-        // joystick.leftBumper().onTrue(new InstantCommand(() -> minus()));
-        // joystick.a().onTrue(new InstantCommand(() -> plus()));
+                new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        
+        joystick.a().whileTrue(
+                new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName2).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
