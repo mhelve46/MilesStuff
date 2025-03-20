@@ -69,8 +69,7 @@ public class Vision extends SubsystemBase {
 
                 SmartDashboard.putNumber("Auto config distance", distance);
                 SmartDashboard.putNumber("Auto config rotation distance", rot_distance);
-                if (distance < 0.2) {
-                // if (distance < 0.2 && (Units.radiansToDegrees(rot_distance) < 4)) {
+                if (distance < 0.2 && (Units.radiansToDegrees(rot_distance) < 4)) {
 
                     LimelightHelpers.setLEDMode_ForceOn(_limelightName);
                 } else {
