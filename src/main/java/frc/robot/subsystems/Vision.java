@@ -22,7 +22,8 @@ public class Vision extends SubsystemBase {
     private double timestampToReEnable;
     private String _limelightName = Constants.VisionConstants.limeLightName;
     private Pose2d autoStartPose = new Pose2d();
-
+    public int lastTargetFront;
+    public int lastTargetBack;
 
     public static Vision getInstance() {
         return m_Vision;
@@ -38,8 +39,13 @@ public class Vision extends SubsystemBase {
     @Override
     public void periodic() {
         
+        updateTargetData(Constants.VisionConstants.limeLightName);
+        updateTargetData(Constants.VisionConstants.limeLightName2);
+        
+        SmartDashboard.putNumber("lastTargetFront", lastTargetFront);
+        SmartDashboard.putNumber("lastTargetBack", lastTargetBack);
 
-        SmartDashboard.putBoolean("tempDisable", tempDisable);
+        // SmartDashboard.putBoolean("tempDisable", tempDisable);
 
         SmartDashboard.putString("placementPosition: " , autoStartPose.toString());
         SmartDashboard.putString("currentPosition: ", Robot.getInstance().drivetrain.getState().Pose.toString());
@@ -68,10 +74,6 @@ public class Vision extends SubsystemBase {
         }
     }
     
-    
-
-
-
     public Alliance MyAlliance() {
         Optional<Alliance> ally = DriverStation.getAlliance();
         if (ally.isPresent()) {
@@ -81,17 +83,16 @@ public class Vision extends SubsystemBase {
         }
     }
 
-    // public boolean AllianceTargetAquired() {
-        // boolean targetAquired = LimelightHelpers.getTV(_limelightName);
-        // if (targetAquired) {
-        //     int targetID = (int) LimelightHelpers.getFiducialID(_limelightName);
-        //     if ((targetID >= 0) && (targetID <= 16))
-        //         return (MyAlliance() == _tagApproches.TagAlliance(targetID));
-        //     else
-        //         return false;
-        // }
-        // return false;
-    // }
+    public void updateTargetData(String llName) {
+        if (LimelightHelpers.getTV(llName)) {
+            if (llName == Constants.VisionConstants.limeLightName) {
+                lastTargetFront = ((int)LimelightHelpers.getFiducialID(llName));
+            }
+            if (llName == Constants.VisionConstants.limeLightName2) {
+                lastTargetBack = ((int)LimelightHelpers.getFiducialID(llName));
+            }
+        }
+    }
 
     public void tempDisable(double seconds) {
         tempDisable = true;
