@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 12.373,
-        "y": 5.174
+        "x": 5.126,
+        "y": 2.866
       },
       "prevControl": null,
       "nextControl": {
-        "x": 12.159659090909093,
-        "y": 5.75290404040404
+        "x": 5.267878787878788,
+        "y": 2.5711484848484853
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 11.539646464646466,
-        "y": 7.511300505050505
+        "x": 5.96969696969697,
+        "y": 0.5488636363636362
       },
       "prevControl": {
-        "x": 11.85473484848485,
-        "y": 6.698169191919191
+        "x": 5.959532828282828,
+        "y": 0.9147727272727273
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "ProcessorAuton",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -59.18330564427641
+    "rotation": 117.13
   },
   "useDefaultConstraints": true
 }

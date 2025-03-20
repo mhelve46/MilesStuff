@@ -116,15 +116,15 @@ public class PoseSetter {
 			// processor
 			put(AlgaePlace + "L1", new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
-				0.24,
-				25
+				Constants.ElevatorConstants.stage2LowerLimit,
+				202,
 			}); 
 
 			// processor
 			put(AlgaePlace + "L2", new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
-				0.24,
-				25
+				Constants.ElevatorConstants.stage2LowerLimit,
+				202,
 			}); 
 
 			// barge
