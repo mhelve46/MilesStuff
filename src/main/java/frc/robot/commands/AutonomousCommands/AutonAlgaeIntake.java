@@ -5,19 +5,20 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Claw;
+import frc.robot.Robot;
+import frc.robot.subsystems.Algae;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutonAlgaeIntake extends Command {
-private final Claw m_claw;
+private final Algae m_algae;
 
-  /** Creates a new ClawIntake. */
+  /** Creates a new AlgaeIntake. */
   public 
-  AutonAlgaeIntake(Claw subsystem) {
+  AutonAlgaeIntake(Algae subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    m_claw = subsystem;
-    addRequirements(m_claw);
+    m_algae = subsystem;
+    addRequirements(m_algae);
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +29,7 @@ private final Claw m_claw;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_claw.algaeRotateInwards();
+    m_algae.algaeRotateInwards();
   }
 
   // Called once the command ends or is interrupted.
@@ -39,7 +40,7 @@ private final Claw m_claw;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    // return m_claw.getAlgaeDetect();
-    return m_claw.getAlgaeDetect();
+    // return m_algae.getAlgaeDetect();
+    return Robot.getInstance().getAlgaeDetect();
   }
 }

@@ -59,6 +59,7 @@ import frc.robot.commands.Zeroing.ZeroElevatorS1;
 import frc.robot.commands.Zeroing.ZeroElevatorS2;
 import frc.robot.commands.Zeroing.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
@@ -70,10 +71,12 @@ public class RobotContainer {
    public final Shoulder m_shoulder = new Shoulder();
    public final Elevator m_elevator = new Elevator();
    public final Claw m_claw = new Claw();
+   public final Algae m_algae = new Algae();
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
-
+   
    private CANdi shoulderAndTopCandi;
+   private CANdi clawCandi; 
 
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond);
     // kSpeedAt12Volts desired top speed
@@ -114,15 +117,16 @@ public class RobotContainer {
     public RobotContainer() {
 
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
-        NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw));
+        NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw, m_algae));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator));
-        NamedCommands.registerCommand("AutonGrabAlgaeHigh", new AutonGrabAlgaeHigh(m_shoulder, m_elevator, m_claw));
-        NamedCommands.registerCommand("AutonGrabAlgaeLow", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_claw));
-        NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_claw)); // use with race group
+        NamedCommands.registerCommand("AutonGrabAlgaeHigh", new AutonGrabAlgaeHigh(m_shoulder, m_elevator, m_algae));
+        NamedCommands.registerCommand("AutonGrabAlgaeLow", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_algae));
+        NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_algae)); // use with race group
 
         
         shoulderAndTopCandi = new CANdi(31, "rio");
+        clawCandi = new CANdi(30, "rio");
 
         autoChooser = AutoBuilder.buildAutoChooser("Autonomous Command");
         autoChooser.onChange(new Consumer<Command>() {
@@ -141,8 +145,8 @@ public class RobotContainer {
         // SmartDashboard Commands
         SmartDashboard.putData("CoralClawDrop", new CoralClawDrop(m_claw));
         SmartDashboard.putData("CoralClawIntake", new CoralClawIntake(m_claw));
-        SmartDashboard.putData("AlgaeClawDrop", new AlgaeClawDrop(m_claw));
-        SmartDashboard.putData("AlgaeClawIntake", new AlgaeClawIntake(m_claw));
+        SmartDashboard.putData("AlgaeClawDrop", new AlgaeClawDrop(m_algae));
+        SmartDashboard.putData("AlgaeClawIntake", new AlgaeClawIntake(m_algae));
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
                 .andThen(new Climb(m_elevator)));
         SmartDashboard.putData("GrabCoral", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
@@ -155,16 +159,16 @@ public class RobotContainer {
                 .andThen(new PlaceCoral(m_shoulder, m_elevator)));
         SmartDashboard.putData("Store", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new Store(m_shoulder, m_elevator, m_claw)));
-        SmartDashboard.putData("ZeroAll", new ZeroAll(m_shoulder, m_elevator, m_claw));
+        SmartDashboard.putData("ZeroAll", new ZeroAll(m_shoulder, m_elevator, m_claw, m_algae));
         SmartDashboard.putData("Zero S1", new ZeroElevatorS1(m_elevator));
         SmartDashboard.putData("Zero S2", new ZeroElevatorS2(m_elevator));
         SmartDashboard.putData("ZeroShoulder", new ZeroShoulder(m_shoulder));
         SmartDashboard.putData("PreZero", new InstantCommand(() -> 
-        goalArrangementOthers(PoseSetter.PreZero)).andThen(new PreZero(m_shoulder, m_elevator, m_claw)));
+        goalArrangementOthers(PoseSetter.PreZero)).andThen(new PreZero(m_shoulder, m_elevator, m_claw, m_algae)));
         SmartDashboard.putData("Home S1", new HomeElevatorS1(m_elevator));
         SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
         SmartDashboard.putData("Home Shoulder", new HomeShoulder(m_shoulder));
-        SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_claw));
+        SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_algae));
         // SmartDashboard.putBoolean("is safe to move shoulder", m_shoulder.isSafeToMoveShoulder());
         // SmartDashboard.putBoolean("is safe to move elevator", m_elevator.isSafeToMoveElevator());
 
@@ -237,12 +241,12 @@ public class RobotContainer {
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.leftTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaePlace + Constants.Selector.PlacementSelector.getLevel()))
-                .andThen(new PlaceAlgae(m_shoulder, m_elevator, m_claw)
+                .andThen(new PlaceAlgae(m_shoulder, m_elevator, m_algae)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
-        joystick.leftTrigger(.5).onFalse(new AlgaeClawDrop(m_claw).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        joystick.leftTrigger(.5).onFalse(new AlgaeClawDrop(m_algae).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         joystick.leftBumper().whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaeGrab + Constants.Selector.PlacementSelector.getLevel()))
-                .andThen(new GrabAlgae(m_shoulder, m_elevator, m_claw)
+                .andThen(new GrabAlgae(m_shoulder, m_elevator, m_algae)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         // joystick.leftBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
@@ -288,13 +292,13 @@ public class RobotContainer {
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnZeroAll.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))
-                .andThen(new ZeroAll(m_shoulder, m_elevator,  m_claw)
+                .andThen(new ZeroAll(m_shoulder, m_elevator,  m_claw, m_algae)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnPreZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnPreZeroAll.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreZero))
                 .andThen(new CoralClawDrop(m_claw))
-                .andThen(new PreZero(m_shoulder, m_elevator,  m_claw)
+                .andThen(new PreZero(m_shoulder, m_elevator,  m_claw, m_algae)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
         
        final JoystickButton btnClawIntake = new JoystickButton(accessory, XboxController.Button.kRightBumper.value);
@@ -367,6 +371,14 @@ public class RobotContainer {
         SmartDashboard.putString("current setting", currentArrangement);
         return currentArrangement;
     }
+
+    public Boolean getCoralDetect() {
+        return clawCandi.getS1Closed().getValue();
+      }
+    
+      public Boolean getAlgaeDetect() {
+        return !clawCandi.getS2Closed().getValue();
+      }
 
     public Boolean getTopStage2() {
         // return false;

@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
     Robot.getInstance().m_elevator.stopBothMotors();
     Robot.getInstance().m_shoulder.stopShoulder();
     Robot.getInstance().m_claw.coralZero();
-    Robot.getInstance().m_claw.algaeZero();
+    Robot.getInstance().m_algae.algaeZero();
 
     // CHARACTERIZING
     // SignalLogger.stop();

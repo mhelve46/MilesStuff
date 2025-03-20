@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PoseSetter;
 import frc.robot.Robot;
-import frc.robot.commands.CoralClawDrop;
+import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
@@ -16,11 +16,11 @@ import frc.robot.subsystems.Shoulder;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ZeroAll extends SequentialCommandGroup {
   /** Creates a new Store. */
-  public ZeroAll(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
+  public ZeroAll(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw, Algae m_algae) {
     // Add Commands here:
     addCommands(
       new InstantCommand(() -> m_claw.coralZero()),
-      new InstantCommand(() -> m_claw.algaeZero()),
+      new InstantCommand(() -> m_algae.algaeZero()),
       new ZeroElevatorS1(m_elevator),
       new HomeElevatorS1(m_elevator),
       new ZeroElevatorS2(m_elevator),

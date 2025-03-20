@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Robot;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
 
@@ -17,7 +17,7 @@ import frc.robot.subsystems.Shoulder;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PlaceAlgae extends SequentialCommandGroup {
   /** Creates a new RemoveAlgae. */
-  public PlaceAlgae(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
+  public PlaceAlgae(Shoulder m_shoulder, Elevator m_elevator, Algae m_algae) {
 
     addCommands(
      Commands.parallel( 

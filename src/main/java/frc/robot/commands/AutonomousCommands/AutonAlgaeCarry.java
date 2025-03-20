@@ -5,16 +5,16 @@
 package frc.robot.commands.AutonomousCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Algae;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutonAlgaeCarry extends Command {
-  private final Claw m_claw;
+  private final Algae m_algae;
   /** Creates a new AutonAlgaeCarry. */
-  public AutonAlgaeCarry(Claw subsystem) {
+  public AutonAlgaeCarry(Algae subsystem) {
     
-    m_claw = subsystem;
-    addRequirements(m_claw);
+    m_algae = subsystem;
+    addRequirements(m_algae);
   }
 // run this with a race group or deadline group in pathplanner
   @Override
@@ -22,7 +22,7 @@ public class AutonAlgaeCarry extends Command {
 
   @Override
   public void execute() {
-    m_claw.algaeRotateInwards();
+    m_algae.algaeRotateInwards();
   }
 
   @Override

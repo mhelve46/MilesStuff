@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.MoveShoulder;
+import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
@@ -17,13 +18,13 @@ import frc.robot.subsystems.Shoulder;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class PreZero extends SequentialCommandGroup {
   /** Creates a new PreZero. */
-  public PreZero(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw) {
+  public PreZero(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw, Algae m_algae) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       Commands.parallel(
         new InstantCommand(() -> m_claw.coralZero()),
-        new InstantCommand(() -> m_claw.algaeZero()),
+        new InstantCommand(() -> m_algae.algaeZero()),
         new InstantCommand(() -> m_elevator.stage1move()), 
         new MoveShoulder(m_shoulder)
       )

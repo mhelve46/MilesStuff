@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -39,7 +40,7 @@ private final Claw m_claw;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_claw.getCoralDetect();
+    return Robot.getInstance().getCoralDetect();
     
   }
 }

@@ -49,6 +49,6 @@ public class CoralClawDrop extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(0.5) && !m_claw.getCoralDetect();
+    return timer.hasElapsed(0.5) && !Robot.getInstance().getCoralDetect();
   }
 }
