@@ -5,7 +5,7 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
@@ -26,13 +26,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "MiddleReefAlgae2Coral"
+            "pathName": "BackUp"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "AutonPlaceCoral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiddleReefAlgae2Coral"
           }
         },
         {
