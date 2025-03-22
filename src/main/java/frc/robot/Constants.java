@@ -144,9 +144,9 @@ public class Constants {
 
     public static final class ElevatorConstants {
 
-        public static final double stage2UpperLimit = 3.34;
+        public static final double stage2UpperLimit = 3.02;
         public static final double stage2LowerLimit = 0;
-        public static final double stage2SensorLimit = 3.4;
+        public static final double stage2SensorLimit = 3.08;
 
         public static final double stage1UpperLimit = 5.17;
         public static final double stage1LowerLimit = 0.06;
