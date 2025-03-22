@@ -58,21 +58,21 @@ public class PoseSetter {
 
 			put(Stored, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					0.74,
+					Constants.ElevatorConstants.stage2LowerLimit,
 	 				120,
 
 			});
 
 			put(Climb, new double[] {
-					-1.25,
-					Constants.ElevatorConstants.stage2LowerLimit,
-					Constants.ShoulderConstants.shoulderUpperLimit,
+					-2.26,
+					1.39,
+					106.6,
 			});//tune
 
 			put(PreClimb, new double[] {
-					1.0f,
+					1.4,
 					Constants.ElevatorConstants.stage2UpperLimit,
-					Constants.ShoulderConstants.shoulderUpperLimit,
+					212.5,
 
 			});//tune
 

@@ -152,7 +152,7 @@ public class RobotContainer {
         SmartDashboard.putData("AlgaeClawDrop", new AlgaeClawDrop(m_algae));
         SmartDashboard.putData("AlgaeClawIntake", new AlgaeClawIntake(m_algae));
         SmartDashboard.putData("Climb", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator)));
+                .andThen(new Climb(m_shoulder, m_elevator)));
         SmartDashboard.putData("GrabCoral", new InstantCommand(() -> goalArrangementOthers(PoseSetter.Feeder))
                 .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)));
         SmartDashboard.putData("MoveElevator", new InstantCommand(() -> goalArrangementPlacing())
@@ -289,10 +289,10 @@ public class RobotContainer {
 
         final JoystickButton btnClimb = new JoystickButton(accessory, XboxController.Button.kStart.value);
         btnClimb.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.PreClimb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+                .andThen(new Climb(m_shoulder, m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         btnClimb.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Climb))
-                .andThen(new Climb(m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+                .andThen(new Climb(m_shoulder, m_elevator).withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         final JoystickButton btnZeroAll = new JoystickButton(accessory, XboxController.Button.kBack.value);
         btnZeroAll.onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Zero))

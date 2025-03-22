@@ -155,6 +155,13 @@ public class Shoulder extends SubsystemBase {
         shoulderMotor.setPosition(position);
     }
 
+    public void setShoulderClimb() {
+        if (Robot.getInstance().accessory.getRightTriggerAxis() >= .5) {
+            shoulderMotor.setControl(
+                    m_motionMagicReq.withPosition(shoulderTarget).withSlot(0));
+        }
+    }
+
     // public boolean isSafeToMoveShoulder() {
     //     double currPos = Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble();
     //     double quadrant = Constants.ElevatorConstants.stage2UpperLimit / 4;
