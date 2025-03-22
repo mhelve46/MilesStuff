@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
 
       LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limeLightName, headingDeg, 0, 0, 0, 0, 0);
       var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limeLightName);
-      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 2.0 && Robot.getInstance().m_Vision.tempDisable == false) {
+      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 1.5 && !Robot.getInstance().m_Vision.tempDisable) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
             Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
       }

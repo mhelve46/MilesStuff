@@ -170,7 +170,7 @@ public class Constants {
         public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
 
-        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(16.25), new Rotation2d(Math.PI));
+        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(17.25), new Rotation2d(Math.PI));
         public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(26), new Rotation2d());
     }
 
