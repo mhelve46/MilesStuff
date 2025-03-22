@@ -44,8 +44,10 @@ import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
 import frc.robot.commands.Store;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeCarry;
-import frc.robot.commands.AutonomousCommands.AutonClawDrop;
-import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeHigh;
+import frc.robot.commands.AutonomousCommands.AutonAlgaeDrop;
+import frc.robot.commands.AutonomousCommands.AutonCoralDrop;
+import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeL2;
+import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeL3;
 import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeLow;
 import frc.robot.commands.AutonomousCommands.AutonGrabCoral;
 import frc.robot.commands.AutonomousCommands.AutonPlaceAlgae;
@@ -117,10 +119,12 @@ public class RobotContainer {
     public RobotContainer() {
 
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
-        NamedCommands.registerCommand("AutonClawDrop", new AutonClawDrop(m_claw, m_algae));
+        NamedCommands.registerCommand("AutonClawDrop", new AutonCoralDrop(m_claw));
+        NamedCommands.registerCommand("AutonAlgaeDrop", new AutonAlgaeDrop(m_algae));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
         NamedCommands.registerCommand("AutonPlaceAlgae", new AutonPlaceAlgae(m_shoulder, m_elevator));
-        NamedCommands.registerCommand("AutonGrabAlgaeHigh", new AutonGrabAlgaeHigh(m_shoulder, m_elevator, m_algae));
+        NamedCommands.registerCommand("AutonGrabAlgaeL3", new AutonGrabAlgaeL3(m_shoulder, m_elevator, m_algae));
+        NamedCommands.registerCommand("AutonGrabAlgaeL2", new AutonGrabAlgaeL2(m_shoulder, m_elevator, m_algae));
         NamedCommands.registerCommand("AutonGrabAlgaeLow", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_algae));
         NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_algae)); // use with race group
 

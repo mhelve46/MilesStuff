@@ -92,7 +92,7 @@ public class PoseSetter {
 			put(AlgaeGrab + "L2", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				24.8,
+				29.4,
 			});
 
 			put(AlgaeGrab + "L3", new double[] {

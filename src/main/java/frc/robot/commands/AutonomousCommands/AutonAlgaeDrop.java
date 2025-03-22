@@ -10,17 +10,16 @@ import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Algae;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class AutonClawDrop extends Command {
-  private final Claw m_claw;
+public class AutonAlgaeDrop extends Command {
+  
   private final Algae m_algae;
 
   /** Creates a new ClawDrop. */
-  public AutonClawDrop(Claw subsystem, Algae subsystem2) {
+  public AutonAlgaeDrop(Algae subsystem2) {
     // Use addRequirements() here to declare subsystem dependencies.
-
-    m_claw = subsystem;
+   
     m_algae = subsystem2;
-    addRequirements(m_claw);
+    addRequirements(m_algae);
   }
 
   // Called when the command is initially scheduled.
@@ -30,14 +29,14 @@ public class AutonClawDrop extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_claw.coralRotateOutwards();
     m_algae.algaeRotateOutwards();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_claw.coralZero();
+    
+
     m_algae.algaeZero();
     if (Robot.COMMAND_DEBUG) System.out.println("end claw");
   }
@@ -45,6 +44,6 @@ public class AutonClawDrop extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.getInstance().getCoralDetect() && !Robot.getInstance().getAlgaeDetect();
+    return !Robot.getInstance().getAlgaeDetect();
   }
 }
