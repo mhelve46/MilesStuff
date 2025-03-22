@@ -99,19 +99,13 @@ public class PoseSetter {
 				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
 				29.4,
-		    });
+		    	});
 
 			put(AlgaeGrab + "L4", new double[] {
 				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
 				29.4,
-		    });
-
-			put(LowAlgaeGrabAuton, new double[] {
-				Constants.ElevatorConstants.stage1LowerLimit,
-				Constants.ElevatorConstants.stage2LowerLimit,
-				192.4,
-		    }); 
+		    	});
 
 			// processor
 			put(AlgaePlace + "L1", new double[]{
@@ -132,14 +126,14 @@ public class PoseSetter {
 				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
 				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
 				127
-		    }); 
+		    	}); 
 
 			// barge
 			put(AlgaePlace + "L4", new double[] {
 				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
 				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
 				127
-		    }); 
+		    	}); 
 		}
 	};
 
