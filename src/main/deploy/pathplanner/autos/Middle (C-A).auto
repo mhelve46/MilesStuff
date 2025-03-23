@@ -5,9 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "AutonResetRotation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonResetRotation"
+                }
+              }
+            ]
           }
         },
         {
@@ -38,7 +51,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutonPlaceCoral"
+            "name": "AutonPlaceCoralParallel"
           }
         },
         {

@@ -11,6 +11,7 @@
 // ROBOTBUILDER TYPE: SequentialCommandGroup.
 
 package frc.robot.commands.AutonomousCommands;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PoseSetter;
@@ -37,9 +38,10 @@ public class AutonGrabCoral extends SequentialCommandGroup {
         // Also add parallel commands using the
         //
         addCommands(
+            Commands.parallel(
             new InstantCommand(() -> Robot.getInstance().goalArrangementOthers(PoseSetter.Feeder)),
               new MoveShoulder(m_shoulder),
-              new MoveElevator(m_elevator),
+              new MoveElevator(m_elevator)),
               new CoralClawIntake(m_claw)
         );
         

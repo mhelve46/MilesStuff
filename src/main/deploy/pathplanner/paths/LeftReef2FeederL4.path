@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.115426136363636,
-        "y": 2.8832528409090914
+        "x": 4.943118686868687,
+        "y": 5.214204545454545
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.183831055349423,
-        "y": 2.642793349396388
+        "x": 4.9225808080808084,
+        "y": 5.946376262626262
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.481818181818182,
-        "y": 2.449558080808081
+        "x": 1.63,
+        "y": 7.237
       },
       "prevControl": {
-        "x": 5.388970512729656,
-        "y": 2.6816772535293953
+        "x": 1.8401543605064727,
+        "y": 7.0916504481434055
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,21 +34,21 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
-    "maxAcceleration": 2.0,
-    "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0,
+    "maxAcceleration": 2.5,
+    "maxAngularVelocity": 250.0,
+    "maxAngularAcceleration": 500.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 117.13
+    "rotation": -53.66259508075672
   },
   "reversed": false,
-  "folder": "ProcessorAuton",
+  "folder": "LeftAutons",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 117.12965254809058
+    "rotation": -119.78059086803596
   },
   "useDefaultConstraints": false
 }

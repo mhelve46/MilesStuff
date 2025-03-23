@@ -5,9 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "AutonDisableVision"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonDisableVision"
+                }
+              }
+            ]
           }
         },
         {
@@ -17,7 +30,51 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftStart2ReefL2"
+                  "pathName": "LeftStart2ReefL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftReef2FeederL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonGrabCoral"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftFeeder2ReefL4"
                 }
               },
               {
@@ -42,7 +99,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftReef2FeederL2"
+                  "pathName": "LeftBack2FeederL4"
                 }
               },
               {
@@ -61,13 +118,13 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftFeeder2ReefL2"
+                  "pathName": "LeftBack2ReefL4"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabCoral"
                 }
               }
             ]

@@ -9,30 +9,18 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "StartProcessor2Reef"
+                  "name": "AutonDisableVision"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonStart"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutonClawDrop"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ReefBack"
           }
         },
         {
@@ -42,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Back2Reef"
+                  "pathName": "StartProcessor2Reef"
                 }
               },
               {
@@ -58,6 +46,69 @@
           "type": "named",
           "data": {
             "name": "AutonAlgaeIntake"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "ReefBack"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonAlgaeCarry"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Back2Reef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonAlgaeCarry"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonClawDrop"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonAlgaeCarry"
+                }
+              }
+            ]
           }
         },
         {

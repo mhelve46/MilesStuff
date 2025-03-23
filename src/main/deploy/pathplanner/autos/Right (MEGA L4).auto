@@ -9,6 +9,25 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "AutonDisableVision"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
                 "type": "path",
                 "data": {
                   "pathName": "RightStart2ReefL2"

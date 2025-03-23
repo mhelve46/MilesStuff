@@ -5,6 +5,25 @@
     "data": {
       "commands": [
         {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonDisableVision"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [

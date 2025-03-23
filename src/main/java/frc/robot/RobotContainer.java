@@ -42,6 +42,7 @@ import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.PlaceAlgae;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
+import frc.robot.commands.StartPreMatch;
 import frc.robot.commands.Store;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeCarry;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeDrop;
@@ -53,7 +54,10 @@ import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeLow;
 import frc.robot.commands.AutonomousCommands.AutonGrabCoral;
 import frc.robot.commands.AutonomousCommands.AutonPlaceAlgae;
 import frc.robot.commands.AutonomousCommands.AutonPlaceCoral;
+import frc.robot.commands.AutonomousCommands.AutonPlaceCoralParallel;
 import frc.robot.commands.AutonomousCommands.AutonResetRotation;
+import frc.robot.commands.AutonomousCommands.AutonStart;
+import frc.robot.commands.AutonomousCommands.AutonStore;
 import frc.robot.commands.Zeroing.HomeElevatorS1;
 import frc.robot.commands.Zeroing.HomeElevatorS2;
 import frc.robot.commands.Zeroing.HomeShoulder;
@@ -121,6 +125,9 @@ public class RobotContainer {
     public RobotContainer() {
 
         NamedCommands.registerCommand("AutonPlaceCoral", new AutonPlaceCoral(m_shoulder, m_elevator));
+        NamedCommands.registerCommand("AutonStore", new AutonStore(m_elevator, m_shoulder));
+        NamedCommands.registerCommand("AutonPlaceCoralParallel", new AutonPlaceCoralParallel(m_shoulder, m_elevator));
+        NamedCommands.registerCommand("AutonStart", new AutonStart( m_elevator));
         NamedCommands.registerCommand("AutonClawDrop", new AutonCoralDrop(m_claw));
         NamedCommands.registerCommand("AutonAlgaeDrop", new AutonAlgaeDrop(m_algae));
         NamedCommands.registerCommand("AutonGrabCoral", new AutonGrabCoral(m_shoulder, m_elevator, m_claw));
@@ -184,6 +191,7 @@ public class RobotContainer {
         SmartDashboard.putData("Home S2", new HomeElevatorS2(m_elevator));
         SmartDashboard.putData("Home Shoulder", new HomeShoulder(m_shoulder));
         SmartDashboard.putData("Low Algae Grab", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_algae));
+        SmartDashboard.putData("StartPreMatch", new StartPreMatch(m_elevator));
         // SmartDashboard.putBoolean("is safe to move shoulder", m_shoulder.isSafeToMoveShoulder());
         // SmartDashboard.putBoolean("is safe to move elevator", m_elevator.isSafeToMoveElevator());
 

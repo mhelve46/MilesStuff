@@ -14,6 +14,7 @@ public class PoseSetter {
 	public static final String AlgaeGrab = "AlgaeRemove";
 	public static final String LowAlgaeGrabAuton = "LowAlgaeGrabAuton";
 	public static final String AlgaePlace = "AlgaePlace";
+	public static final String StartPreMatch = "StartPreMatch";
 
 	public static final TreeMap<String, double[]> positionsMap = new TreeMap<String, double[]>() {
 		private static final long serialVersionUID = 1L;
@@ -53,6 +54,12 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2UpperLimit,
 					Constants.ShoulderConstants.shoulderLowerLimit,
+			});
+
+			put(StartPreMatch, new double[] {
+				Constants.ElevatorConstants.stage1LowerLimit,
+				1.7,
+				Constants.ShoulderConstants.shoulderLowerLimit,
 			});
 
 			put(Stored, new double[] {
@@ -109,14 +116,14 @@ public class PoseSetter {
 			put(AlgaePlace + "L1", new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
-				202,
+				206.56,
 			}); 
 
 			// processor
 			put(AlgaePlace + "L2", new double[]{
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
-				202,
+				206.56,
 			}); 
 
 			// barge

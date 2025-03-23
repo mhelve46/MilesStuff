@@ -56,6 +56,6 @@ public class AutonCoralDrop extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !Robot.getInstance().getCoralDetect() && timer.hasElapsed(1);
+    return !Robot.getInstance().getCoralDetect() && timer.hasElapsed(.5);
   }
 }

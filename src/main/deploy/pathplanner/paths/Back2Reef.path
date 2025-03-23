@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 5.126073232323233,
-        "y": 2.8662878787878787
+        "x": 5.284943181818181,
+        "y": 2.9829687499999995
       },
       "prevControl": {
-        "x": 5.286119332239353,
-        "y": 2.674232558888534
+        "x": 5.4449892817343,
+        "y": 2.790913430100655
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 117.13
+    "rotation": 118.7059525434011
   },
   "reversed": false,
   "folder": "ProcessorAuton",
