@@ -7,15 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Coral;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CoralClawIntake extends Command {
-private final Claw m_claw;
+private final Coral m_claw;
   private final Timer timer = new Timer();
 
   /** Creates a new ClawIntake. */
-  public CoralClawIntake(Claw subsystem) {
+  public CoralClawIntake(Coral subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     m_claw = subsystem;
@@ -41,6 +41,8 @@ private final Claw m_claw;
   @Override
   public void end(boolean interrupted) {
     m_claw.coralZero();
+    timer.reset();
+    timer.stop();
   }
 
   // Returns true when the command should end.

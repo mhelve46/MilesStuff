@@ -23,30 +23,29 @@ public class PoseSetter {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
 					103
-			});
+			}); 
 
 			put("L2", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
 					Constants.ElevatorConstants.stage2LowerLimit,
-					108,
+					103,
 			});
 
 			put("L3", new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					2.93,
+					2.66,
 					106,
-			});
+			}); 
 
 			put("L4", new double[] {
-					Constants.ElevatorConstants.stage1UpperLimit,
-					Constants.ElevatorConstants.stage2UpperLimit + 0.11,
+					Constants.ElevatorConstants.stage1UpperLimit + 0.38,
+					Constants.ElevatorConstants.stage2UpperLimit + 0.31,
 					116,
-
 			});
 
 			put(Feeder, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					1.81,
+					1.09,
 					Constants.ShoulderConstants.shoulderUpperLimit,
 			});
 
@@ -58,35 +57,34 @@ public class PoseSetter {
 
 			put(Stored, new double[] {
 					Constants.ElevatorConstants.stage1LowerLimit,
-					Constants.ElevatorConstants.stage2LowerLimit,
+					Constants.ElevatorConstants.stage2LowerLimit + 0.2,
 	 				120,
-
-			});
+			}); // retune
 
 			put(Climb, new double[] {
 					-2.26,
 					1.39,
 					106.6,
-			});//tune
+			});
 
 			put(PreClimb, new double[] {
 					1.4,
 					Constants.ElevatorConstants.stage2UpperLimit,
 					212.5,
 
-			});//tune
+			});
 
 			put(PreZero, new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit / 4,
-					Constants.ElevatorConstants.stage2UpperLimit,
-					Constants.ShoulderConstants.shoulderLowerLimit + 30,
+					Constants.ElevatorConstants.stage2UpperLimit - 0.4,
+					Constants.ShoulderConstants.shoulderLowerLimit + 35,
 			});
 
 			// ground
 			put(AlgaeGrab + "L1", new double[] {
 				Constants.ElevatorConstants.stage1LowerLimit,
 				Constants.ElevatorConstants.stage2LowerLimit,
-				196,
+				200,
 			}); 
 
 			put(AlgaeGrab + "L2", new double[] {
@@ -98,7 +96,7 @@ public class PoseSetter {
 			put(AlgaeGrab + "L3", new double[] {
 				4.6,
 				Constants.ElevatorConstants.stage2UpperLimit,
-				29.4,
+				29.6,
 		    	});
 
 			put(AlgaeGrab + "L4", new double[] {
@@ -123,15 +121,15 @@ public class PoseSetter {
 
 			// barge
 			put(AlgaePlace + "L3", new double[] {
-				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
-				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
+				Constants.ElevatorConstants.stage1UpperLimit + 0.36,
+				Constants.ElevatorConstants.stage2UpperLimit + 0.31,
 				127
 		    	}); 
 
 			// barge
 			put(AlgaePlace + "L4", new double[] {
-				Constants.ElevatorConstants.stage1UpperLimit + 0.38,
-				Constants.ElevatorConstants.stage2UpperLimit + 0.12,
+				Constants.ElevatorConstants.stage1UpperLimit + 0.36,
+				Constants.ElevatorConstants.stage2UpperLimit + 0.31,
 				127
 		    	}); 
 		}

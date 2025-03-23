@@ -46,12 +46,14 @@ import frc.robot.commands.Store;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeCarry;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeDrop;
 import frc.robot.commands.AutonomousCommands.AutonCoralDrop;
+import frc.robot.commands.AutonomousCommands.AutonDisableVision;
 import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeL2;
 import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeL3;
 import frc.robot.commands.AutonomousCommands.AutonGrabAlgaeLow;
 import frc.robot.commands.AutonomousCommands.AutonGrabCoral;
 import frc.robot.commands.AutonomousCommands.AutonPlaceAlgae;
 import frc.robot.commands.AutonomousCommands.AutonPlaceCoral;
+import frc.robot.commands.AutonomousCommands.AutonResetRotation;
 import frc.robot.commands.Zeroing.HomeElevatorS1;
 import frc.robot.commands.Zeroing.HomeElevatorS2;
 import frc.robot.commands.Zeroing.HomeShoulder;
@@ -62,8 +64,8 @@ import frc.robot.commands.Zeroing.ZeroElevatorS2;
 import frc.robot.commands.Zeroing.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Algae;
-import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
+import frc.robot.subsystems.Coral;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
 import frc.robot.subsystems.Vision;
@@ -72,7 +74,7 @@ public class RobotContainer {
     // Subsystems
    public final Shoulder m_shoulder = new Shoulder();
    public final Elevator m_elevator = new Elevator();
-   public final Claw m_claw = new Claw();
+   public final Coral m_claw = new Coral();
    public final Algae m_algae = new Algae();
    public final Vision m_Vision = new Vision();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
@@ -127,8 +129,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonGrabAlgaeL2", new AutonGrabAlgaeL2(m_shoulder, m_elevator, m_algae));
         NamedCommands.registerCommand("AutonGrabAlgaeLow", new AutonGrabAlgaeLow(m_shoulder, m_elevator, m_algae));
         NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_algae)); // use with race group
+        NamedCommands.registerCommand("AutonResetRotation", new AutonResetRotation(drivetrain, m_Vision));
+        NamedCommands.registerCommand("AutonDisableVision", new AutonDisableVision(m_Vision));
 
-        
         shoulderAndTopCandi = new CANdi(31, "rio");
         clawCandi = new CANdi(30, "rio");
 
@@ -138,6 +141,14 @@ public class RobotContainer {
                     m_Vision.updateAutoStartPosition(autoChooser.getSelected().getName());
                 };
             });
+        // autoChooser.onChange(new Consumer<Command>() {
+        //     public void accept(Command t) {
+        //         new InstantCommand(() -> System.out.println("this is an instand command ******************")).andThen(new InstantCommand(() -> m_Vision.tempDisable(0.5))
+        //             .andThen(drivetrain.runOnce(
+        //                 () -> drivetrain.resetRotation(
+        //                     drivetrain.getOperatorForwardDirection().plus(new Rotation2d(Math.PI))))));            }
+        // });
+
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         autoLevelSelector.setDefaultOption("L4", new InstantCommand(() -> Constants.Selector.PlacementSelector.setCurrentRow(3)));
@@ -240,9 +251,9 @@ public class RobotContainer {
                 .andThen(new GrabCoral(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
-        joystick.rightBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
-                .andThen(new Store(m_shoulder, m_elevator, m_claw)
-                        .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+        // joystick.rightBumper().onFalse(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
+        //         .andThen(new Store(m_shoulder, m_elevator, m_claw)
+        //                 .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
 
         joystick.leftTrigger(.5).whileTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.AlgaePlace + Constants.Selector.PlacementSelector.getLevel()))
                 .andThen(new PlaceAlgae(m_shoulder, m_elevator, m_algae)
@@ -312,6 +323,9 @@ public class RobotContainer {
         btnStore.onTrue(new InstantCommand(() -> goalArrangementOthers(PoseSetter.Stored))
                 .andThen(new Store(m_shoulder, m_elevator, m_claw)
                         .withInterruptBehavior(InterruptionBehavior.kCancelSelf)));
+
+        final JoystickButton btnAlgaeIntake = new JoystickButton(accessory, XboxController.Button.kLeftBumper.value);
+        btnAlgaeIntake.whileTrue(new AlgaeClawIntake(m_algae).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
                 
         drivetrain.registerTelemetry(logger::telemeterize);
     }

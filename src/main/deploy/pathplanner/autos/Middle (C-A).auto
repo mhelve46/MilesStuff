@@ -58,6 +58,37 @@
           "data": {
             "pathName": "MiddlePathBump"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonDisableVision"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MiddleProcessor"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonAlgaeDrop"
+          }
         }
       ]
     }

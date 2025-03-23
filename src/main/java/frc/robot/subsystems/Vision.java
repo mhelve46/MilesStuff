@@ -21,7 +21,7 @@ public class Vision extends SubsystemBase {
 
     private static final Vision m_Vision = new Vision();
     public boolean tempDisable = false;
-    private double timestampToReEnable;
+    public double timestampToReEnable;
     private String _limelightName = Constants.VisionConstants.limeLightName;
     private Pose2d autoStartPose = new Pose2d();
     public int lastTargetFront;
@@ -47,11 +47,11 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("lastTargetFront", lastTargetFront);
         SmartDashboard.putNumber("lastTargetBack", lastTargetBack);
       
-        if (timestampToReEnable < Utils.getCurrentTimeSeconds() && tempDisable == true){
+        if (timestampToReEnable < Utils.getCurrentTimeSeconds() &&tempDisable  == true){
             tempDisable = false; 
         }
 
-        // SmartDashboard.putBoolean("tempDisable", tempDisable);
+        SmartDashboard.putBoolean("tempDisable", tempDisable);
 
         SmartDashboard.putString("placementPosition: " , autoStartPose.toString());
         SmartDashboard.putString("currentPosition: ", Robot.getInstance().drivetrain.getState().Pose.toString());
@@ -106,7 +106,9 @@ public class Vision extends SubsystemBase {
     }
     
     public void tempDisable(double seconds) {
+        System.out.println("tempDisable********************************************************************************************************");
         tempDisable = true;
+        System.out.println(tempDisable);
         double currentTime = Utils.getCurrentTimeSeconds();
         timestampToReEnable = currentTime + seconds;
     }
