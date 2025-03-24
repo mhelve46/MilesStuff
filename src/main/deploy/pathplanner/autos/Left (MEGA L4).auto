@@ -5,47 +5,22 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "AutonDisableVision"
-                }
-              },
               {
                 "type": "named",
                 "data": {
                   "name": "AutonStart"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "RightStart2ReefL3"
-                }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonGrabAlgaeL3"
+                  "name": "AutonDisableVision"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BackL3"
           }
         },
         {
@@ -55,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "ForwardL3"
+                  "pathName": "LeftStart2ReefL4"
                 }
               },
               {
@@ -74,9 +49,9 @@
           }
         },
         {
-          "type": "named",
+          "type": "path",
           "data": {
-            "name": "AutonAlgaeDrop"
+            "pathName": "LeftBump1"
           }
         },
         {
@@ -86,7 +61,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightReef2FeederL3"
+                  "pathName": "LeftReef2FeederL4"
                 }
               },
               {
@@ -105,7 +80,57 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightFeeder2ReefL3"
+                  "pathName": "LeftFeeder2ReefL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LeftBump2"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftBack2FeederL4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonGrabCoral"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftBack2ReefL4"
                 }
               },
               {

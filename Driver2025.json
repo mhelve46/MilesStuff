@@ -50,7 +50,9 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false
+              "Visuals/Show Outside Circles": false,
+              "Colors/path": "#FFFFFFFF",
+              "Colors/target pose": "#FFFFFFFF"
             }
           },
           "0,3": {
@@ -490,7 +492,34 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "titleType": 0,
-        "tiles": {}
+        "tiles": {
+          "3,1": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/placementPosition: ",
+              "_title": "SmartDashboard/placementPosition: ",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "3,0": {
+            "size": [
+              4,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/currentPosition: ",
+              "_title": "SmartDashboard/currentPosition: ",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          }
+        }
       }
     },
     {
@@ -733,6 +762,19 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/current setting",
+              "_title": "SmartDashboard/current setting",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -751,7 +793,7 @@
           "0,0": {
             "size": [
               2,
-              3
+              4
             ],
             "content": {
               "_type": "Grid Layout",
@@ -759,7 +801,7 @@
               "_glyph": 149,
               "_showGlyph": false,
               "Layout/Number of columns": 1,
-              "Layout/Number of rows": 4,
+              "Layout/Number of rows": 7,
               "Layout/Label position": "BOTTOM",
               "_children": {
                 "0,0": {
@@ -787,6 +829,27 @@
                   "_type": "Command",
                   "_source0": "network_table:///SmartDashboard/Zero S1",
                   "_title": "SmartDashboard/Zero S1",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                "0,4": {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Home Shoulder",
+                  "_title": "SmartDashboard/Home Shoulder",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                "0,5": {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Home S1",
+                  "_title": "SmartDashboard/Home S1",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                "0,6": {
+                  "_type": "Command",
+                  "_source0": "network_table:///SmartDashboard/Home S2",
+                  "_title": "SmartDashboard/Home S2",
                   "_glyph": 148,
                   "_showGlyph": false
                 }
@@ -849,7 +912,7 @@
           "4,0": {
             "size": [
               2,
-              4
+              2
             ],
             "content": {
               "_type": "Grid Layout",
@@ -869,19 +932,12 @@
                 },
                 "0,1": {
                   "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/wrist pos",
-                  "_title": "/SmartDashboard/wrist pos",
-                  "_glyph": 148,
-                  "_showGlyph": false
-                },
-                "0,2": {
-                  "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Top Pos",
                   "_title": "/SmartDashboard/Top Pos",
                   "_glyph": 148,
                   "_showGlyph": false
                 },
-                "0,3": {
+                "0,2": {
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Bottom Pos",
                   "_title": "/SmartDashboard/Bottom Pos",
@@ -921,28 +977,15 @@
                 },
                 "0,0": {
                   "_type": "Command",
-                  "_source0": "network_table:///SmartDashboard/MoveWrist",
-                  "_title": "/SmartDashboard/MoveWrist",
+                  "_source0": "network_table:///SmartDashboard/StartPreMatch",
+                  "_title": "SmartDashboard/StartPreMatch",
                   "_glyph": 148,
                   "_showGlyph": false
                 }
               }
             }
           },
-          "1,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/ClawIntake",
-              "_title": "/SmartDashboard/ClawIntake",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "7,3": {
+          "4,3": {
             "size": [
               1,
               1
@@ -955,7 +998,7 @@
               "_showGlyph": false
             }
           },
-          "6,3": {
+          "5,3": {
             "size": [
               1,
               1
@@ -968,15 +1011,28 @@
               "_showGlyph": false
             }
           },
-          "8,3": {
+          "4,2": {
             "size": [
               1,
               1
             ],
             "content": {
               "_type": "Command",
-              "_source0": "network_table:///SmartDashboard/Home Shoulder",
-              "_title": "SmartDashboard/Home Shoulder",
+              "_source0": "network_table:///SmartDashboard/AlgaeClawIntake",
+              "_title": "SmartDashboard/AlgaeClawIntake",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Command",
+              "_source0": "network_table:///SmartDashboard/AlgaeClawDrop",
+              "_title": "SmartDashboard/AlgaeClawDrop",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -986,9 +1042,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -8.0,
-    "y": -8.0,
-    "width": 1297.3333740234375,
-    "height": 737.3333129882812
+    "x": -7.333333492279053,
+    "y": -7.333333492279053,
+    "width": 1294.6666259765625,
+    "height": 694.6666870117188
   }
 }

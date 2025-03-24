@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
-public class Claw extends SubsystemBase {
+public class Coral extends SubsystemBase {
   /** Creates a new Claw. */
 
   private SparkMax coralClawMotor;
@@ -25,7 +25,7 @@ public class Claw extends SubsystemBase {
   //private CANdi clawCandi;
   public double coralDropSpeed;
 
-  public Claw() {
+  public Coral() {
 
     // clawCandi = new CANdi(30, "rio");
 

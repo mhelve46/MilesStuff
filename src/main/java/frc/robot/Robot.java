@@ -4,11 +4,11 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,7 +22,7 @@ public class Robot extends TimedRobot {
 
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
-  private boolean kUseLimelight = true;
+  public static boolean kUseLimelight = true;
 
   public static boolean VISIONTEST = false;
   public static boolean COMMAND_DEBUG = false;
@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
-    
+    SmartDashboard.putBoolean("usell", kUseLimelight);
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
     
     if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
@@ -113,7 +113,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    kUseLimelight = false;
+    kUseLimelight = true;
+
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     m_autonomousReefLevel = m_robotContainer.getSelectedAutoLevel();
 
@@ -136,6 +137,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousExit() {
   kUseLimelight = true;
+  Robot.getInstance().m_Vision.tempDisable = false;
   }
   @Override
   public void teleopInit() {

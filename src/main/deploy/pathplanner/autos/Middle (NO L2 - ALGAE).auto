@@ -9,42 +9,55 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "MiddleStart2Algae"
+                  "name": "AutonResetRotation"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonGrabAlgaeL2"
+                  "name": "AutonStart"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "BackUp"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutonPlaceCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "MiddleReefAlgae2Coral"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "MiddleStart2Reef"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              }
+            ]
           }
         },
         {
           "type": "named",
           "data": {
             "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiddlePathBump"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonStore"
           }
         }
       ]

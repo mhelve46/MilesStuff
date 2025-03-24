@@ -9,9 +9,28 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "AutonDisableVision"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
                 "type": "path",
                 "data": {
-                  "pathName": "RightStart2ReefL2"
+                  "pathName": "RightStart2ReefL4"
                 }
               },
               {
@@ -30,13 +49,19 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "RightBump1"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightReef2FeederL2"
+                  "pathName": "RightReef2FeederL4"
                 }
               },
               {
@@ -55,7 +80,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "RightFeeder2ReefL2"
+                  "pathName": "RightFeeder2ReefL4"
                 }
               },
               {
@@ -71,6 +96,18 @@
           "type": "named",
           "data": {
             "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RightBump2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonStore"
           }
         }
       ]

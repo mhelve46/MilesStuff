@@ -9,6 +9,25 @@
           "data": {
             "commands": [
               {
+                "type": "named",
+                "data": {
+                  "name": "AutonDisableVision"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonStart"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
                 "type": "path",
                 "data": {
                   "pathName": "LeftStart2ReefL3"
@@ -30,15 +49,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "AutonPlaceCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "LeftReefBack2CoralL3"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "LeftReefBack2CoralL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              }
+            ]
           }
         },
         {
@@ -98,15 +124,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "AutonPlaceCoral"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Forward1"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Forward1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              }
+            ]
           }
         },
         {

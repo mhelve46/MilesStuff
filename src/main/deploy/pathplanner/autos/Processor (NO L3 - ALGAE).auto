@@ -9,30 +9,18 @@
           "data": {
             "commands": [
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "StartProcessor2Reef"
+                  "name": "AutonDisableVision"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonStart"
                 }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutonClawDrop"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "ReefBack"
           }
         },
         {
@@ -42,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Back2Reef"
+                  "pathName": "StartProcessor2Reef"
                 }
               },
               {
@@ -61,19 +49,44 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "path",
+          "data": {
+            "pathName": "ReefBack"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Back2Reef"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
                   "pathName": "Reef2Processor"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AutonAlgaeCarry"
                 }
               },
               {
@@ -117,19 +130,13 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
                   "pathName": "Algae2Processor"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "AutonAlgaeCarry"
                 }
               },
               {

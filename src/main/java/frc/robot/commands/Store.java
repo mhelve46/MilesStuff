@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.PoseSetter;
 import frc.robot.Robot;
-import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Coral;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shoulder;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Store extends SequentialCommandGroup {
   /** Creates a new Store. */
-  public Store(Shoulder m_shoulder, Elevator m_elevator, Claw m_claw){
+  public Store(Shoulder m_shoulder, Elevator m_elevator, Coral m_claw){
     // Add Commands here:
     // Also add parallel commands using the
     //
