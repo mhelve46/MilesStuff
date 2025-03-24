@@ -21,72 +21,67 @@ public class Claw extends SubsystemBase {
   /** Creates a new Claw. */
 
   private SparkMax coralClawMotor;
-  private SparkMax algaeClawMotor;
-  private CANdi clawCandi;
-  private DigitalInput coralSwitch;
-  private DigitalInput algaeSwitch;
+  //private SparkMax algaeClawMotor;
+  //private CANdi clawCandi;
+  public double coralDropSpeed;
 
   public Claw() {
 
-    clawCandi = new CANdi(30, "rio");
-    coralSwitch = new DigitalInput(1);
-    algaeSwitch = new DigitalInput(2);
+    // clawCandi = new CANdi(30, "rio");
 
     coralClawMotor = new SparkMax(18, SparkLowLevel.MotorType.kBrushless);
     SparkMaxConfig CoralSparkMaxConfig = new SparkMaxConfig();
     CoralSparkMaxConfig.inverted(true);
     CoralSparkMaxConfig.idleMode(IdleMode.kBrake);
-    CoralSparkMaxConfig.smartCurrentLimit(10, 10);
+    CoralSparkMaxConfig.smartCurrentLimit(15, 10);
     coralClawMotor.configure(CoralSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    algaeClawMotor = new SparkMax(17, SparkLowLevel.MotorType.kBrushless);
-    SparkMaxConfig AlgaeSparkMaxConfig = new SparkMaxConfig();
-    AlgaeSparkMaxConfig.inverted(true);
-    AlgaeSparkMaxConfig.idleMode(IdleMode.kBrake);
-    AlgaeSparkMaxConfig.smartCurrentLimit(5, 10);
-    algaeClawMotor.configure(AlgaeSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    // algaeClawMotor = new SparkMax(17, SparkLowLevel.MotorType.kBrushless);
+    // SparkMaxConfig AlgaeSparkMaxConfig = new SparkMaxConfig();
+    // AlgaeSparkMaxConfig.inverted(true);
+    // AlgaeSparkMaxConfig.idleMode(IdleMode.kBrake);
+    // AlgaeSparkMaxConfig.smartCurrentLimit(5, 10);
+    // algaeClawMotor.configure(AlgaeSparkMaxConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    SmartDashboard.putBoolean("Coral", getCoralDetect());
-    SmartDashboard.putBoolean("Algae", getAlgaeDetect());
+    SmartDashboard.putBoolean("Coral", Robot.getInstance().getCoralDetect());
+    // SmartDashboard.putBoolean("Algae", getAlgaeDetect());
   }
-  public Boolean getCoralDetect() {
-    return coralSwitch.get();
-    // return !clawCandi.getS2Closed().getValue();
-  }
+  // public Boolean getCoralDetect() {
+  //   return clawCandi.getS1Closed().getValue();
+  // }
 
-  public Boolean getAlgaeDetect() {
-    // return !clawCandi.getS1Closed().getValue();
-    return algaeSwitch.get();
-  }
+  // public Boolean getAlgaeDetect() {
+  //   return !clawCandi.getS2Closed().getValue();
+  // }
 
   public void coralRotateInwards() {
     coralClawMotor.set(.5);
   }
 
-  public void algaeRotateInwards() {
-    coralClawMotor.set(.5);
-  }
+  // public void algaeRotateInwards() {
+  //   algaeClawMotor.set(1);
+  // }
 
   public void coralRotateOutwards() {
-    coralClawMotor.set(-1);
+    coralClawMotor.set(coralDropSpeed);
   }
 
-  public void algaeRotateOutwards() {
-    coralClawMotor.set(-1);
-  }
+  // public void algaeRotateOutwards() {
+  //   algaeClawMotor.set(-1);
+  // }
 
   public void coralZero() {
     coralClawMotor.set(0);
   }
 
-  public void algaeZero() {
-    coralClawMotor.set(0);
-  }
+  // public void algaeZero() {
+  //   algaeClawMotor.set(0);
+  // }
 
  
 

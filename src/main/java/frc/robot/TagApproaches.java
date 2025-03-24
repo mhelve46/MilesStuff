@@ -5,7 +5,7 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.TagApproach.gameTarget;
 
@@ -28,14 +28,12 @@ public class TagApproaches {
     public TagApproaches() {
         tagArray = new TagApproach[22];
 
-        poseOffsetx = robotWidth * Math.cos(getTagAngle(1));
-        poseOffsety = robotWidth * Math.sin(getTagAngle(1));
-        pose = calcNewPose(1, poseOffsetx, poseOffsety, 0);
+        pose = calcNewPose(1, 0, 0, 0);
+        pose = addTagCentricOffset(pose, Constants.VisionConstants.CoralStationTagOffset);
         tagArray[0] = new TagApproach(1, Alliance.Red, gameTarget.CoralStation, pose);
         
-        poseOffsetx = robotWidth * Math.cos(getTagAngle(2));
-        poseOffsety = robotWidth * Math.sin(getTagAngle(2));
-        pose = calcNewPose(2, poseOffsetx, poseOffsety, 0);
+        pose = calcNewPose(2, 0, 0, 0);
+        pose = addTagCentricOffset(pose, Constants.VisionConstants.CoralStationTagOffset);
         tagArray[1] = new TagApproach(2, Alliance.Red, gameTarget.CoralStation, pose);
         
         pose = calcNewPose(3, 0, -robotWidth, 0);
@@ -77,14 +75,12 @@ public class TagApproaches {
         pose = addTagCentricOffset(pose, Constants.VisionConstants.ReefTagOffset);
         tagArray[10] = new TagApproach(11, Alliance.Red, gameTarget.Reef, pose);
 
-        poseOffsetx = robotWidth * Math.cos(getTagAngle(12));
-        poseOffsety = robotWidth * Math.sin(getTagAngle(12));
-        pose = calcNewPose(12, poseOffsetx, poseOffsety, 0);
+        pose = calcNewPose(12, 0, 0, 0);
+        pose = addTagCentricOffset(pose, Constants.VisionConstants.CoralStationTagOffset);
         tagArray[11] = new TagApproach(12, Alliance.Blue, gameTarget.CoralStation, pose);
 
-        poseOffsetx = robotWidth * Math.cos(getTagAngle(13));
-        poseOffsety = robotWidth * Math.sin(getTagAngle(13));
         pose = calcNewPose(13, poseOffsetx, poseOffsety, 0);
+        pose = addTagCentricOffset(pose, Constants.VisionConstants.CoralStationTagOffset);
         tagArray[12] = new TagApproach(13, Alliance.Blue, gameTarget.CoralStation, pose);
 
         pose = calcNewPose(14, -robotWidth, 0, 0);
@@ -171,6 +167,10 @@ public class TagApproaches {
         if (tagArray[indexInArray].GameTarget() == gameTarget.Reef){ 
             return shiftReefAllign(goalPose);
         }
+        if (tagArray[indexInArray].GameTarget() == gameTarget.CoralStation){
+            return shiftFeederAllign(goalPose);
+        }
+
         return goalPose;
     }
 
@@ -215,15 +215,34 @@ public class TagApproaches {
         double offset = 0;
 
         if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
-            offset = 0.225;
+            offset = 0.1234;
             if (Robot.VISIONTEST) System.out.println("moving left");
         } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
-            offset = -.165;
+            offset = -0.235;
             if (Robot.VISIONTEST) System.out.println("moving right");
         } else {
             offset = 0;
             if (Robot.VISIONTEST) System.out.println("staying in the center");
             
+        }
+
+        Rotation2d goalAngle = goalBeforeShift.getRotation();
+        Translation2d oldTranslation = goalBeforeShift.getTranslation();
+        Translation2d offsetTranslation = new Translation2d(offset, goalAngle.plus(Rotation2d.fromDegrees(90)));
+        Translation2d newGoalTranslation = oldTranslation.plus(offsetTranslation);
+
+        return new Pose2d(newGoalTranslation, goalAngle);
+    }
+    
+    public Pose2d shiftFeederAllign(Pose2d goalBeforeShift) {
+        double offset = 0;
+
+        if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
+            offset = Units.inchesToMeters(25.75);
+        } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
+            offset = Units.inchesToMeters(25.75) * -1;
+        } else {
+            offset = 0;            
         }
 
         Rotation2d goalAngle = goalBeforeShift.getRotation();

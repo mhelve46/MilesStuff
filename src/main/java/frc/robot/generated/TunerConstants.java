@@ -24,17 +24,18 @@ public class TunerConstants {
     // The steer motor uses any SwerveModule.SteerRequestType control request with the
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
     private static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(20.864).withKI(0).withKD(0.51148)
-        // .withKP(17.227).withKI(0).withKD(0.27039)
-        // .withKS(0.14275).withKV(2.4214).withKA(0.050732)
+        .withKP(19.681).withKI(0).withKD(0.51148)
+        // .withKP(20.864).withKI(0).withKD(0.51148) old
+        .withKA(0).withKV(0).withKS(0)
+        // .withKS(0.0.15521).withKV(2.4344).withKA(0.047396) from sysid
         .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
     // When using closed-loop control, the drive motor uses the control
     // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
     private static final Slot0Configs driveGains = new Slot0Configs()
-        .withKP(0.11196).withKI(0).withKD(0)
-        // .withKP(0.037002).withKI(0).withKD(0)
-        .withKS(0.10857).withKI(0.11458);
-        // .withKS(0.082551).withKV(0.11422);
+        .withKP(0.09557).withKI(0).withKD(0)
+        // .withKP(0.11196).withKI(0).withKD(0) old
+        .withKS(0.11412).withKA(0.0053).withKV(0.11497);
+        // .withKS(0.10857).withKV(0.11458); old
 
     // The closed-loop output type to use for the steer motors;
     // This affects the PID/FF gains for the steer motors
@@ -69,7 +70,10 @@ public class TunerConstants {
         );
     private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
     // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-    private static final Pigeon2Configuration pigeonConfigs = null;
+    private static final Pigeon2Configuration pigeonConfigs = new Pigeon2Configuration().withMountPose(
+        new MountPoseConfigs().withMountPoseYaw(Degrees.of(-81.15472412109375))
+            .withMountPosePitch(Degrees.of(0.7538015842437744))
+            .withMountPoseRoll(Degrees.of(0.8576945662498474)));
 
     // CAN bus that the devices are located on;
     // All swerve devices must share the same CAN bus
@@ -85,7 +89,7 @@ public class TunerConstants {
 
     private static final double kDriveGearRatio = 8.142857142857142;
     private static final double kSteerGearRatio = 21.428571428571427;
-    private static final Distance kWheelRadius = Inches.of(1.8);
+    private static final Distance kWheelRadius = Inches.of(2);
 
     private static final boolean kInvertLeftSide = false;
     private static final boolean kInvertRightSide = true;

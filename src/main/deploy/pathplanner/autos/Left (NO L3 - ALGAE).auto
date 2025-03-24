@@ -17,16 +17,40 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabAlgaeL3"
                 }
               }
             ]
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "LeftReefA2CBackUpL3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonPlaceCoral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LeftReefBack2CoralL3"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonAlgaeDrop"
           }
         },
         {
@@ -55,16 +79,34 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "LeftFeeder2ReefL3"
+                  "pathName": "LeftToRemoveAlgae"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabAlgaeL3"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BackUp1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonPlaceCoral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Forward1"
           }
         },
         {

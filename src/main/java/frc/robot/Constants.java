@@ -143,36 +143,20 @@ public class Constants {
     }
 
     public static final class ElevatorConstants {
-        public static final class PID {
-            //
-            public static final double P = 2.4f;
-            public static final int I = 0;
-            public static final double D = 0.1f;
-            //
-            public static final int P2 = 60;
-            public static final int I2 = 0;
-            public static final int D2 = 6;
-            //
-        }
 
-        public static final double stage2UpperLimit = 5.7;
+        public static final double stage2UpperLimit = 3.02;
         public static final double stage2LowerLimit = 0;
-        public static final double stage2SensorLimit = 5.76;
-        public static final double stage1UpperLimit = 2.75;
+        public static final double stage2SensorLimit = 3.08;
+
+        public static final double stage1UpperLimit = 5.17;
         public static final double stage1LowerLimit = 0.06;
         public static final double stage1SensorLimit = 0;
 
     }
 
     public static final class ShoulderConstants {
-        //
-        public static final double P = 7.5;
-        public static final int I = 0;
-        public static final double D = 0.1f;
-        public static final double G = 1.75;
-        public static final double S = 0.05;
 
-        public static final double shoulderUpperLimit = 150;
+        public static final double shoulderUpperLimit = 221.5;
         public static final double shoulderLowerLimit = 0.06;
         public static final double shoulderSensorLimit = 0;
         //
@@ -185,9 +169,9 @@ public class Constants {
         public static final String limeLightName = "limelight-front";
         public static final String limeLightName2 = "limelight-back";
         public static final int aprilPipe = 0;
-        // public static final int Pipe2 = 1;
 
-        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(19.5), new Rotation2d(Math.PI));
+        public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(17.25), new Rotation2d(Math.PI));
+        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(26), new Rotation2d());
     }
 
 }

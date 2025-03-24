@@ -5,22 +5,40 @@
     "data": {
       "commands": [
         {
-          "type": "sequential",
+          "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "MiddleStart2Reef"
+                  "pathName": "MiddleStart2Algae"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabAlgaeL2"
                 }
               }
             ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BackUp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonPlaceCoral"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "MiddleReefAlgae2Coral"
           }
         },
         {

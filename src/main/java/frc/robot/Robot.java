@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 
 import edu.wpi.first.cameraserver.CameraServer;
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     // m_robotContainer = new RobotContainer();
+        LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
         HttpCamera frontCam = new HttpCamera("FrontCam", "http://10.48.59.11:5800");
         CameraServer.addCamera(frontCam);
         HttpCamera backCam = new HttpCamera("BackCam", "http://10.48.59.12:5800");
@@ -45,6 +47,13 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
     
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
+    
+    if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
+        && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
+      {Robot.getInstance().percentSlow = .5;}
+    else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
+      {Robot.getInstance().percentSlow = .75;}
+    else Robot.getInstance().percentSlow = 1;
     
     /*
      * This example of adding Limelight is very simple and may not be sufficient for
@@ -65,7 +74,7 @@ public class Robot extends TimedRobot {
 
       LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limeLightName, headingDeg, 0, 0, 0, 0, 0);
       var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limeLightName);
-      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 2.0 && Robot.getInstance().m_Vision.tempDisable == false) {
+      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 1.5 && !Robot.getInstance().m_Vision.tempDisable) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
             Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
       }
@@ -90,7 +99,10 @@ public class Robot extends TimedRobot {
     Robot.getInstance().m_elevator.stopBothMotors();
     Robot.getInstance().m_shoulder.stopShoulder();
     Robot.getInstance().m_claw.coralZero();
-    Robot.getInstance().m_claw.algaeZero();
+    Robot.getInstance().m_algae.algaeZero();
+
+    // CHARACTERIZING
+    // SignalLogger.stop();
   }
 
   @Override
@@ -129,9 +141,11 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+      LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
     }
 
-    // RUN TO ZERO PLEASE //
+    // SignalLogger.start();
+    // TURN ON FOR CHARACTERIZING
 
   }
 

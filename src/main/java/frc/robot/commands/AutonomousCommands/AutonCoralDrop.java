@@ -2,20 +2,19 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.AutonomousCommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class CoralClawIntake extends Command {
-private final Claw m_claw;
-  private final Timer timer = new Timer();
+public class AutonCoralDrop extends Command {
+  private final Claw m_claw;
+  
 
-  /** Creates a new ClawIntake. */
-  public CoralClawIntake(Claw subsystem) {
+  /** Creates a new ClawDrop. */
+  public AutonCoralDrop(Claw subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     m_claw = subsystem;
@@ -24,29 +23,24 @@ private final Claw m_claw;
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    timer.reset();
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_claw.coralRotateInwards(); 
-    if (Robot.getInstance().getCoralDetect()) {
-      timer.start();
-    }
+    m_claw.coralRotateOutwards();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_claw.coralZero();
+    if (Robot.COMMAND_DEBUG) System.out.println("end claw");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timer.hasElapsed(0.5);
-    
+    return !Robot.getInstance().getCoralDetect();
   }
 }

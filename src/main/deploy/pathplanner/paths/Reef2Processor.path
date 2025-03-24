@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.565467171717171,
-        "y": 6.149305555555555
+        "x": 5.126,
+        "y": 2.866
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.572346769668636,
-        "y": 6.146103699953679
+        "x": 5.268371212121212,
+        "y": 2.5511994949494943
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.16528409090909,
-        "y": 5.17671875
+        "x": 5.96969696969697,
+        "y": 0.5488636363636362
       },
       "prevControl": {
-        "x": 5.521737980675378,
-        "y": 5.255240240500897
+        "x": 5.868055555555555,
+        "y": 0.7826388888888891
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,7 +33,7 @@
     {
       "name": "Constraints Zone",
       "minWaypointRelativePos": 0.5003946329913183,
-      "maxWaypointRelativePos": 0.9976322020520916,
+      "maxWaypointRelativePos": 1.0,
       "constraints": {
         "maxVelocity": 3.0,
         "maxAcceleration": 1.5,
@@ -56,13 +56,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.99999999999999
+    "rotation": 90.0
   },
   "reversed": false,
-  "folder": "LeftAutons",
+  "folder": "ProcessorAuton",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 117.13
   },
   "useDefaultConstraints": false
 }
