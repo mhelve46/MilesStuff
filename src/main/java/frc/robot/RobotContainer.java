@@ -90,7 +90,9 @@ public class RobotContainer {
     // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
     // 3/4 of a rotation per second max angular velocity
+
     public double percentSlow = 1;
+    public boolean isSlowBtn = false;
 
     public String goalArrangement = "blank";
     public String currentArrangement = "blank";
@@ -202,6 +204,7 @@ public class RobotContainer {
 
         // selector spots
         Constants.Selector.PlacementSelector.initializeTab();
+        Constants.Selector.FeederSelector.initializeTab();
         SmartDashboard.putString("current setting", currentArrangement);
         SmartDashboard.putString("goal setting", goalArrangement);
 
@@ -347,6 +350,12 @@ public class RobotContainer {
     }
 
     private void slow() {
+        if (isSlowBtn) {
+            isSlowBtn = false;
+        } else {
+            isSlowBtn = true;
+        }
+        
         if (percentSlow == 1) {
             percentSlow = Constants.SwerveConstants.percentSlow;
         } else {

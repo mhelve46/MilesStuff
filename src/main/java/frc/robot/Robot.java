@@ -22,8 +22,9 @@ public class Robot extends TimedRobot {
 
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
-  public static boolean kUseLimelight = true;
+  private double targetSlow = 1;
 
+  public static boolean kUseLimelight = true;
   public static boolean VISIONTEST = false;
   public static boolean COMMAND_DEBUG = false;
   public static boolean DRIVE_TO_POSITION_DEBUG = false;
@@ -47,13 +48,20 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
     SmartDashboard.putBoolean("usell", kUseLimelight);
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
-    
-    if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
+
+    // slow down
+      if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
         && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
-      {Robot.getInstance().percentSlow = .5;}
-    else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
-      {Robot.getInstance().percentSlow = .75;}
-    else Robot.getInstance().percentSlow = 1;
+        {targetSlow = .5;}
+      else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
+        {targetSlow = .75;}
+      else targetSlow = 1;
+
+    if (!Robot.getInstance().isSlowBtn){
+    Robot.getInstance().percentSlow += (targetSlow - Robot.getInstance().percentSlow) * Constants.SwerveConstants.smoothingFactor;
+    }
+
+
     
     /*
      * This example of adding Limelight is very simple and may not be sufficient for
