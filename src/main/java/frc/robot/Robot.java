@@ -70,7 +70,9 @@ public class Robot extends TimedRobot {
     // }
     // copilot code. do we trust it?
 
+    if (!Robot.getInstance().isSlowBtn){
     Robot.getInstance().percentSlow += (targetSlow - Robot.getInstance().percentSlow) * Constants.SwerveConstants.smoothingFactor;
+    }
     // I like this one better
 
 
