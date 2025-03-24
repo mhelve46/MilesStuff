@@ -36,7 +36,32 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonGrabAlgaeL3"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BackL3"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "ForwardL3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutonPlaceCoralParallel"
                 }
               }
             ]
@@ -46,6 +71,12 @@
           "type": "named",
           "data": {
             "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutonAlgaeDrop"
           }
         },
         {
@@ -80,7 +111,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonPlaceCoralParallel"
                 }
               }
             ]

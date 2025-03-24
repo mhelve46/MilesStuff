@@ -49,6 +49,12 @@
           }
         },
         {
+          "type": "path",
+          "data": {
+            "pathName": "LeftBump1"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -80,7 +86,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonPlaceCoral"
+                  "name": "AutonPlaceCoralParallel"
                 }
               }
             ]
@@ -90,6 +96,12 @@
           "type": "named",
           "data": {
             "name": "AutonClawDrop"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "LeftBump2"
           }
         },
         {
@@ -124,7 +136,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "AutonGrabCoral"
+                  "name": "AutonPlaceCoralParallel"
                 }
               }
             ]
