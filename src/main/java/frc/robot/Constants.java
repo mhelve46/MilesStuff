@@ -222,6 +222,8 @@ public class Constants {
     public static final class SwerveConstants {
         public static final double percentSlow = 0.35;
         public static final double RAMP_STEP = 0.1;
+        public static final double smoothingFactor = 0.65;
+        // Closer to 1: Faster changes (less smoothing), Closer to 0: Slower changes (more smoothing).
     } 
 
     public static final class ElevatorConstants {

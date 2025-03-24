@@ -53,12 +53,26 @@ public class Robot extends TimedRobot {
       - 0.25 * (Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage1UpperLimit) 
       - 0.25 * (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage2UpperLimit);
 
-    if (Robot.getInstance().percentSlow < targetSlow) {
-      Robot.getInstance().percentSlow = Math.min(Robot.getInstance().percentSlow + Constants.SwerveConstants.RAMP_STEP, targetSlow);
-    } else if (Robot.getInstance().percentSlow > targetSlow) {
-      Robot.getInstance().percentSlow = Math.max(Robot.getInstance().percentSlow - Constants.SwerveConstants.RAMP_STEP, targetSlow);
-    }
+      // if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
+      //   && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
+      //   {targetSlow = .5;}
+      // else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
+      //   {targetSlow = .75;}
+      // else targetSlow = 1;
+      // proably better
+
+    // if (Robot.getInstance().percentSlow < targetSlow) {
+    //   Robot.getInstance().percentSlow += Constants.SwerveConstants.RAMP_STEP;
+    //   Robot.getInstance().percentSlow = Math.min(Robot.getInstance().percentSlow + Constants.SwerveConstants.RAMP_STEP, targetSlow);
+    // } else if (Robot.getInstance().percentSlow > targetSlow) {
+    //   Robot.getInstance().percentSlow -= Constants.SwerveConstants.RAMP_STEP;
+    //   Robot.getInstance().percentSlow = Math.max(Robot.getInstance().percentSlow - Constants.SwerveConstants.RAMP_STEP, targetSlow);
+    // }
     // copilot code. do we trust it?
+
+    Robot.getInstance().percentSlow += (targetSlow - Robot.getInstance().percentSlow) * Constants.SwerveConstants.smoothingFactor;
+    // I like this one better
+
 
 
     
