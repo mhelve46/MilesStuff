@@ -204,6 +204,7 @@ public class RobotContainer {
 
         // selector spots
         Constants.Selector.PlacementSelector.initializeTab();
+        Constants.Selector.FeederSelector.initializeTab();
         SmartDashboard.putString("current setting", currentArrangement);
         SmartDashboard.putString("goal setting", goalArrangement);
 
