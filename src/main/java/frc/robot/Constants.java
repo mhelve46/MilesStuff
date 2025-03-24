@@ -56,7 +56,7 @@ public class Constants {
             public static void move(int direction) {
                 // Set the current true element to false
                 array[currentRow][currentCol] = false;
-                SmartDashboard.putBoolean(currentRow + "-" + currentCol, false);
+                SmartDashboard.putBoolean("a"+currentRow + "-" + currentCol, false);
 
                 if (direction == Constants.Selector.DPAD.kDown && currentRow > 0) {
                     currentRow--;
@@ -70,7 +70,7 @@ public class Constants {
 
                 // Set the new position to true
                 array[currentRow][currentCol] = true;
-                SmartDashboard.putBoolean(currentRow + "-" + currentCol, true);
+                SmartDashboard.putBoolean("a"+currentRow + "-" + currentCol, true);
             }
 
             public static int getCurrentRow() {
@@ -80,7 +80,7 @@ public class Constants {
             public static void setCurrentRow(int newRow) {
                 // Set the current true element to false
                 array[currentRow][currentCol] = false;
-                SmartDashboard.putBoolean(currentRow + "-" + currentCol, false);
+                SmartDashboard.putBoolean("a"+currentRow + "-" + currentCol, false);
 
                 if (newRow >= 0 && newRow <= (array.length -1)) {
                     currentRow = newRow;
@@ -88,18 +88,19 @@ public class Constants {
 
                 // Set the new position to true
                 array[currentRow][currentCol] = true;
-                SmartDashboard.putBoolean(currentRow + "-" + currentCol, true);
+                SmartDashboard.putBoolean("a"+currentRow + "-" + currentCol, true);
             }
 
             public static void initializeTab() {
                 for (int i = 0; i<array.length; i++){
                     for (int j = 0; j<array[i].length; j++){
                         array[i][j] = false;
-                        SmartDashboard.putBoolean(i+"-"+j, false);
+                        SmartDashboard.putBoolean("a" + i+"-"+j, false);
                     }
                 }
-                array[currentRow][currentCol] = true;
-                SmartDashboard.putBoolean(currentRow+"-"+currentCol, true);
+                array[currentRow][currentCol] 
+                = true;
+                SmartDashboard.putBoolean("a"+currentRow+"-"+currentCol, true);
 
             }
 

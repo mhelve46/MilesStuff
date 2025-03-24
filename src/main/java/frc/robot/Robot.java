@@ -49,16 +49,16 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("usell", kUseLimelight);
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
 
-    targetSlow = 1.0 
-      - 0.25 * (Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage1UpperLimit) 
-      - 0.25 * (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage2UpperLimit);
+    // targetSlow = 1.0 
+    //   - 0.25 * (Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage1UpperLimit) 
+    //   - 0.25 * (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage2UpperLimit);
 
-      // if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
-      //   && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
-      //   {targetSlow = .5;}
-      // else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
-      //   {targetSlow = .75;}
-      // else targetSlow = 1;
+      if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
+        && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
+        {targetSlow = .5;}
+      else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
+        {targetSlow = .75;}
+      else targetSlow = 1;
       // proably better
 
     // if (Robot.getInstance().percentSlow < targetSlow) {
