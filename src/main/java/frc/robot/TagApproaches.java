@@ -237,9 +237,9 @@ public class TagApproaches {
     public Pose2d shiftFeederAllign(Pose2d goalBeforeShift) {
         double offset = 0;
 
-        if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.left) {
+        if (Constants.Selector.FeederSelector.getFeederSide() == Constants.Selector.FeederSelector.far) {
             offset = Units.inchesToMeters(25.75);
-        } else if (Constants.Selector.PlacementSelector.getScoringPose() == Constants.Selector.PlacementSelector.right) {
+        } else if (Constants.Selector.FeederSelector.getFeederSide() == Constants.Selector.FeederSelector.close) {
             offset = Units.inchesToMeters(25.75) * -1;
         } else {
             offset = 0;            

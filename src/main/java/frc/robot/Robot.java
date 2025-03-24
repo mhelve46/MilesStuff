@@ -22,8 +22,9 @@ public class Robot extends TimedRobot {
 
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
-  public static boolean kUseLimelight = true;
+  private double targetSlow = 1;
 
+  public static boolean kUseLimelight = true;
   public static boolean VISIONTEST = false;
   public static boolean COMMAND_DEBUG = false;
   public static boolean DRIVE_TO_POSITION_DEBUG = false;
@@ -47,13 +48,19 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
     SmartDashboard.putBoolean("usell", kUseLimelight);
     SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
-    
-    if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
-        && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
-      {Robot.getInstance().percentSlow = .5;}
-    else if (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1)
-      {Robot.getInstance().percentSlow = .75;}
-    else Robot.getInstance().percentSlow = 1;
+
+    targetSlow = 1.0 
+      - 0.25 * (Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage1UpperLimit) 
+      - 0.25 * (Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() / Constants.ElevatorConstants.stage2UpperLimit);
+
+    if (Robot.getInstance().percentSlow < targetSlow) {
+      Robot.getInstance().percentSlow = Math.min(Robot.getInstance().percentSlow + Constants.SwerveConstants.RAMP_STEP, targetSlow);
+    } else if (Robot.getInstance().percentSlow > targetSlow) {
+      Robot.getInstance().percentSlow = Math.max(Robot.getInstance().percentSlow - Constants.SwerveConstants.RAMP_STEP, targetSlow);
+    }
+    // copilot code. do we trust it?
+
+
     
     /*
      * This example of adding Limelight is very simple and may not be sufficient for

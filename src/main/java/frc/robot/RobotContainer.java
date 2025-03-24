@@ -90,6 +90,7 @@ public class RobotContainer {
     // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
     // 3/4 of a rotation per second max angular velocity
+
     public double percentSlow = 1;
 
     public String goalArrangement = "blank";
