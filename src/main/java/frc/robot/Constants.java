@@ -221,8 +221,8 @@ public class Constants {
 
     public static final class SwerveConstants {
         public static final double percentSlow = 0.35;
-        public static final double RAMP_STEP = 0.2;
-    }
+        public static final double RAMP_STEP = 0.1;
+    } 
 
     public static final class ElevatorConstants {
 
