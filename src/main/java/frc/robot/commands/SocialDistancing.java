@@ -32,13 +32,14 @@ public class SocialDistancing extends Command {
     private final ProfiledPIDController forwardController = new ProfiledPIDController(2.0, 0, 0, FORWARD_CONSTRAINTS);
     
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity    
 
     public final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric()
         .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     
     public SocialDistancing (CommandSwerveDrivetrain drivetrain, AlignmentSubsystem alignmentSubsystem) {
-        forwardController.setTolerance(0.005);
+        forwardController.setTolerance(0.003);
         m_drivetrain = drivetrain;
         m_distSensor = alignmentSubsystem;
         addRequirements(drivetrain, alignmentSubsystem);
@@ -55,15 +56,6 @@ public class SocialDistancing extends Command {
         SmartDashboard.putBoolean("atTarget", forwardController.atGoal());
         // Drive
         forwardController.setGoal(0.305);
-        // needs to be 12" away on reef
-
-        // double forwardSpeed = forwardController.calculate(m_distSensor.getDistance() - forwardController.getGoal().position);
-        // // Drive to the target
-        // if (forwardSpeed < 0) {
-        //     if(forwardSpeed > -0.1) forwardSpeed = -0.1;
-        // } else {
-        //     if (forwardSpeed < 0.1) forwardSpeed = 0.1;
-        // }
 
         double forwardSpeed = forwardController.calculate(m_distSensor.getDistance());
 

@@ -32,7 +32,7 @@ public class DriveToPosition extends Command {
     private static final TrapezoidProfile.Constraints Magnitude_Constraints = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
     
-    private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
+    private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.75, 0, 0, Magnitude_Constraints);
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
     private String _limelightName = Constants.VisionConstants.limelightName;
@@ -40,7 +40,6 @@ public class DriveToPosition extends Command {
     private Pose2d goalPose;
     private double angle;
 
-    private int lastTarget;
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity    
     
@@ -49,7 +48,7 @@ public class DriveToPosition extends Command {
         _limelightName = llName;
         omegaController.setTolerance(Units.degreesToRadians(1));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
-        magnitudeController.setTolerance(0.01);
+        magnitudeController.setTolerance(0.04);
 
         addRequirements(drivetrain);
     }

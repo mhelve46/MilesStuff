@@ -17,7 +17,6 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -32,6 +31,7 @@ import frc.robot.commands.AlgaeClawDrop;
 import frc.robot.commands.AlgaeClawIntake;
 import frc.robot.commands.CoralClawDrop;
 import frc.robot.commands.CoralClawIntake;
+import frc.robot.commands.DriveToFeeder;
 import frc.robot.commands.DriveToPosition;
 import frc.robot.commands.ElevatorDecrease;
 import frc.robot.commands.ElevatorIncrease;
@@ -259,11 +259,11 @@ public class RobotContainer {
                 new DriveToPosition(drivetrain, Constants.VisionConstants.limelightName).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
         
         joystick.x().whileTrue(
-            new SocialDistancing(drivetrain, m_alignmentSubsystem, new Rotation2d(-90)));
-        joystick.a().whileTrue(
-            new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName2).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+            new SocialDistancing(drivetrain, m_alignmentSubsystem));
         // joystick.a().whileTrue(
-            // new DriveToFeeder(drivetrain, Constants.VisionConstants.limeLightName2, m_AlignmentSubsystem).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        //     new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName2).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        joystick.a().whileTrue(
+            new DriveToFeeder(drivetrain, Constants.VisionConstants.limeLightName2, m_alignmentSubsystem).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);

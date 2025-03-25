@@ -20,7 +20,7 @@ public class Climb extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       Commands.parallel(
-        new InstantCommand(() -> m_shoulder.setShoulderClimb()),
+        // new InstantCommand(() -> m_shoulder.setShoulderClimb()),
         new InstantCommand(() -> m_elevator.setClimb()))
     );
   }
