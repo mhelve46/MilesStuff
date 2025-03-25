@@ -217,8 +217,6 @@ public class Constants {
 
         }
     }
-        
-    
 
     public static final class SwerveConstants {
         public static final double percentSlow = 0.35;
@@ -243,19 +241,19 @@ public class Constants {
         public static final double shoulderUpperLimit = 223.96;
         public static final double shoulderLowerLimit = 0.06;
         public static final double shoulderSensorLimit = 0;
-        //
+
     }
 
     public static final class ClawConstants {
     }
 
     public static final class VisionConstants {
-        public static final String limeLightName = "limelight-front";
+        public static final String limelightName = "limelight-front";
         public static final String limeLightName2 = "limelight-back";
-        public static final int aprilPipe = 0;
 
         public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(17.25), new Rotation2d(Math.PI));
-        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(25), new Rotation2d());
+        // public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(25), new Rotation2d()); 
+        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(27), new Rotation2d());
     }
 
 }

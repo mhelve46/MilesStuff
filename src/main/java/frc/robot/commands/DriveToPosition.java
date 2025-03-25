@@ -32,15 +32,14 @@ public class DriveToPosition extends Command {
     private static final TrapezoidProfile.Constraints Magnitude_Constraints = new TrapezoidProfile.Constraints(3, 2);
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
     
-    private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
+    private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.75, 0, 0, Magnitude_Constraints);
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
-    private String _limelightName = Constants.VisionConstants.limeLightName;
+    private String _limelightName = Constants.VisionConstants.limelightName;
     private final CommandSwerveDrivetrain drivetrain;
     private Pose2d goalPose;
     private double angle;
 
-    private int lastTarget;
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity    
     
@@ -49,7 +48,7 @@ public class DriveToPosition extends Command {
         _limelightName = llName;
         omegaController.setTolerance(Units.degreesToRadians(1));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
-        magnitudeController.setTolerance(0.001);
+        magnitudeController.setTolerance(0.04);
 
         addRequirements(drivetrain);
     }
@@ -58,7 +57,7 @@ public class DriveToPosition extends Command {
     @Override
     public void initialize() {
 
-        if (_limelightName == Constants.VisionConstants.limeLightName) {
+        if (_limelightName == Constants.VisionConstants.limelightName) {
             goalPose = TagApproaches.getInstance().DesiredRobotPos(Vision.getInstance().lastTargetFront);
         }
         if (_limelightName == Constants.VisionConstants.limeLightName2) {
@@ -86,9 +85,8 @@ public class DriveToPosition extends Command {
             
         } else {
             angle = Math.acos(distCxGx / currentR);
-            
         }
-                                
+
         // Drive
         omegaController.setGoal(goalPose.getRotation().getRadians());
         magnitudeController.setGoal(0);
@@ -144,7 +142,7 @@ public class DriveToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return magnitudeController.atGoal() && omegaController.atGoal();
     }
 
     @Override

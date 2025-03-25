@@ -8,11 +8,10 @@ public class PoseSetter {
 	public static final String Zero = "Zero";
 	public static final String Stored = "Stored";
 	public static final String Ground = "Ground";
-	public static final String Climb = "Climb";
-	public static final String PreClimb = "PreClimb";
+	// public static final String Climb = "Climb";
+	// public static final String PreClimb = "PreClimb";
 	public static final String PreZero = "PreZero";
 	public static final String AlgaeGrab = "AlgaeRemove";
-	public static final String LowAlgaeGrabAuton = "LowAlgaeGrabAuton";
 	public static final String AlgaePlace = "AlgaePlace";
 	public static final String StartPreMatch = "StartPreMatch";
 
@@ -68,18 +67,17 @@ public class PoseSetter {
 	 				120,
 			}); // retune
 
-			put(Climb, new double[] {
-					-2.26,
-					1.39,
-					106.6,
-			});
+			// put(Climb, new double[] {
+			// 		-2.26,
+			// 		1.39,
+			// 		106.6,
+			// });
 
-			put(PreClimb, new double[] {
-					1.4,
-					Constants.ElevatorConstants.stage2UpperLimit,
-					212.5,
-
-			});
+			// put(PreClimb, new double[] {
+			// 		1.4,
+			// 		Constants.ElevatorConstants.stage2UpperLimit,
+			// 		212.5,
+			// });
 
 			put(PreZero, new double[] {
 					Constants.ElevatorConstants.stage1UpperLimit / 4,

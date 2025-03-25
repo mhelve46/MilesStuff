@@ -90,7 +90,6 @@ public class Elevator extends SubsystemBase {
         elevatorUpperOutput.Inverted = InvertedValue.Clockwise_Positive;
         elevatorUpperOutput.NeutralMode = NeutralModeValue.Brake;
         
-
         /* Configure Motion Magic */
         MotionMagicConfigs motionMagicU = elevatorUpperConfig.MotionMagic;
         motionMagicU.withMotionMagicCruiseVelocity(RotationsPerSecond.of(9999)) // (meachanism) rotations per second cruise
@@ -148,8 +147,7 @@ public class Elevator extends SubsystemBase {
         SmartDashboard.putNumber("Top Vol", stage2motor.getVelocity().getValueAsDouble());
         SmartDashboard.putNumber("Top Pos", stage2motor.getPosition().getValueAsDouble());
         SmartDashboard.putNumber("Stg2 Target", elevatorStage2Target);
-
-        // SmartDashboard.putBoolean("Climbing", enabledClimb);
+        SmartDashboard.putBoolean("Stage 2", Robot.getInstance().getTopStage2());
 
 //         if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
 //             stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
@@ -157,7 +155,6 @@ public class Elevator extends SubsystemBase {
 //         }
 //         if (getTopSwitch() && Math.abs(stage2motor.getPosition().getValueAsDouble() - Constants.ElevatorConstants.stage2UpperLimit) < 0.1) {
 //             stage2motor.setPosition(Constants.ElevatorConstants.stage2UpperLimit);
-// //TODO CONSTANTS TOP POS
 //         }
 
         SmartDashboard.putBoolean("bottomSwitch", getBottomSwitch());
@@ -178,14 +175,6 @@ public class Elevator extends SubsystemBase {
 
     public boolean getTopSwitch() {
         return Robot.getInstance().getTopStage2();
-    }
-
-    public boolean getmotor1pos() {
-        return stage1motor.getPosition().getValueAsDouble() == 0;
-    }
-
-    public boolean getmotor2pos() {
-        return stage2motor.getPosition().getValueAsDouble() == 0;
     }
 
     public boolean isMotorOneAtPos() {
@@ -240,7 +229,7 @@ public class Elevator extends SubsystemBase {
         if (getTopSwitch()) {
            stage2motor.set(0);
         } else {
-            stage2motor.set(0.5);
+            stage2motor.set(0.2);
         }
     }
 
@@ -250,7 +239,6 @@ public class Elevator extends SubsystemBase {
         } else {
             stage2motor.set(-0.1);
         }
-
     }
 
     public void increase(){
@@ -270,11 +258,6 @@ public class Elevator extends SubsystemBase {
     //     double safeUpper = Constants.ShoulderConstants.shoulderUpperLimit - quadrant;
     //     return (currPos >= safeLower && currPos <= safeUpper);
     // } 
-
-    public void stage1move() {
-        stage1motor.setControl(
-                    m_motionMagicReqL.withPosition(elevatorStage1Target).withSlot(0));
-    }
 
     public void setStage1MotorPosition(double position){
         stage1motor.setPosition(position);

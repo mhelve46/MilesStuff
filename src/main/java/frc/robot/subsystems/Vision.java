@@ -22,7 +22,6 @@ public class Vision extends SubsystemBase {
     private static final Vision m_Vision = new Vision();
     public boolean tempDisable = false;
     public double timestampToReEnable;
-    private String _limelightName = Constants.VisionConstants.limeLightName;
     private Pose2d autoStartPose = new Pose2d();
     public int lastTargetFront;
     public int lastTargetBack;
@@ -32,16 +31,14 @@ public class Vision extends SubsystemBase {
     }
 
     public Vision() {
-        
-        LimelightHelpers.setCameraPose_RobotSpace(_limelightName, -0.09, 0, 0.44, 0, 0,0);
-        // LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limeLightName, -0.09, 0.22, 0.49, 0, -5,0); // not normal one
+        LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limelightName, -0.09, 0, 0.44, 0, 0,0);
         LimelightHelpers.setCameraPose_RobotSpace(Constants.VisionConstants.limeLightName2, -0.093, 0, 0.44, 0, 21, 0);
     }
 
     @Override
     public void periodic() {
         
-        updateTargetData(Constants.VisionConstants.limeLightName);
+        updateTargetData(Constants.VisionConstants.limelightName);
         updateTargetData(Constants.VisionConstants.limeLightName2);
         
         SmartDashboard.putNumber("lastTargetFront", lastTargetFront);
@@ -71,12 +68,12 @@ public class Vision extends SubsystemBase {
                 SmartDashboard.putNumber("Auto config rotation distance", rot_distance);
                 if (distance < 0.2 && (Units.radiansToDegrees(rot_distance) < 4)) {
 
-                    LimelightHelpers.setLEDMode_ForceOn(_limelightName);
+                    LimelightHelpers.setLEDMode_ForceOn(Constants.VisionConstants.limelightName);
                 } else {
-                    LimelightHelpers.setLEDMode_ForceOff(_limelightName);
+                    LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limelightName);
                 }
             } else {
-                LimelightHelpers.setLEDMode_ForceOff(_limelightName);
+                LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limelightName);
             }
         }
     }
@@ -96,7 +93,7 @@ public class Vision extends SubsystemBase {
             if (!(fidID >= 1) || !(fidID <= 22)) {
                     fidID = 1;
             }
-            if (llName.equals(Constants.VisionConstants.limeLightName)) {
+            if (llName.equals(Constants.VisionConstants.limelightName)) {
                 lastTargetFront = fidID;
             }
             if (llName.equals(Constants.VisionConstants.limeLightName2)) {
@@ -105,21 +102,24 @@ public class Vision extends SubsystemBase {
         }
     }
     
+    /**
+     *  Temporarily disables the addVisionMeasurements method in Robot.java
+     *  
+     *  The purpose of this method is to remove errors caused during resetting
+     *  the rotation of the robot when the cameras can see an April Tag
+     * 
+     *  @Param seconds The time period to disable for (tested at .5 seconds)
+     *  @return void
+     */
     public void tempDisable(double seconds) {
-        System.out.println("tempDisable********************************************************************************************************");
         tempDisable = true;
-        System.out.println(tempDisable);
         double currentTime = Utils.getCurrentTimeSeconds();
         timestampToReEnable = currentTime + seconds;
     }
 
-
- public void updateAutoStartPosition(String autoName) {
-
-
+    public void updateAutoStartPosition(String autoName) {
 
         // Instant Command is the name of the "None" Auto
-
 
         if (!autoName.equals("InstantCommand")) {
             try {
@@ -134,7 +134,6 @@ public class Vision extends SubsystemBase {
         } else {
             autoStartPose = new Pose2d();
         } 
-
 
     }
 }
