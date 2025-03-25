@@ -50,9 +50,7 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false,
-              "Colors/path": "#FFFFFFFF",
-              "Colors/target pose": "#FFFFFFFF"
+              "Visuals/Show Outside Circles": false
             }
           },
           "0,3": {
@@ -518,6 +516,32 @@
               "_glyph": 148,
               "_showGlyph": false
             }
+          },
+          "3,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Left Range",
+              "_title": "/SmartDashboard/Left Range",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Right Range",
+              "_title": "/SmartDashboard/Right Range",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
           }
         }
       }
@@ -565,15 +589,6 @@
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
-                "0,2": {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/1-0",
-                  "_title": "/SmartDashboard/1-0",
-                  "_glyph": 148,
-                  "_showGlyph": false,
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
                 "0,1": {
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/2-0",
@@ -614,6 +629,15 @@
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/1-1",
                   "_title": "/SmartDashboard/1-1",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "0,2": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/1-0",
+                  "_title": "/SmartDashboard/1-0",
                   "_glyph": 148,
                   "_showGlyph": false,
                   "Colors/Color when true": "#7CFC00FF",
@@ -750,30 +774,52 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
+          "5,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Algae",
+              "_title": "SmartDashboard/Algae",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
           "2,2": {
             "size": [
               1,
-              1
+              2
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/goal setting",
-              "_title": "SmartDashboard/goal setting",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/current setting",
-              "_title": "SmartDashboard/current setting",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_type": "List Layout",
+              "_title": "Feeder Select",
+              "_glyph": 149,
+              "_showGlyph": false,
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/a1-0",
+                  "_title": "Far",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/a0-0",
+                  "_title": "Close",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                }
+              ]
             }
           }
         }
