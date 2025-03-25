@@ -168,7 +168,9 @@ public class Constants {
         public static final String limeLightName2 = "limelight-back";
 
         public static final Pose2d ReefTagOffset = new Pose2d(0, Units.inchesToMeters(17.25), new Rotation2d(Math.PI));
-        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(25), new Rotation2d());
+        // public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(25), new Rotation2d()); 
+        public static final Pose2d CoralStationTagOffset = new Pose2d(0, Units.inchesToMeters(25.5), new Rotation2d());
+        // made it farther so we don't smash into the feeder-- not sure if needed
     }
 
 }

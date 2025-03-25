@@ -17,6 +17,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.util.PathPlannerLogging;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,7 +30,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.AlgaeClawDrop;
 import frc.robot.commands.AlgaeClawIntake;
-import frc.robot.commands.Climb;
 import frc.robot.commands.CoralClawDrop;
 import frc.robot.commands.CoralClawIntake;
 import frc.robot.commands.DriveToPosition;
@@ -42,6 +42,7 @@ import frc.robot.commands.MoveShoulder;
 import frc.robot.commands.PlaceAlgae;
 import frc.robot.commands.PlaceCoral;
 import frc.robot.commands.SelectPlacement;
+import frc.robot.commands.SocialDistancing;
 import frc.robot.commands.StartPreMatch;
 import frc.robot.commands.Store;
 import frc.robot.commands.AutonomousCommands.AutonAlgaeCarry;
@@ -68,6 +69,7 @@ import frc.robot.commands.Zeroing.ZeroElevatorS2;
 import frc.robot.commands.Zeroing.ZeroShoulder;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Algae;
+import frc.robot.subsystems.AlignmentSubsystem;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.Coral;
 import frc.robot.subsystems.Elevator;
@@ -81,6 +83,7 @@ public class RobotContainer {
    public final Coral m_claw = new Coral();
    public final Algae m_algae = new Algae();
    public final Vision m_vision = new Vision();
+   public final AlignmentSubsystem m_alignmentSubsystem = new AlignmentSubsystem();
    public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
    
    private CANdi shoulderAndTopCandi;
@@ -254,8 +257,12 @@ public class RobotContainer {
         joystick.b().whileTrue(
                 new DriveToPosition(drivetrain, Constants.VisionConstants.limelightName).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
         
+        joystick.x().whileTrue(
+            new SocialDistancing(drivetrain, m_alignmentSubsystem, new Rotation2d(-90)));
         joystick.a().whileTrue(
-                new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName2).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+            new DriveToPosition(drivetrain, Constants.VisionConstants.limeLightName2).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
+        // joystick.a().whileTrue(
+            // new DriveToFeeder(drivetrain, Constants.VisionConstants.limeLightName2, m_AlignmentSubsystem).withInterruptBehavior(InterruptionBehavior.kCancelSelf));
 
         // Accessory buttons
         final POVButton pOVButtonLeft = new POVButton(accessory, 270, 0);
