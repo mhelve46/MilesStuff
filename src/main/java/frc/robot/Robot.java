@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     // m_robotContainer = new RobotContainer();
-        LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
+        LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limelightName);
         HttpCamera frontCam = new HttpCamera("FrontCam", "http://10.48.59.11:5800");
         CameraServer.addCamera(frontCam);
         HttpCamera backCam = new HttpCamera("BackCam", "http://10.48.59.12:5800");
@@ -44,9 +44,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    SmartDashboard.putBoolean("Stage 2", m_robotContainer.getTopStage2());
-    SmartDashboard.putBoolean("usell", kUseLimelight);
-    SmartDashboard.putBoolean("ShoulderTripped", m_robotContainer.getShoulderTripped());
     
     if(Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage2UpperLimit - 1
         && Robot.getInstance().m_elevator.stage1motor.getPosition().getValueAsDouble() >= Constants.ElevatorConstants.stage1UpperLimit - 1)
@@ -72,26 +69,13 @@ public class Robot extends TimedRobot {
       double headingDeg = driveState.Pose.getRotation().getDegrees();
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
 
-      LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limeLightName, headingDeg, 0, 0, 0, 0, 0);
-      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limeLightName);
-      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 1.5 && !Robot.getInstance().m_Vision.tempDisable) {
+      LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limelightName, headingDeg, 0, 0, 0, 0, 0);
+      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limelightName);
+      if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 1.5 && !Robot.getInstance().m_vision.tempDisable) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
             Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
       }
-
-      // //keep if testing the two limelights independently
-      // LimelightHelpers.SetRobotOrientation(Constants.VisionConstants.limeLightName2, headingDeg, 0, 0, 0, 0, 0);
-      // var llMeasurement2 = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.VisionConstants.limeLightName2);
-      // // if (llMeasurement != null && llMeasurement.tagCount > 0 && omegaRps < 2.0) {
-      // //   m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose,
-      // //       Utils.fpgaToCurrentTime(llMeasurement.timestampSeconds));
-      // // }
-
-      // // Track error between the two cameras
-      // SmartDashboard.putNumber("Error between cams", llMeasurement.pose.getDistance(llMeasurement2.pose));
     }
-
-    SmartDashboard.putNumber("tagselected", Robot.getInstance().globalCurrNumSelected); 
   }
 
   @Override
@@ -137,13 +121,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousExit() {
   kUseLimelight = true;
-  Robot.getInstance().m_Vision.tempDisable = false;
+  Robot.getInstance().m_vision.tempDisable = false;
   }
   @Override
   public void teleopInit() {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
-      LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limeLightName);
+      LimelightHelpers.setLEDMode_ForceOff(Constants.VisionConstants.limelightName);
     }
 
     // SignalLogger.start();

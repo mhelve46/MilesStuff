@@ -35,7 +35,7 @@ public class DriveToPosition extends Command {
     private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.5, 0, 0, Magnitude_Constraints);
     private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
 
-    private String _limelightName = Constants.VisionConstants.limeLightName;
+    private String _limelightName = Constants.VisionConstants.limelightName;
     private final CommandSwerveDrivetrain drivetrain;
     private Pose2d goalPose;
     private double angle;
@@ -58,7 +58,7 @@ public class DriveToPosition extends Command {
     @Override
     public void initialize() {
 
-        if (_limelightName == Constants.VisionConstants.limeLightName) {
+        if (_limelightName == Constants.VisionConstants.limelightName) {
             goalPose = TagApproaches.getInstance().DesiredRobotPos(Vision.getInstance().lastTargetFront);
         }
         if (_limelightName == Constants.VisionConstants.limeLightName2) {

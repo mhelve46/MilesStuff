@@ -148,8 +148,7 @@ public class Elevator extends SubsystemBase {
         SmartDashboard.putNumber("Top Vol", stage2motor.getVelocity().getValueAsDouble());
         SmartDashboard.putNumber("Top Pos", stage2motor.getPosition().getValueAsDouble());
         SmartDashboard.putNumber("Stg2 Target", elevatorStage2Target);
-
-        // SmartDashboard.putBoolean("Climbing", enabledClimb);
+        SmartDashboard.putBoolean("Stage 2", Robot.getInstance().getTopStage2());
 
 //         if (getBottomSwitch() && stage1motor.getPosition().getValueAsDouble()!= Constants.ElevatorConstants.stage1LowerLimit) {
 //             stage1motor.setPosition(Constants.ElevatorConstants.stage1LowerLimit);
