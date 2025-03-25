@@ -31,21 +31,16 @@ public class SocialDistancing extends Command {
 
     private final ProfiledPIDController forwardController = new ProfiledPIDController(2.0, 0, 0, FORWARD_CONSTRAINTS);
     
-    private Rotation2d goalPose;
-
-
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     public final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric()
         .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
         .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     
-    public SocialDistancing (CommandSwerveDrivetrain drivetrain, AlignmentSubsystem alignmentSubsystem, Rotation2d acquiredTarget) {
+    public SocialDistancing (CommandSwerveDrivetrain drivetrain, AlignmentSubsystem alignmentSubsystem) {
         forwardController.setTolerance(0.005);
         m_drivetrain = drivetrain;
         m_distSensor = alignmentSubsystem;
-        goalPose = acquiredTarget;
         addRequirements(drivetrain, alignmentSubsystem);
     }
 
@@ -53,12 +48,11 @@ public class SocialDistancing extends Command {
     @Override
     public void initialize() {
         forwardController.reset(m_distSensor.getDistance());
-        // m_drivetrain.getState().Pose.getRotation().getRadians(); get current rotation
     }
 
     @Override
     public void execute() {
-        SmartDashboard.putBoolean("atTargert", forwardController.atGoal());
+        SmartDashboard.putBoolean("atTarget", forwardController.atGoal());
         // Drive
         forwardController.setGoal(0.305);
         // needs to be 12" away on reef
@@ -80,23 +74,12 @@ public class SocialDistancing extends Command {
             forwardSpeed = 0;
         }
 
-        Optional<Alliance> ally = DriverStation.getAlliance();
-
-            if (ally.get() == Alliance.Blue) {
-                m_drivetrain.setControl(
-                driveRobotCentric
-                .withVelocityX(forwardSpeed * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond))
+        m_drivetrain.setControl(
+            driveRobotCentric
+                .withVelocityX(forwardSpeed * MaxSpeed)
                 .withVelocityY(0)
                 .withRotationalRate(0)
-                );
-            } else {
-                m_drivetrain.setControl(
-                driveRobotCentric
-                .withVelocityX(forwardSpeed * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond))
-                .withVelocityY(0)
-                .withRotationalRate(0)
-                );
-            }        
+        );
     }
 
     @Override

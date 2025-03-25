@@ -49,7 +49,7 @@ public class DriveToPosition extends Command {
         _limelightName = llName;
         omegaController.setTolerance(Units.degreesToRadians(1));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
-        magnitudeController.setTolerance(0.001);
+        magnitudeController.setTolerance(0.01);
 
         addRequirements(drivetrain);
     }
@@ -86,9 +86,8 @@ public class DriveToPosition extends Command {
             
         } else {
             angle = Math.acos(distCxGx / currentR);
-            
         }
-                                
+
         // Drive
         omegaController.setGoal(goalPose.getRotation().getRadians());
         magnitudeController.setGoal(0);
@@ -144,7 +143,7 @@ public class DriveToPosition extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        return magnitudeController.atGoal() && omegaController.atGoal();
     }
 
     @Override

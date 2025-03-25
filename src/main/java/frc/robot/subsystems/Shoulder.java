@@ -145,18 +145,18 @@ public class Shoulder extends SubsystemBase {
         } else {
             shoulderMotor.set(0.05);
         }
-
     }
+
     public void setShoulderMotorPosition(double position){
         shoulderMotor.setPosition(position);
     }
 
-    public void setShoulderClimb() {
-        if (Robot.getInstance().accessory.getRightTriggerAxis() >= .5) {
-            shoulderMotor.setControl(
-                    m_motionMagicReq.withPosition(shoulderTarget).withSlot(0));
-        }
-    }
+    // public void setShoulderClimb() {
+    //     if (Robot.getInstance().accessory.getRightTriggerAxis() >= .5) {
+    //         shoulderMotor.setControl(
+    //                 m_motionMagicReq.withPosition(shoulderTarget).withSlot(0));
+    //     }
+    // }
 
     // public boolean isSafeToMoveShoulder() {
     //     double currPos = Robot.getInstance().m_elevator.stage2motor.getPosition().getValueAsDouble();

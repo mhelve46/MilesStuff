@@ -31,6 +31,11 @@ public class AlignmentSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("Range", getDistance());
     }
 
+    /**
+     * Gets the distance from the distance sensor
+     * 
+     * @return distance in meters
+     */
     public double getDistance() {
       return distSensor.GetRange() / 1000;
     }

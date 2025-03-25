@@ -135,6 +135,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AutonAlgaeCarry", new AutonAlgaeCarry(m_algae)); // use with race group
         NamedCommands.registerCommand("AutonResetRotation", new AutonResetRotation(drivetrain, m_vision));
         NamedCommands.registerCommand("AutonDisableVision", new AutonDisableVision(m_vision));
+        NamedCommands.registerCommand("AutonEnableVision", new InstantCommand(() -> Robot.kUseLimelight = true));
 
         shoulderAndTopCandi = new CANdi(31, "rio");
         clawCandi = new CANdi(30, "rio");

@@ -102,19 +102,24 @@ public class Vision extends SubsystemBase {
         }
     }
     
+    /**
+     *  Temporarily disables the addVisionMeasurements method in Robot.java
+     *  
+     *  The purpose of this method is to remove errors caused during resetting
+     *  the rotation of the robot when the cameras can see an April Tag
+     * 
+     *  @Param seconds The time period to disable for (tested at .5 seconds)
+     *  @return void
+     */
     public void tempDisable(double seconds) {
         tempDisable = true;
         double currentTime = Utils.getCurrentTimeSeconds();
         timestampToReEnable = currentTime + seconds;
     }
 
-
- public void updateAutoStartPosition(String autoName) {
-
-
+    public void updateAutoStartPosition(String autoName) {
 
         // Instant Command is the name of the "None" Auto
-
 
         if (!autoName.equals("InstantCommand")) {
             try {
@@ -129,7 +134,6 @@ public class Vision extends SubsystemBase {
         } else {
             autoStartPose = new Pose2d();
         } 
-
 
     }
 }
