@@ -238,7 +238,7 @@ public class TagApproaches {
         double offset = 0;
 
         if (Constants.Selector.FeederSelector.getFeederSide() == Constants.Selector.FeederSelector.far) {
-            offset = Units.inchesToMeters(25.75);
+            offset = Units.inchesToMeters(15.75);
         } else if (Constants.Selector.FeederSelector.getFeederSide() == Constants.Selector.FeederSelector.close) {
             offset = Units.inchesToMeters(25.75) * -1;
         } else {
