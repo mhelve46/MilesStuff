@@ -33,7 +33,7 @@ public class DriveToPosition extends Command {
     private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS = new TrapezoidProfile.Constraints(8, 8);
     
     private final ProfiledPIDController magnitudeController = new ProfiledPIDController(2.75, 0, 0, Magnitude_Constraints);
-    private final ProfiledPIDController omegaController = new ProfiledPIDController(3, 0, .1, OMEGA_CONSTRAINTS);
+    private final ProfiledPIDController omegaController = new ProfiledPIDController(5, 0, .1, OMEGA_CONSTRAINTS);
 
     private String _limelightName = Constants.VisionConstants.limelightName;
     private final CommandSwerveDrivetrain drivetrain;
@@ -46,7 +46,7 @@ public class DriveToPosition extends Command {
     public DriveToPosition(CommandSwerveDrivetrain subsystem, String llName) {
         drivetrain = subsystem;
         _limelightName = llName;
-        omegaController.setTolerance(Units.degreesToRadians(1));
+        omegaController.setTolerance(Units.degreesToRadians(1.5));
         omegaController.enableContinuousInput(-Math.PI, Math.PI);
         magnitudeController.setTolerance(0.04);
 
