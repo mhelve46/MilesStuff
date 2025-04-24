@@ -1,7 +1,6 @@
 package frc.robot;
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
   private static final RobotContainer m_robotContainer = new RobotContainer();
 
   public Robot() {}
